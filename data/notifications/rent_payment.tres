@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="NotificationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/notifications/notification_data.gd" id="data"]
+[ext_resource type="Texture2D" path="res://assets/generated/bank.svg" id="bank"]
+
+[resource]
+script = ExtResource("data")
+title = "OS Bank — new payment"
+message = "Your rent bill has arrived: $ 500. Pay it in the Payments section."
+icon = ExtResource("bank")
+accent = Color(1, 0.616, 0.18, 1)
+action = 2
+target = "bank.oc/payments"
+delay = 5.0

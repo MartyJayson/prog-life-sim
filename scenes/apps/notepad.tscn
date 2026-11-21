@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/notepad.gd" id="script"]
+
+[node name="Notepad" type="VBoxContainer"]
+script = ExtResource("script")
+
+[node name="Clear" type="Button" parent="."]
+text = "Clear text"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+
+[node name="Editor" type="TextEdit" parent="."]
+unique_name_in_owner = true
+size_flags_vertical = 3
+placeholder_text = "Type your notes here..."
+wrap_mode = 1
+
+[connection signal="pressed" from="Clear" to="." method="_clear"]

@@ -1,0 +1,335 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop.gd" id="script"]
+
+[ext_resource type="Theme" path="res://assets/generated/os_theme.tres" id="theme"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/wallpaper.svg" id="wallpaper"]
+
+[ext_resource type="PackedScene" path="res://scenes/desktop_icon.tscn" id="shortcut"]
+[ext_resource type="PackedScene" path="res://scenes/web_shortcut.tscn" id="web_shortcut"]
+
+[ext_resource type="Script" path="res://scripts/window_manager.gd" id="manager"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/browser.svg" id="browser"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/operations.svg" id="operations"]
+[ext_resource type="Texture2D" path="res://assets/generated/snake.svg" id="snake"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/notepad.svg" id="notepad"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/calculator.svg" id="calculator"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/about.svg" id="about"]
+
+[ext_resource type="Texture2D" path="res://assets/generated/terminal.svg" id="terminal"]
+
+[ext_resource type="Script" path="res://scripts/notifications/notification_center.gd" id="notifications"]
+[ext_resource type="Resource" path="res://data/notifications/rent_payment.tres" id="rent_payment"]
+
+[sub_resource type="ButtonGroup" id="selection"]
+resource_local_to_scene = false
+allow_unpress = false
+
+[sub_resource type="StyleBoxFlat" id="bar"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 14.0
+content_margin_bottom = 0.0
+bg_color = Color(0.12, 0.37, 0.78, 1)
+border_width_top = 2
+border_color = Color(0.42, 0.68, 0.98, 1)
+
+[sub_resource type="StyleBoxFlat" id="menu"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 6.0
+bg_color = Color(0.965, 0.98, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.42, 0.77, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 7
+shadow_offset = Vector2(0, 3)
+
+[node name="Desktop" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Wallpaper" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("wallpaper")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shortcuts" type="GridContainer" parent="."]
+offset_left = 26
+offset_top = 29
+columns = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 13
+
+[node name="browser" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Browser"
+icon = ExtResource("browser")
+button_group = SubResource("selection")
+
+[node name="snake" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Snake"
+icon = ExtResource("snake")
+button_group = SubResource("selection")
+
+[node name="notepad" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Notepad"
+icon = ExtResource("notepad")
+button_group = SubResource("selection")
+
+[node name="calculator" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Calculator"
+icon = ExtResource("calculator")
+button_group = SubResource("selection")
+
+[node name="about" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "About OS"
+icon = ExtResource("about")
+button_group = SubResource("selection")
+
+[node name="operations" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Operations"
+icon = ExtResource("operations")
+button_group = SubResource("selection")
+
+[node name="slots" instance=ExtResource("web_shortcut") parent="Shortcuts"]
+text = "casino.oc - shortcut"
+button_group = SubResource("selection")
+
+[node name="bank" instance=ExtResource("web_shortcut") parent="Shortcuts"]
+text = "bank.oc - shortcut"
+button_group = SubResource("selection")
+
+[node name="terminal" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Terminal"
+icon = ExtResource("terminal")
+button_group = SubResource("selection")
+
+[node name="WindowManager" type="Control" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_bottom = -66
+mouse_filter = 2
+script = ExtResource("manager")
+
+[node name="Taskbar" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -66
+theme_override_styles/panel = SubResource("bar")
+
+[node name="Row" type="HBoxContainer" parent="Taskbar"]
+theme_override_constants/separation = 12
+
+[node name="Start" type="Button" parent="Taskbar/Row"]
+unique_name_in_owner = true
+text = "OS"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"StartButton"
+
+[node name="Tasks" type="HBoxContainer" parent="Taskbar/Row"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+
+[node name="ClockStack" type="VBoxContainer" parent="Taskbar/Row"]
+custom_minimum_size = Vector2(92, 0)
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Clock" type="Label" parent="Taskbar/Row/ClockStack"]
+unique_name_in_owner = true
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.937, 0.973, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Date" type="Label" parent="Taskbar/Row/ClockStack"]
+unique_name_in_owner = true
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.937, 0.973, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Notifications" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -398
+offset_top = -78
+offset_right = -12
+offset_bottom = -78
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 10
+script = ExtResource("notifications")
+scheduled = Array[Resource]([ExtResource("rent_payment")])
+
+[node name="ClockTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Menu" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10
+offset_right = 279
+offset_bottom = -74
+grow_vertical = 0
+theme_override_styles/panel = SubResource("menu")
+
+[node name="List" type="VBoxContainer" parent="Menu"]
+
+[node name="Heading" type="PanelContainer" parent="Menu/List"]
+mouse_filter = 2
+theme_type_variation = &"HeaderPanel"
+
+[node name="Title" type="Label" parent="Menu/List/Heading"]
+text = "OS"
+mouse_filter = 2
+theme_type_variation = &"HeaderTitle"
+theme_override_font_sizes/font_size = 28
+
+[node name="browser" type="Button" parent="Menu/List"]
+text = "Browser"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("browser")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[node name="snake" type="Button" parent="Menu/List"]
+text = "Snake"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("snake")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[node name="notepad" type="Button" parent="Menu/List"]
+text = "Notepad"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("notepad")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[node name="calculator" type="Button" parent="Menu/List"]
+text = "Calculator"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("calculator")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[node name="operations" type="Button" parent="Menu/List"]
+text = "Operations"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("operations")
+alignment = 0
+theme_type_variation = &"MenuItem"
+theme_override_constants/icon_max_width = 26
+
+[node name="terminal" type="Button" parent="Menu/List"]
+text = "Terminal"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("terminal")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[node name="about" type="Button" parent="Menu/List"]
+text = "About OS"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+icon = ExtResource("about")
+alignment = 0
+theme_type_variation = &"MenuItem"
+custom_minimum_size = Vector2(245, 0)
+theme_override_constants/icon_max_width = 26
+
+[connection signal="gui_input" from="Wallpaper" to="." method="_desktop_input"]
+
+[connection signal="pressed" from="Taskbar/Row/Start" to="." method="_toggle_menu"]
+
+[connection signal="timeout" from="ClockTimer" to="." method="_update_clock"]
+
+[connection signal="launched" from="Shortcuts/browser" to="." method="_open" binds=["browser"]]
+
+[connection signal="pressed" from="Menu/List/browser" to="." method="_open" binds=["browser"]]
+
+[connection signal="launched" from="Shortcuts/snake" to="." method="_open" binds=["snake"]]
+
+[connection signal="pressed" from="Menu/List/snake" to="." method="_open" binds=["snake"]]
+
+[connection signal="launched" from="Shortcuts/notepad" to="." method="_open" binds=["notepad"]]
+
+[connection signal="pressed" from="Menu/List/notepad" to="." method="_open" binds=["notepad"]]
+
+[connection signal="launched" from="Shortcuts/calculator" to="." method="_open" binds=["calculator"]]
+
+[connection signal="pressed" from="Menu/List/calculator" to="." method="_open" binds=["calculator"]]
+
+[connection signal="launched" from="Shortcuts/about" to="." method="_open" binds=["about"]]
+
+[connection signal="pressed" from="Menu/List/about" to="." method="_open" binds=["about"]]
+
+[connection signal="launch_requested" from="WindowManager" to="." method="_open"]
+
+[connection signal="window_interacted" from="WindowManager" to="." method="_hide_menu"]
+
+[connection signal="launched" from="Shortcuts/operations" to="." method="_open" binds=["operations"]]
+[connection signal="pressed" from="Menu/List/operations" to="." method="_open" binds=["operations"]]
+[connection signal="window_closed" from="WindowManager" to="." method="_window_closed"]
+[connection signal="launched" from="Shortcuts/slots" to="." method="_open_site" binds=["casino.oc"]]
+[connection signal="launched" from="Shortcuts/bank" to="." method="_open_site" binds=["bank.oc"]]
+[connection signal="launched" from="Shortcuts/terminal" to="." method="_open" binds=["terminal"]]
+[connection signal="pressed" from="Menu/List/terminal" to="." method="_open" binds=["terminal"]]
+[connection signal="activated" from="Notifications" to="." method="_notification_activated"]

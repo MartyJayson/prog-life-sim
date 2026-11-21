@@ -1,0 +1,60 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="row"]
+content_margin_left = 6.0
+content_margin_top = 10.0
+content_margin_right = 6.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0)
+border_width_bottom = 1
+border_color = Color(0.894, 0.918, 0.949, 1)
+
+[sub_resource type="StyleBoxFlat" id="badge"]
+bg_color = Color(0.933, 0.949, 0.973, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="BankRow" type="PanelContainer"]
+theme_override_styles/panel = SubResource("row")
+
+[node name="Row" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 14
+
+[node name="Badge" type="PanelContainer" parent="Row"]
+custom_minimum_size = Vector2(40, 40)
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("badge")
+
+[node name="Sign" type="Label" parent="Row/Badge"]
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.067, 0.533, 0.294, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Text" type="VBoxContainer" parent="Row"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="Row/Text"]
+text = ""
+mouse_filter = 2
+text_overrun_behavior = 3
+theme_override_colors/font_color = Color(0.067, 0.122, 0.235, 1)
+theme_override_font_sizes/font_size = 19
+
+[node name="Time" type="Label" parent="Row/Text"]
+text = ""
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.49, 0.545, 0.627, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Amount" type="Label" parent="Row"]
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.067, 0.533, 0.294, 1)
+theme_override_font_sizes/font_size = 21

@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[node name="News" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="."]
+text = "News OS"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 38
+
+[node name="Subtitle" type="Label" parent="."]
+text = "The Desktop Edition  /  Technology & Culture"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="Separator" type="HSeparator" parent="."]
+
+[node name="desk" type="Button" parent="."]
+text = "OS opens the desktop"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "news.oc/desk"
+
+[node name="arcade" type="Button" parent="."]
+text = "A new high score at the arcade"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "news.oc/arcade"

@@ -1,0 +1,625 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/slots.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/web/slot_reel.gd" id="reel"]
+[ext_resource type="Script" path="res://scripts/web/slot_overlay.gd" id="overlay"]
+[ext_resource type="Texture2D" path="res://assets/generated/poop.svg" id="poop"]
+[ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="casino_theme"]
+[ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 0.8
+
+[sub_resource type="StyleBoxFlat" id="casino"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.086, 0.035, 0.157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.478, 0.239, 0.702, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="machine"]
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+bg_color = Color(0.31, 0.035, 0.11, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.765, 0.235, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0.89, 0.2, 0.45, 0.35)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="side"]
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+bg_color = Color(0.125, 0.059, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.427, 0.247, 0.62, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="chip"]
+bg_color = Color(0.243, 0.098, 0.38, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.722, 0.471, 0.949, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="chip_hover"]
+bg_color = Color(0.353, 0.149, 0.53, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.882, 0.722, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="chip_disabled"]
+bg_color = Color(0.157, 0.09, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.31, 0.22, 0.4, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="bet_box"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.051, 0.02, 0.09, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.765, 0.235, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="spin_normal"]
+content_margin_left = 26.0
+content_margin_top = 8.0
+content_margin_right = 26.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.718, 0.012, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 6
+border_color = Color(0.835, 0.38, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(1, 0.72, 0.1, 0.45)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="spin_hover"]
+content_margin_left = 26.0
+content_margin_top = 8.0
+content_margin_right = 26.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.82, 0.29, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 6
+border_color = Color(0.92, 0.47, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(1, 0.8, 0.2, 0.6)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="spin_pressed"]
+content_margin_left = 26.0
+content_margin_top = 11.0
+content_margin_right = 26.0
+content_margin_bottom = 5.0
+bg_color = Color(0.93, 0.6, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.76, 0.33, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="spin_disabled"]
+content_margin_left = 26.0
+content_margin_top = 8.0
+content_margin_right = 26.0
+content_margin_bottom = 8.0
+bg_color = Color(0.43, 0.34, 0.24, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 6
+border_color = Color(0.3, 0.23, 0.16, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Gradient" id="coin_tints"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.96, 0.6, 1, 1, 0.8, 0.16, 1, 1, 0.55, 0.06, 1)
+
+[sub_resource type="Gradient" id="coin_fade"]
+offsets = PackedFloat32Array(0, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Slots" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("casino_theme")
+script = ExtResource("script")
+
+[node name="Casino" type="PanelContainer" parent="."]
+theme_override_styles/panel = SubResource("casino")
+
+[node name="Stack" type="VBoxContainer" parent="Casino"]
+theme_override_constants/separation = 14
+
+[node name="Header" parent="Casino/Stack" instance=ExtResource("header")]
+section = "slots"
+
+[node name="Title" type="HBoxContainer" parent="Casino/Stack"]
+theme_override_constants/separation = 16
+
+[node name="Name" type="Label" parent="Casino/Stack/Title"]
+text = "★ SLOTS ★"
+mouse_filter = 2
+theme_type_variation = &"CasinoLogo"
+theme_override_font_sizes/font_size = 30
+
+[node name="Tagline" type="Label" parent="Casino/Stack/Title"]
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Three in a row — take the prize!"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="Body" type="HBoxContainer" parent="Casino/Stack"]
+theme_override_constants/separation = 18
+
+[node name="Machine" type="PanelContainer" parent="Casino/Stack/Body"]
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("machine")
+
+[node name="Column" type="VBoxContainer" parent="Casino/Stack/Body/Machine"]
+theme_override_constants/separation = 10
+
+[node name="Board" type="Control" parent="Casino/Stack/Body/Machine/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 330)
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Reels" type="HBoxContainer" parent="Casino/Stack/Body/Machine/Column/Board"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 22.0
+offset_right = -22.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Reel0" type="Control" parent="Casino/Stack/Body/Machine/Column/Board/Reels"]
+unique_name_in_owner = true
+clip_contents = true
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("reel")
+
+[node name="Reel1" type="Control" parent="Casino/Stack/Body/Machine/Column/Board/Reels"]
+unique_name_in_owner = true
+clip_contents = true
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("reel")
+
+[node name="Reel2" type="Control" parent="Casino/Stack/Body/Machine/Column/Board/Reels"]
+unique_name_in_owner = true
+clip_contents = true
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("reel")
+
+[node name="Overlay" type="Control" parent="Casino/Stack/Body/Machine/Column/Board"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("overlay")
+
+[node name="Flash" type="ColorRect" parent="Casino/Stack/Body/Machine/Column/Board"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.9, 0.55, 1)
+
+[node name="Coins" type="CPUParticles2D" parent="Casino/Stack/Body/Machine/Column/Board"]
+unique_name_in_owner = true
+emitting = false
+amount = 60
+lifetime = 1.8
+one_shot = true
+explosiveness = 0.9
+direction = Vector2(0, -1)
+spread = 75.0
+gravity = Vector2(0, 1300)
+initial_velocity_min = 450.0
+initial_velocity_max = 900.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 7.0
+scale_amount_max = 13.0
+color_ramp = SubResource("coin_fade")
+color_initial_ramp = SubResource("coin_tints")
+
+[node name="Banner" type="Label" parent="Casino/Stack/Body/Machine/Column/Board"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+text = "WIN!"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0.45, 0.04, 0.1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/line_spacing = -8
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 56
+
+[node name="WinLabel" type="Label" parent="Casino/Stack/Body/Machine/Column"]
+unique_name_in_owner = true
+text = "Good luck!"
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.26, 1)
+theme_override_colors/font_outline_color = Color(0.4, 0.04, 0.1, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 32
+
+[node name="Breakdown" type="Label" parent="Casino/Stack/Body/Machine/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.87, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Controls" type="HBoxContainer" parent="Casino/Stack/Body/Machine/Column"]
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="BetCaption" type="Label" parent="Casino/Stack/Body/Machine/Column/Controls"]
+text = "BET"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="Less" type="Button" parent="Casino/Stack/Body/Machine/Column/Controls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+text = "−"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.5, 0.42, 0.6, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("chip")
+theme_override_styles/hover = SubResource("chip_hover")
+theme_override_styles/pressed = SubResource("chip_hover")
+theme_override_styles/disabled = SubResource("chip_disabled")
+
+[node name="BetBox" type="PanelContainer" parent="Casino/Stack/Body/Machine/Column/Controls"]
+custom_minimum_size = Vector2(120, 0)
+theme_override_styles/panel = SubResource("bet_box")
+
+[node name="Bet" type="Label" parent="Casino/Stack/Body/Machine/Column/Controls/BetBox"]
+unique_name_in_owner = true
+text = "$ 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.26, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 26
+
+[node name="More" type="Button" parent="Casino/Stack/Body/Machine/Column/Controls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+text = "+"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.5, 0.42, 0.6, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("chip")
+theme_override_styles/hover = SubResource("chip_hover")
+theme_override_styles/pressed = SubResource("chip_hover")
+theme_override_styles/disabled = SubResource("chip_disabled")
+
+[node name="Gap" type="Control" parent="Casino/Stack/Body/Machine/Column/Controls"]
+custom_minimum_size = Vector2(12, 0)
+mouse_filter = 2
+
+[node name="Spin" type="Button" parent="Casino/Stack/Body/Machine/Column/Controls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+text = "SPIN"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.36, 0.1, 0, 1)
+theme_override_colors/font_hover_color = Color(0.36, 0.1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.36, 0.1, 0, 1)
+theme_override_colors/font_disabled_color = Color(0.75, 0.68, 0.6, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("spin_normal")
+theme_override_styles/hover = SubResource("spin_hover")
+theme_override_styles/pressed = SubResource("spin_pressed")
+theme_override_styles/disabled = SubResource("spin_disabled")
+
+[node name="Message" type="Label" parent="Casino/Stack/Body/Machine/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 24)
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Side" type="PanelContainer" parent="Casino/Stack/Body"]
+custom_minimum_size = Vector2(250, 0)
+theme_override_styles/panel = SubResource("side")
+
+[node name="List" type="VBoxContainer" parent="Casino/Stack/Body/Side"]
+theme_override_constants/separation = 10
+
+[node name="Heading" type="Label" parent="Casino/Stack/Body/Side/List"]
+text = "PAYTABLE"
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.26, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 22
+
+[node name="Hint" type="Label" parent="Casino/Stack/Body/Side/List"]
+text = "Three matching symbols in a row — horizontally, vertically or diagonally."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.85, 0.78, 0.96, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="Pays" type="GridContainer" parent="Casino/Stack/Body/Side/List"]
+columns = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 6
+
+[node name="Jackpot" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "$  $  $"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 24
+
+[node name="JackpotPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×50"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 24
+
+[node name="King" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "K  K  K"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.353, 0.392, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 22
+
+[node name="KingPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×10"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Queen" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "Q  Q  Q"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.769, 0.49, 1, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 22
+
+[node name="QueenPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×8"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Jack" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "J  J  J"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.247, 0.831, 0.498, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 22
+
+[node name="JackPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×4"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Ten" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "10 10 10"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.29, 0.659, 1, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 22
+
+[node name="TenPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×3"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Pair" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "$  $  on a line"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 20
+
+[node name="PairPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×2"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Single" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "$  anywhere"
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 20
+
+[node name="SinglePay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "refund"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="Poop" type="HBoxContainer" parent="Casino/Stack/Body/Side/List/Pays"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="A" type="TextureRect" parent="Casino/Stack/Body/Side/List/Pays/Poop"]
+custom_minimum_size = Vector2(26, 26)
+texture = ExtResource("poop")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="B" type="TextureRect" parent="Casino/Stack/Body/Side/List/Pays/Poop"]
+custom_minimum_size = Vector2(26, 26)
+texture = ExtResource("poop")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="C" type="TextureRect" parent="Casino/Stack/Body/Side/List/Pays/Poop"]
+custom_minimum_size = Vector2(26, 26)
+texture = ExtResource("poop")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="PoopPay" type="Label" parent="Casino/Stack/Body/Side/List/Pays"]
+text = "×0"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.72, 0.6, 0.5, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Separator" type="HSeparator" parent="Casino/Stack/Body/Side/List"]
+
+[node name="Note" type="Label" parent="Casino/Stack/Body/Side/List"]
+text = "8 lines, each paid separately, and wins add up. Poop pays nothing and breaks lines. A $ anywhere refunds the bet if there is no line of two or three $."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.85, 0.78, 0.96, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="Legal" type="Label" parent="Casino/Stack/Body/Side/List"]
+text = "Bets are charged to your OS Bank account."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="AutoStop" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="pressed" from="Casino/Stack/Body/Machine/Column/Controls/Less" to="." method="_change_bet" binds=[-1]]
+[connection signal="pressed" from="Casino/Stack/Body/Machine/Column/Controls/More" to="." method="_change_bet" binds=[1]]
+[connection signal="pressed" from="Casino/Stack/Body/Machine/Column/Controls/Spin" to="." method="_spin"]
+[connection signal="timeout" from="AutoStop" to="." method="_on_auto_stop"]

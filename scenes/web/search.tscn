@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[node name="Search" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="."]
+text = "Search OS"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 38
+
+[node name="Subtitle" type="Label" parent="."]
+text = "Search the local web directory"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="SearchRow" type="HBoxContainer" parent="."]
+
+[node name="Query" type="LineEdit" parent="SearchRow"]
+placeholder_text = "Try games or technology"
+size_flags_horizontal = 3
+
+[node name="Submit" type="Button" parent="SearchRow"]
+text = "Search"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Results" type="VBoxContainer" parent="."]
+
+[node name="Empty" type="Label" parent="."]
+text = ""
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 23
+visible = false
+
+[node name="Home" type="Button" parent="."]
+text = "OS Home"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "home.oc"

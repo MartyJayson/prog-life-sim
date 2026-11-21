@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[node name="Games" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="."]
+text = "Games OS"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 38
+
+[node name="Subtitle" type="Label" parent="."]
+text = "The desktop arcade"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="Description" type="Label" parent="."]
+text = "Snake  ·  Collect food, grow longer, and stay clear of the walls."
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 23
+
+[node name="Play" type="Button" parent="."]
+text = "Play Snake"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+metadata/app = "snake"

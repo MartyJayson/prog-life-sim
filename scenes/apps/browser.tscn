@@ -1,0 +1,78 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/browser.gd" id="script"]
+
+[sub_resource type="StyleBoxFlat" id="surface"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.973, 0.984, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.69, 0.788, 0.875, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[node name="Browser" type="VBoxContainer"]
+script = ExtResource("script")
+
+[node name="Navigation" type="HBoxContainer" parent="."]
+
+[node name="Back" type="Button" parent="Navigation"]
+unique_name_in_owner = true
+text = "←"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Back"
+
+[node name="Forward" type="Button" parent="Navigation"]
+unique_name_in_owner = true
+text = "→"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Forward"
+
+[node name="Refresh" type="Button" parent="Navigation"]
+text = "↻"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Refresh"
+
+[node name="Home" type="Button" parent="Navigation"]
+text = "Home"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Address" type="LineEdit" parent="Navigation"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+
+[node name="Go" type="Button" parent="Navigation"]
+text = "Go"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Surface" type="PanelContainer" parent="."]
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("surface")
+
+[node name="Scroller" type="ScrollContainer" parent="Surface"]
+unique_name_in_owner = true
+horizontal_scroll_mode = 0
+
+[connection signal="pressed" from="Navigation/Back" to="." method="_step" binds=[-1]]
+
+[connection signal="pressed" from="Navigation/Forward" to="." method="_step" binds=[1]]
+
+[connection signal="pressed" from="Navigation/Refresh" to="." method="_render"]
+
+[connection signal="pressed" from="Navigation/Home" to="." method="_go_home"]
+
+[connection signal="pressed" from="Navigation/Go" to="." method="_submit_address"]
+
+[connection signal="text_submitted" from="Navigation/Address" to="." method="_navigate"]

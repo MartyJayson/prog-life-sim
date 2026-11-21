@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/operations/map_app.gd" id="app"]
+[ext_resource type="Script" path="res://scripts/operations/map_view.gd" id="map"]
+[ext_resource type="Script" path="res://scripts/operations/mission.gd" id="mission"]
+[ext_resource type="PackedScene" path="res://scenes/operations/maps/dust_ii.tscn" id="layout"]
+[ext_resource type="Resource" path="res://scenes/operations/settings.tres" id="settings"]
+[ext_resource type="Theme" path="res://scenes/operations/roster_theme.tres" id="roster_theme"]
+[ext_resource type="PackedScene" path="res://scenes/operations/round_overlay.tscn" id="overlay"]
+
+[sub_resource type="World2D" id="world"]
+resource_local_to_scene = true
+
+[node name="Operations" type="VBoxContainer"]
+script = ExtResource("app")
+
+[node name="Body" type="HBoxContainer" parent="."]
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Roster" type="PanelContainer" parent="Body"]
+custom_minimum_size = Vector2(210, 0)
+theme = ExtResource("roster_theme")
+
+[node name="List" type="VBoxContainer" parent="Body/Roster"]
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Body/Roster/List"]
+text = "ALLIES · CT"
+theme_override_font_sizes/font_size = 15
+
+[node name="AllyRows" type="VBoxContainer" parent="Body/Roster/List"]
+unique_name_in_owner = true
+theme_override_constants/separation = 12
+
+[node name="Map" type="Control" parent="Body"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+clip_contents = true
+script = ExtResource("map")
+
+[node name="RoundOverlay" parent="Body/Map" instance=ExtResource("overlay")]
+unique_name_in_owner = true
+
+[node name="Legend" type="Label" parent="."]
+text = "Dust II     ● CT Defence     ● T Attack"
+horizontal_alignment = 1
+
+[node name="Simulation" type="SubViewport" parent="."]
+world_2d = SubResource("world")
+size = Vector2i(820, 460)
+render_target_update_mode = 0
+
+[node name="Mission" type="Node2D" parent="Simulation"]
+script = ExtResource("mission")
+settings = ExtResource("settings")
+
+[node name="Layout" parent="Simulation/Mission" instance=ExtResource("layout")]
+
+[connection signal="start_requested" from="Body/Map/RoundOverlay" to="." method="_start"]
+[connection signal="new_round_requested" from="Body/Map/RoundOverlay" to="." method="_restart"]
+[connection signal="device_selected" from="Body/Map" to="." method="_select_device"]
+[connection signal="ended" from="Simulation/Mission" to="." method="_on_ended"]

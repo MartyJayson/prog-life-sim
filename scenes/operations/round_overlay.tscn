@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/operations/round_overlay.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/operations/round_overlay_theme.tres" id="theme"]
+
+[node name="RoundOverlay" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(340, 190)
+
+[node name="Content" type="VBoxContainer" parent="Panel"]
+theme_override_constants/separation = 12
+
+[node name="Accent" type="ColorRect" parent="Panel/Content"]
+custom_minimum_size = Vector2(0, 2)
+mouse_filter = 2
+color = Color(0.54, 0.8, 1, 1)
+
+[node name="Title" type="Label" parent="Panel/Content"]
+text = "OPERATION"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 34
+
+[node name="Description" type="Label" parent="Panel/Content"]
+text = "Dust II · CT Defence"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+
+[node name="Start" type="Button" parent="Panel/Content"]
+custom_minimum_size = Vector2(0, 36)
+text = "Start"
+
+[node name="NewRound" type="Button" parent="Panel/Content"]
+visible = false
+custom_minimum_size = Vector2(0, 36)
+text = "New Round"
+
+[connection signal="pressed" from="Panel/Content/Start" to="." method="_start_pressed"]
+[connection signal="pressed" from="Panel/Content/NewRound" to="." method="_new_round_pressed"]

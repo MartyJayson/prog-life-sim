@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/desktop_icon.tscn" id="shortcut"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser.svg" id="internet"]
+
+[sub_resource type="StyleBoxFlat" id="badge"]
+bg_color = Color(0.973, 0.984, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29, 0.44, 0.58, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="WebShortcut" instance=ExtResource("shortcut")]
+custom_minimum_size = Vector2(110, 116)
+autowrap_mode = 2
+icon = ExtResource("internet")
+
+[node name="ShortcutBadge" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_top = 40.0
+offset_right = -10.0
+offset_bottom = 57.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("badge")
+
+[node name="Arrow" type="Label" parent="ShortcutBadge"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.04, 0.19, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1

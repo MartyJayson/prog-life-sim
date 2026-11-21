@@ -1,0 +1,152 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/operations/hack_app.gd" id="script"]
+
+[ext_resource type="Script" path="res://scripts/operations/hack_track.gd" id="track"]
+
+[node name="Hack" type="VBoxContainer"]
+theme_override_constants/separation = 9
+script = ExtResource("script")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 23
+
+[node name="Status" type="Label" parent="."]
+unique_name_in_owner = true
+autowrap_mode = 2
+
+[node name="Terminal" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+
+[node name="Key0" type="Button" parent="Terminal"]
+text = "▲"
+size_flags_horizontal = 3
+
+[node name="Key1" type="Button" parent="Terminal"]
+text = "■"
+size_flags_horizontal = 3
+
+[node name="Key2" type="Button" parent="Terminal"]
+text = "●"
+size_flags_horizontal = 3
+
+[node name="Key3" type="Button" parent="Terminal"]
+text = "◆"
+size_flags_horizontal = 3
+
+[node name="Door" type="GridContainer" parent="."]
+unique_name_in_owner = true
+columns = 3
+size_flags_horizontal = 4
+
+[node name="Tile0" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile1" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile2" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile3" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile4" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile5" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile6" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile7" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Tile8" type="Button" parent="Door"]
+custom_minimum_size = Vector2(72, 49)
+theme_override_font_sizes/font_size = 23
+text = ""
+size_flags_horizontal = 3
+
+[node name="Turret" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+
+[node name="Track" type="Control" parent="Turret"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 34)
+mouse_filter = 2
+script = ExtResource("track")
+
+[node name="Stop" type="Button" parent="Turret"]
+text = "Stop the indicator"
+size_flags_horizontal = 3
+
+[node name="Commands" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+
+[node name="open" type="Button" parent="Commands"]
+text = "Open"
+size_flags_horizontal = 3
+
+[node name="close" type="Button" parent="Commands"]
+text = "Close"
+size_flags_horizontal = 3
+
+[node name="lock" type="Button" parent="Commands"]
+text = "Lock"
+size_flags_horizontal = 3
+
+[node name="unlock" type="Button" parent="Commands"]
+text = "Unlock"
+size_flags_horizontal = 3
+
+[node name="Retry" type="Button" parent="."]
+unique_name_in_owner = true
+text = "Retry"
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="Terminal/Key0" to="." method="_enter_symbol" binds=[0]]
+[connection signal="pressed" from="Terminal/Key1" to="." method="_enter_symbol" binds=[1]]
+[connection signal="pressed" from="Terminal/Key2" to="." method="_enter_symbol" binds=[2]]
+[connection signal="pressed" from="Terminal/Key3" to="." method="_enter_symbol" binds=[3]]
+[connection signal="pressed" from="Door/Tile0" to="." method="_rotate_tile" binds=[0]]
+[connection signal="pressed" from="Door/Tile1" to="." method="_rotate_tile" binds=[1]]
+[connection signal="pressed" from="Door/Tile2" to="." method="_rotate_tile" binds=[2]]
+[connection signal="pressed" from="Door/Tile3" to="." method="_rotate_tile" binds=[3]]
+[connection signal="pressed" from="Door/Tile4" to="." method="_rotate_tile" binds=[4]]
+[connection signal="pressed" from="Door/Tile5" to="." method="_rotate_tile" binds=[5]]
+[connection signal="pressed" from="Door/Tile6" to="." method="_rotate_tile" binds=[6]]
+[connection signal="pressed" from="Door/Tile7" to="." method="_rotate_tile" binds=[7]]
+[connection signal="pressed" from="Door/Tile8" to="." method="_rotate_tile" binds=[8]]
+[connection signal="pressed" from="Turret/Stop" to="." method="_stop_indicator"]
+[connection signal="pressed" from="Commands/open" to="." method="_command" binds=["open"]]
+[connection signal="pressed" from="Commands/close" to="." method="_command" binds=["close"]]
+[connection signal="pressed" from="Commands/lock" to="." method="_command" binds=["lock"]]
+[connection signal="pressed" from="Commands/unlock" to="." method="_command" binds=["unlock"]]
+[connection signal="pressed" from="Retry" to="." method="_begin"]

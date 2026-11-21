@@ -1,0 +1,220 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/boot.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/desktop.tscn" id="desktop"]
+[ext_resource type="AudioStream" path="res://assets/sound/pc turn on sound.wav" id="power_on"]
+[ext_resource type="AudioStream" path="res://assets/sound/background pc sound.mp3" id="hum"]
+
+[sub_resource type="SystemFont" id="mono"]
+font_names = PackedStringArray("Consolas", "Lucida Console", "Courier New", "Monospace")
+antialiasing = 0
+
+[sub_resource type="SystemFont" id="logo_font"]
+font_names = PackedStringArray("Trebuchet MS", "Segoe UI", "Arial", "Sans-Serif")
+font_weight = 700
+font_italic = true
+
+[sub_resource type="LabelSettings" id="post_text"]
+font = SubResource("mono")
+font_size = 30
+font_color = Color(0.78, 0.78, 0.78, 1)
+
+[sub_resource type="LabelSettings" id="logo_text"]
+font = SubResource("logo_font")
+font_size = 120
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="logo_sub"]
+font = SubResource("logo_font")
+font_size = 30
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="footer"]
+font = SubResource("logo_font")
+font_size = 18
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="bar_frame"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.72, 0.72, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Gradient" id="block_gradient"]
+colors = PackedColorArray(0.55, 0.7, 1, 1, 0.16, 0.38, 0.9, 1)
+
+[sub_resource type="GradientTexture2D" id="block_texture"]
+gradient = SubResource("block_gradient")
+width = 14
+height = 18
+fill_to = Vector2(0, 1)
+
+[node name="Boot" type="Node"]
+script = ExtResource("script")
+
+[node name="Desktop" parent="." instance=ExtResource("desktop")]
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Screen" type="ColorRect" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Post" type="Control" parent="Overlay/Screen"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lines" type="Label" parent="Overlay/Screen/Post"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+label_settings = SubResource("post_text")
+
+[node name="Footer" type="Label" parent="Overlay/Screen/Post"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press DEL to enter SETUP
+11/20/2001-QX586-BF877-OS4LEF09C-00"
+label_settings = SubResource("post_text")
+
+[node name="Logo" type="Control" parent="Overlay/Screen"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Center" type="VBoxContainer" parent="Overlay/Screen/Logo"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Maker" type="Label" parent="Overlay/Screen/Logo/Center"]
+layout_mode = 2
+text = "Byteforge®"
+label_settings = SubResource("logo_sub")
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Overlay/Screen/Logo/Center"]
+layout_mode = 2
+text = "OS"
+label_settings = SubResource("logo_text")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Overlay/Screen/Logo/Center"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Bar" type="Panel" parent="Overlay/Screen/Logo/Center"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(240, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("bar_frame")
+
+[node name="Blocks" type="HBoxContainer" parent="Overlay/Screen/Logo/Center/Bar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -50.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = 23.0
+theme_override_constants/separation = 3
+
+[node name="Block1" type="TextureRect" parent="Overlay/Screen/Logo/Center/Bar/Blocks"]
+layout_mode = 2
+texture = SubResource("block_texture")
+
+[node name="Block2" type="TextureRect" parent="Overlay/Screen/Logo/Center/Bar/Blocks"]
+layout_mode = 2
+texture = SubResource("block_texture")
+
+[node name="Block3" type="TextureRect" parent="Overlay/Screen/Logo/Center/Bar/Blocks"]
+layout_mode = 2
+texture = SubResource("block_texture")
+
+[node name="Copyright" type="Label" parent="Overlay/Screen/Logo"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -52.0
+offset_right = 428.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "Copyright © Byteforge Systems"
+label_settings = SubResource("footer")
+
+[node name="Brand" type="Label" parent="Overlay/Screen/Logo"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -228.0
+offset_top = -52.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Byteforge"
+label_settings = SubResource("footer")
+horizontal_alignment = 2
+
+[node name="PowerOn" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("power_on")
+
+[node name="Hum" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("hum")
+volume_db = -10.0

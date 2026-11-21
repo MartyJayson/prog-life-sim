@@ -1,0 +1,121 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/app_window.gd" id="script"]
+
+[sub_resource type="StyleBoxFlat" id="frame"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.965, 0.98, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.42, 0.77, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0.02, 0.08, 0.19, 0.42)
+shadow_size = 14
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="active"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.16, 0.45, 0.85, 1)
+border_width_bottom = 2
+border_color = Color(1, 0.69, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="inactive"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.49, 0.59, 0.73, 1)
+border_width_bottom = 2
+border_color = Color(0.73, 0.78, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[node name="AppWindow" type="PanelContainer"]
+theme_override_styles/panel = SubResource("frame")
+script = ExtResource("script")
+active_title_style = SubResource("active")
+inactive_title_style = SubResource("inactive")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="PanelContainer" parent="Stack"]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("inactive")
+
+[node name="Row" type="HBoxContainer" parent="Stack/TitleBar"]
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Picture" type="TextureRect" parent="Stack/TitleBar/Row"]
+unique_name_in_owner = true
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+custom_minimum_size = Vector2(22, 22)
+size_flags_vertical = 4
+
+[node name="Caption" type="Label" parent="Stack/TitleBar/Row"]
+unique_name_in_owner = true
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderTitle"
+theme_override_font_sizes/font_size = 19
+text_overrun_behavior = 3
+
+[node name="Minimize" type="Button" parent="Stack/TitleBar/Row"]
+custom_minimum_size = Vector2(28, 24)
+size_flags_vertical = 4
+tooltip_text = "Minimize"
+text = "−"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TitleButton"
+
+[node name="Maximize" type="Button" parent="Stack/TitleBar/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 24)
+size_flags_vertical = 4
+tooltip_text = "Maximize"
+text = "□"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TitleButton"
+
+[node name="Close" type="Button" parent="Stack/TitleBar/Row"]
+custom_minimum_size = Vector2(28, 24)
+size_flags_vertical = 4
+tooltip_text = "Close"
+text = "✕"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TitleClose"
+
+[node name="ContentHost" type="MarginContainer" parent="Stack"]
+unique_name_in_owner = true
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[connection signal="gui_input" from="Stack/TitleBar" to="." method="_title_input"]
+
+[connection signal="pressed" from="Stack/TitleBar/Row/Minimize" to="." method="_request_minimize"]
+
+[connection signal="pressed" from="Stack/TitleBar/Row/Maximize" to="." method="_request_maximize"]
+
+[connection signal="pressed" from="Stack/TitleBar/Row/Close" to="." method="_request_close"]

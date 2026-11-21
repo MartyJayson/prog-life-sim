@@ -1,0 +1,66 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/terminal.gd" id="script"]
+
+[sub_resource type="SystemFont" id="console"]
+font_names = PackedStringArray("Consolas", "Lucida Console", "Cascadia Mono", "Courier New", "DejaVu Sans Mono", "Monospace")
+
+[sub_resource type="StyleBoxFlat" id="screen"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 4.0
+content_margin_bottom = 8.0
+bg_color = Color(0.047, 0.047, 0.047, 1)
+
+[sub_resource type="StyleBoxEmpty" id="bare"]
+
+[node name="Terminal" type="PanelContainer"]
+theme_override_styles/panel = SubResource("screen")
+script = ExtResource("script")
+
+[node name="Scroller" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+horizontal_scroll_mode = 0
+mouse_default_cursor_shape = 1
+
+[node name="Lines" type="VBoxContainer" parent="Scroller"]
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Output" type="Label" parent="Scroller/Lines"]
+unique_name_in_owner = true
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_fonts/font = SubResource("console")
+theme_override_font_sizes/font_size = 18
+theme_override_constants/line_spacing = 0
+
+[node name="InputRow" type="HBoxContainer" parent="Scroller/Lines"]
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Prompt" type="Label" parent="Scroller/Lines/InputRow"]
+unique_name_in_owner = true
+mouse_filter = 2
+theme_override_fonts/font = SubResource("console")
+theme_override_font_sizes/font_size = 18
+
+[node name="Input" type="LineEdit" parent="Scroller/Lines/InputRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 1
+caret_blink = true
+caret_blink_interval = 0.5
+context_menu_enabled = false
+keep_editing_on_text_submit = true
+theme_override_fonts/font = SubResource("console")
+theme_override_font_sizes/font_size = 18
+theme_override_constants/minimum_character_width = 0
+theme_override_styles/normal = SubResource("bare")
+theme_override_styles/focus = SubResource("bare")
+theme_override_styles/read_only = SubResource("bare")
+
+[connection signal="gui_input" from="Scroller" to="." method="_surface_input"]
+[connection signal="text_submitted" from="Scroller/Lines/InputRow/Input" to="." method="submit"]
+[connection signal="gui_input" from="Scroller/Lines/InputRow/Input" to="." method="_input_key"]

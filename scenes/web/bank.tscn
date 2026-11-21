@@ -1,0 +1,231 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/bank.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/bank_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/web/bank_header.tscn" id="header"]
+
+[sub_resource type="StyleBoxFlat" id="accent"]
+bg_color = Color(0.0, 0.69, 0.42, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="plastic"]
+content_margin_left = 22.0
+content_margin_top = 18.0
+content_margin_right = 22.0
+content_margin_bottom = 18.0
+bg_color = Color(0.067, 0.243, 0.58, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.267, 0.498, 0.902, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0.043, 0.165, 0.38, 0.35)
+shadow_size = 14
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="chip"]
+bg_color = Color(0.957, 0.788, 0.341, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.71, 0.545, 0.18, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="secondary"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(0.937, 0.953, 0.976, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.784, 0.827, 0.89, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Bank" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+theme_override_constants/separation = 18
+script = ExtResource("script")
+
+[node name="TopBar" parent="." instance=ExtResource("header")]
+
+[node name="Accounts" parent="TopBar/Row" index="1"]
+disabled = true
+
+[node name="Greeting" type="Label" parent="."]
+text = "Good afternoon! Your finances are under control."
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.067, 0.122, 0.235, 1)
+theme_override_font_sizes/font_size = 24
+
+[node name="Hero" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 18
+
+[node name="Account" type="PanelContainer" parent="Hero"]
+size_flags_horizontal = 3
+theme_type_variation = &"BankCard"
+
+[node name="Stack" type="VBoxContainer" parent="Hero/Account"]
+theme_override_constants/separation = 4
+
+[node name="Caption" type="HBoxContainer" parent="Hero/Account/Stack"]
+theme_override_constants/separation = 10
+
+[node name="Accent" type="Panel" parent="Hero/Account/Stack/Caption"]
+custom_minimum_size = Vector2(6, 26)
+theme_override_styles/panel = SubResource("accent")
+
+[node name="Name" type="Label" parent="Hero/Account/Stack/Caption"]
+text = "Wallet · Main USD account"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.067, 0.122, 0.235, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="Available" type="Label" parent="Hero/Account/Stack"]
+text = "Available"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.49, 0.545, 0.627, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Balance" type="Label" parent="Hero/Account/Stack"]
+unique_name_in_owner = true
+text = "$ 0"
+mouse_filter = 2
+theme_type_variation = &"BankHeading"
+theme_override_colors/font_color = Color(0.039, 0.165, 0.38, 1)
+theme_override_font_sizes/font_size = 76
+
+[node name="Number" type="Label" parent="Hero/Account/Stack"]
+text = "Account 40817 840 •••• 2048"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.49, 0.545, 0.627, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Updated" type="Label" parent="Hero/Account/Stack"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.6, 0.643, 0.71, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Gap" type="Control" parent="Hero/Account/Stack"]
+custom_minimum_size = Vector2(0, 10)
+mouse_filter = 2
+
+[node name="Actions" type="HBoxContainer" parent="Hero/Account/Stack"]
+theme_override_constants/separation = 10
+
+[node name="Slots" type="Button" parent="Hero/Account/Stack/Actions"]
+text = "Slots OS"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"BankPrimary"
+metadata/destination = "casino.oc/slots"
+
+[node name="Home" type="Button" parent="Hero/Account/Stack/Actions"]
+text = "OS home page"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("secondary")
+metadata/destination = "home.oc"
+
+[node name="Plastic" type="PanelContainer" parent="Hero"]
+custom_minimum_size = Vector2(320, 0)
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("plastic")
+
+[node name="Stack" type="VBoxContainer" parent="Hero/Plastic"]
+theme_override_constants/separation = 12
+
+[node name="Brand" type="HBoxContainer" parent="Hero/Plastic/Stack"]
+
+[node name="Name" type="Label" parent="Hero/Plastic/Stack/Brand"]
+text = "OS BANK"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BankHeading"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="Tier" type="Label" parent="Hero/Plastic/Stack/Brand"]
+text = "PLATINUM"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.722, 0.808, 0.957, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Chip" type="Panel" parent="Hero/Plastic/Stack"]
+custom_minimum_size = Vector2(48, 36)
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("chip")
+
+[node name="Digits" type="Label" parent="Hero/Plastic/Stack"]
+text = "4417  ••••  ••••  2048"
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 23
+
+[node name="Owner" type="HBoxContainer" parent="Hero/Plastic/Stack"]
+
+[node name="Holder" type="Label" parent="Hero/Plastic/Stack/Owner"]
+text = "OS USER"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.86, 0.91, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="Expiry" type="Label" parent="Hero/Plastic/Stack/Owner"]
+text = "12/30"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.86, 0.91, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="History" type="PanelContainer" parent="."]
+theme_type_variation = &"BankCard"
+
+[node name="Stack" type="VBoxContainer" parent="History"]
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="History/Stack"]
+text = "Recent transactions"
+mouse_filter = 2
+theme_type_variation = &"BankHeading"
+
+[node name="Rows" type="VBoxContainer" parent="History/Stack"]
+unique_name_in_owner = true
+theme_override_constants/separation = 0
+
+[node name="Empty" type="Label" parent="History/Stack"]
+unique_name_in_owner = true
+visible = false
+text = "No transactions yet."
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.49, 0.545, 0.627, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="Footer" type="Label" parent="."]
+text = "OS Bank · OS Central Bank licence No. 0001 · Deposits insured by an imaginary fund"
+mouse_filter = 2
+autowrap_mode = 3
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 0.643, 0.71, 1)
+theme_override_font_sizes/font_size = 14
+
+[editable path="TopBar"]

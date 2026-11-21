@@ -1,0 +1,142 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/notifications/notification_toast.gd" id="script"]
+
+[sub_resource type="StyleBoxFlat" id="normal"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.965, 0.98, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.18, 0.42, 0.77, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 7
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="hover"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.91, 0.957, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.6, 0.15, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 9
+shadow_offset = Vector2(0, 3)
+
+[node name="NotificationToast" type="PanelContainer"]
+custom_minimum_size = Vector2(380, 0)
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("normal")
+script = ExtResource("script")
+normal_style = SubResource("normal")
+hover_style = SubResource("hover")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Layout"]
+layout_mode = 2
+mouse_filter = 1
+theme_type_variation = &"HeaderPanel"
+
+[node name="Row" type="HBoxContainer" parent="Layout/Header"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 8
+
+[node name="HeaderIcon" type="TextureRect" parent="Layout/Header/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Layout/Header/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderTitle"
+text_overrun_behavior = 3
+
+[node name="Close" type="Button" parent="Layout/Header/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Close"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"TitleClose"
+theme_override_font_sizes/font_size = 14
+text = "✕"
+
+[node name="Body" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Row" type="HBoxContainer" parent="Layout/Body"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/separation = 10
+
+[node name="Accent" type="ColorRect" parent="Layout/Body/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+mouse_filter = 1
+color = Color(1, 0.616, 0.18, 1)
+
+[node name="Icon" type="TextureRect" parent="Layout/Body/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="Layout/Body/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_constants/separation = 4
+
+[node name="Message" type="Label" parent="Layout/Body/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Layout/Body/Row/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.11, 0.42, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "Click to open"
+
+[connection signal="mouse_entered" from="." to="." method="_hover" binds=[true]]
+[connection signal="mouse_exited" from="." to="." method="_hover" binds=[false]]
+[connection signal="pressed" from="Layout/Header/Row/Close" to="." method="_dismiss"]

@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[node name="Home" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="."]
+text = "Welcome to the OS web"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 38
+
+[node name="Subtitle" type="Label" parent="."]
+text = "Open a site from the directory below."
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="Site0" type="Button" parent="."]
+text = "Search OS   ·   Find pages in the OS directory"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "search.oc"
+
+[node name="Site1" type="Button" parent="."]
+text = "News OS   ·   Local headlines and technology"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "news.oc"
+
+[node name="Site2" type="Button" parent="."]
+text = "Games OS   ·   Play classic desktop games"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "games.oc"
+
+[node name="Site3" type="Button" parent="."]
+text = "About OS   ·   Read about the operating system"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "about.oc"
+
+[node name="Site4" type="Button" parent="."]
+text = "Casino OC   ·   Slots and blackjack"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "casino.oc"
+
+[node name="Site5" type="Button" parent="."]
+text = "OS Bank   ·   Online banking and your wallet"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "bank.oc"

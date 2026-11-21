@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[node name="Missing" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="."]
+text = "Page Not Found"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 38
+
+[node name="Subtitle" type="Label" parent="."]
+text = ""
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+
+[node name="Home" type="Button" parent="."]
+text = "Return to OS Home"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "home.oc"

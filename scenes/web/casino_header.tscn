@@ -1,0 +1,67 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/casino_header.gd" id="script"]
+
+[node name="CasinoHeader" type="PanelContainer"]
+theme_type_variation = &"CasinoHeader"
+script = ExtResource("script")
+
+[node name="Row" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 6
+
+[node name="Logo" type="Label" parent="Row"]
+text = "★ CASINO OC ★"
+mouse_filter = 2
+theme_type_variation = &"CasinoLogo"
+
+[node name="Gap" type="Control" parent="Row"]
+custom_minimum_size = Vector2(14, 0)
+mouse_filter = 2
+
+[node name="Lobby" type="Button" parent="Row"]
+unique_name_in_owner = true
+text = "Lobby"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoNav"
+metadata/destination = "casino.oc"
+metadata/section = "lobby"
+
+[node name="Slots" type="Button" parent="Row"]
+unique_name_in_owner = true
+text = "Slots"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoNav"
+metadata/destination = "casino.oc/slots"
+metadata/section = "slots"
+
+[node name="Blackjack" type="Button" parent="Row"]
+unique_name_in_owner = true
+text = "Blackjack"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoNav"
+metadata/destination = "casino.oc/blackjack"
+metadata/section = "blackjack"
+
+[node name="Spacer" type="Control" parent="Row"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Balance" type="Label" parent="Row"]
+unique_name_in_owner = true
+text = "Balance: $ 0"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+
+[node name="Gap2" type="Control" parent="Row"]
+custom_minimum_size = Vector2(10, 0)
+mouse_filter = 2
+
+[node name="Bank" type="Button" parent="Row"]
+text = "OS Bank →"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoLink"
+metadata/destination = "bank.oc"

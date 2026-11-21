@@ -1,0 +1,413 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/blackjack.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
+[ext_resource type="Script" path="res://scripts/web/marquee_lights.gd" id="lights"]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 0.8
+
+[sub_resource type="StyleBoxFlat" id="felt_line"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(1, 0.84, 0.4, 0.45)
+
+[sub_resource type="StyleBoxFlat" id="score"]
+content_margin_left = 12.0
+content_margin_top = 2.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0.35)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Gradient" id="coin_tints"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.96, 0.6, 1, 1, 0.8, 0.16, 1, 1, 0.55, 0.06, 1)
+
+[sub_resource type="Gradient" id="coin_fade"]
+offsets = PackedFloat32Array(0, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Blackjack" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Page" type="PanelContainer" parent="."]
+theme_type_variation = &"CasinoPage"
+
+[node name="Stack" type="VBoxContainer" parent="Page"]
+theme_override_constants/separation = 14
+
+[node name="Header" parent="Page/Stack" instance=ExtResource("header")]
+section = "blackjack"
+
+[node name="Title" type="HBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 16
+
+[node name="Name" type="Label" parent="Page/Stack/Title"]
+text = "★ BLACKJACK ★"
+mouse_filter = 2
+theme_type_variation = &"CasinoLogo"
+theme_override_font_sizes/font_size = 30
+
+[node name="Tagline" type="Label" parent="Page/Stack/Title"]
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Beat the dealer without going over 21!"
+mouse_filter = 2
+text_overrun_behavior = 3
+
+[node name="Body" type="HBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 18
+
+[node name="Table" type="PanelContainer" parent="Page/Stack/Body"]
+size_flags_horizontal = 3
+theme_type_variation = &"CasinoTable"
+
+[node name="Hands" type="VBoxContainer" parent="Page/Stack/Body/Table"]
+theme_override_constants/separation = 10
+
+[node name="DealerRow" type="HBoxContainer" parent="Page/Stack/Body/Table/Hands"]
+alignment = 1
+
+[node name="DealerTitle" type="Label" parent="Page/Stack/Body/Table/Hands/DealerRow"]
+unique_name_in_owner = true
+text = "Dealer"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.97, 0.94, 0.82, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("score")
+
+[node name="Dealer" type="HFlowContainer" parent="Page/Stack/Body/Table/Hands"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 124)
+alignment = 1
+theme_override_constants/h_separation = 12
+
+[node name="Rules" type="PanelContainer" parent="Page/Stack/Body/Table/Hands"]
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("felt_line")
+
+[node name="Text" type="Label" parent="Page/Stack/Body/Table/Hands/Rules"]
+text = "WIN ×2  ·  PUSH — REFUND  ·  DEALER DRAWS TO 17"
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.45, 0.8)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 16
+
+[node name="Player" type="HFlowContainer" parent="Page/Stack/Body/Table/Hands"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 124)
+alignment = 1
+theme_override_constants/h_separation = 12
+
+[node name="PlayerRow" type="HBoxContainer" parent="Page/Stack/Body/Table/Hands"]
+alignment = 1
+
+[node name="PlayerTitle" type="Label" parent="Page/Stack/Body/Table/Hands/PlayerRow"]
+unique_name_in_owner = true
+text = "You"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.97, 0.94, 0.82, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("score")
+
+[node name="StatusBox" type="PanelContainer" parent="Page/Stack/Body/Table/Hands"]
+size_flags_horizontal = 4
+theme_type_variation = &"CasinoBanner"
+
+[node name="Status" type="Label" parent="Page/Stack/Body/Table/Hands/StatusBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(520, 0)
+text = "Place a bet and press DEAL."
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_font_sizes/font_size = 19
+
+[node name="Effects" type="Control" parent="Page/Stack/Body/Table"]
+mouse_filter = 2
+
+[node name="TableLights" type="Control" parent="Page/Stack/Body/Table/Effects"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -12.0
+offset_right = 16.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("lights")
+spacing = 34.0
+inset = 0.0
+
+[node name="Flash" type="ColorRect" parent="Page/Stack/Body/Table/Effects"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.9, 0.55, 1)
+
+[node name="Coins" type="CPUParticles2D" parent="Page/Stack/Body/Table/Effects"]
+unique_name_in_owner = true
+emitting = false
+amount = 120
+lifetime = 1.8
+one_shot = true
+explosiveness = 0.9
+direction = Vector2(0, -1)
+spread = 75.0
+gravity = Vector2(0, 1300)
+initial_velocity_min = 450.0
+initial_velocity_max = 900.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 7.0
+scale_amount_max = 13.0
+color_ramp = SubResource("coin_fade")
+color_initial_ramp = SubResource("coin_tints")
+
+[node name="Banner" type="Label" parent="Page/Stack/Body/Table/Effects"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+horizontal_alignment = 1
+theme_override_colors/font_outline_color = Color(0.3, 0.02, 0.06, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 58
+
+[node name="Side" type="PanelContainer" parent="Page/Stack/Body"]
+custom_minimum_size = Vector2(250, 0)
+theme_type_variation = &"CasinoPanel"
+
+[node name="List" type="VBoxContainer" parent="Page/Stack/Body/Side"]
+theme_override_constants/separation = 10
+
+[node name="Heading" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "RULES"
+mouse_filter = 2
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 22
+
+[node name="Goal" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "• Score higher than the dealer without going over 21."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="Cards" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "• 2–10 count at face value, J, Q, K count 10, an ace counts 1 or 11."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="Dealer" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "• The dealer draws while under 17."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="Natural" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "• 21 with the first two cards ends the hand at once."
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="Separator" type="HSeparator" parent="Page/Stack/Body/Side/List"]
+
+[node name="Pays" type="GridContainer" parent="Page/Stack/Body/Side/List"]
+columns = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 6
+
+[node name="Win" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+size_flags_horizontal = 3
+text = "Win"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+
+[node name="WinPay" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+text = "×2"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(1, 0.824, 0.247, 1)
+
+[node name="Push" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+size_flags_horizontal = 3
+text = "Push"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+
+
+[node name="PushPay" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+text = "refund"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+
+
+[node name="Lose" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+size_flags_horizontal = 3
+text = "Loss"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+
+
+[node name="LosePay" type="Label" parent="Page/Stack/Body/Side/List/Pays"]
+text = "×0"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 20
+
+
+[node name="Limits" type="Label" parent="Page/Stack/Body/Side/List"]
+text = "Bets from $ 500 to $ 10 000."
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+
+[node name="Controls" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Controls"]
+theme_override_constants/separation = 10
+
+[node name="BetRow" type="HBoxContainer" parent="Page/Stack/Controls/Column"]
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="Page/Stack/Controls/Column/BetRow"]
+size_flags_vertical = 4
+text = "BET"
+mouse_filter = 2
+
+[node name="Bet" type="SpinBox" parent="Page/Stack/Controls/Column/BetRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 0)
+min_value = 500.0
+max_value = 10000.0
+step = 100.0
+value = 500.0
+prefix = "$"
+
+[node name="Chip500" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(64, 48)
+text = "500"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+
+[node name="Chip1000" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(64, 48)
+text = "1K"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+
+[node name="Chip2500" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(64, 48)
+text = "2.5K"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+
+[node name="Chip5000" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(64, 48)
+text = "5K"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+
+[node name="ChipMax" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(64, 48)
+text = "MAX"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+
+[node name="Spacer" type="Control" parent="Page/Stack/Controls/Column/BetRow"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Balance" type="Label" parent="Page/Stack/Controls/Column/BetRow"]
+unique_name_in_owner = true
+size_flags_vertical = 4
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Actions" type="HBoxContainer" parent="Page/Stack/Controls/Column"]
+alignment = 1
+theme_override_constants/separation = 14
+
+[node name="Deal" type="Button" parent="Page/Stack/Controls/Column/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 60)
+text = "DEAL"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoGold"
+
+[node name="Hit" type="Button" parent="Page/Stack/Controls/Column/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 60)
+text = "HIT"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 22
+
+[node name="Stand" type="Button" parent="Page/Stack/Controls/Column/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 60)
+text = "STAND"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoRed"
+
+[connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Deal" to="." method="_deal"]
+[connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Hit" to="." method="_hit"]
+[connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Stand" to="." method="_stand"]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip500" to="." method="_set_bet" binds=[500]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip1000" to="." method="_set_bet" binds=[1000]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip2500" to="." method="_set_bet" binds=[2500]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip5000" to="." method="_set_bet" binds=[5000]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/ChipMax" to="." method="_bet_max"]

@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop_icon.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/generated/desktop_icon_theme.tres" id="theme"]
+
+[node name="DesktopIcon" type="Button"]
+text = ""
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+custom_minimum_size = Vector2(110, 99)
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+theme = ExtResource("theme")
+theme_override_constants/icon_max_width = 52
+theme_override_font_sizes/font_size = 17
+script = ExtResource("script")

@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/snake.gd" id="script"]
+
+[node name="Snake" type="VBoxContainer"]
+script = ExtResource("script")
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+
+[node name="Status" type="Label" parent="Toolbar"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+size_flags_horizontal = 3
+
+[node name="Restart" type="Button" parent="Toolbar"]
+text = "Restart"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Board" type="Control" parent="."]
+unique_name_in_owner = true
+size_flags_vertical = 3
+
+[node name="Hint" type="Label" parent="."]
+text = "Arrow keys / WASD"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+
+[connection signal="pressed" from="Toolbar/Restart" to="." method="_restart"]
+
+[connection signal="draw" from="Board" to="." method="_draw_board"]
+
+[connection signal="resized" from="Board" to="." method="_queue_board_redraw"]

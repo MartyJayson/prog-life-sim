@@ -1,0 +1,102 @@
+[gd_resource type="Theme" format=3]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 0.9
+
+[sub_resource type="StyleBoxFlat" id="topbar"]
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
+bg_color = Color(0.039, 0.165, 0.38, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="card"]
+content_margin_left = 26.0
+content_margin_top = 22.0
+content_margin_right = 26.0
+content_margin_bottom = 22.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.863, 0.894, 0.937, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.043, 0.165, 0.38, 0.1)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxEmpty" id="nav"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="nav_hover"]
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+bg_color = Color(0.105, 0.26, 0.5, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="primary"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0, 0.62, 0.38, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="primary_hover"]
+content_margin_left = 20.0
+content_margin_top = 8.0
+content_margin_right = 20.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0, 0.71, 0.44, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[resource]
+BankTopBar/base_type = &"PanelContainer"
+BankTopBar/styles/panel = SubResource("topbar")
+BankCard/base_type = &"PanelContainer"
+BankCard/styles/panel = SubResource("card")
+BankHeading/base_type = &"Label"
+BankHeading/colors/font_color = Color(0.067, 0.122, 0.235, 1)
+BankHeading/fonts/font = SubResource("bold")
+BankHeading/font_sizes/font_size = 23
+BankNav/base_type = &"Button"
+BankNav/colors/font_color = Color(0.678, 0.757, 0.894, 1)
+BankNav/colors/font_disabled_color = Color(1, 1, 1, 1)
+BankNav/colors/font_focus_color = Color(1, 1, 1, 1)
+BankNav/colors/font_hover_color = Color(1, 1, 1, 1)
+BankNav/colors/font_pressed_color = Color(1, 1, 1, 1)
+BankNav/font_sizes/font_size = 19
+BankNav/styles/normal = SubResource("nav")
+BankNav/styles/disabled = SubResource("nav")
+BankNav/styles/hover = SubResource("nav_hover")
+BankNav/styles/pressed = SubResource("nav_hover")
+BankPrimary/base_type = &"Button"
+BankPrimary/colors/font_color = Color(1, 1, 1, 1)
+BankPrimary/colors/font_focus_color = Color(1, 1, 1, 1)
+BankPrimary/colors/font_hover_color = Color(1, 1, 1, 1)
+BankPrimary/colors/font_pressed_color = Color(1, 1, 1, 1)
+BankPrimary/styles/normal = SubResource("primary")
+BankPrimary/styles/hover = SubResource("primary_hover")
+BankPrimary/styles/pressed = SubResource("primary")

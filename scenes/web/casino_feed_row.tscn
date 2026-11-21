@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[node name="FeedRow" type="HBoxContainer"]
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="."]
+size_flags_horizontal = 3
+mouse_filter = 2
+text_overrun_behavior = 3
+
+[node name="Time" type="Label" parent="."]
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+
+[node name="Amount" type="Label" parent="."]
+custom_minimum_size = Vector2(110, 0)
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 19

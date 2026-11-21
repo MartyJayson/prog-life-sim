@@ -1,0 +1,205 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/operations/device.gd" id="device"]
+
+[sub_resource type="NavigationPolygon" id="nav0"]
+vertices = PackedVector2Array(12, 12, 147, 12, 194, 12, 205, 12, 218, 12, 282, 12, 307, 12, 388, 12, 12, 122, 147, 122, 194, 122, 205, 122, 218, 122, 282, 122, 307, 122, 388, 122, 12, 176, 147, 176, 194, 176, 205, 176, 218, 176, 282, 176, 307, 176, 388, 176, 12, 207, 147, 207, 194, 207, 205, 207, 218, 207, 282, 207, 307, 207, 388, 207, 12, 253, 147, 253, 194, 253, 205, 253, 218, 253, 282, 253, 307, 253, 388, 253, 12, 295, 147, 295, 194, 295, 205, 295, 218, 295, 282, 295, 307, 295, 388, 295, 12, 347, 147, 347, 194, 347, 205, 347, 218, 347, 282, 347, 307, 347, 388, 347, 12, 448, 147, 448, 194, 448, 205, 448, 218, 448, 282, 448, 307, 448, 388, 448)
+polygons = [PackedInt32Array(0, 1, 9, 8), PackedInt32Array(1, 2, 10, 9), PackedInt32Array(2, 3, 11, 10), PackedInt32Array(3, 4, 12, 11), PackedInt32Array(4, 5, 13, 12), PackedInt32Array(5, 6, 14, 13), PackedInt32Array(6, 7, 15, 14), PackedInt32Array(8, 9, 17, 16), PackedInt32Array(9, 10, 18, 17), PackedInt32Array(13, 14, 22, 21), PackedInt32Array(14, 15, 23, 22), PackedInt32Array(16, 17, 25, 24), PackedInt32Array(17, 18, 26, 25), PackedInt32Array(18, 19, 27, 26), PackedInt32Array(19, 20, 28, 27), PackedInt32Array(20, 21, 29, 28), PackedInt32Array(21, 22, 30, 29), PackedInt32Array(22, 23, 31, 30), PackedInt32Array(24, 25, 33, 32), PackedInt32Array(27, 28, 36, 35), PackedInt32Array(28, 29, 37, 36), PackedInt32Array(29, 30, 38, 37), PackedInt32Array(30, 31, 39, 38), PackedInt32Array(32, 33, 41, 40), PackedInt32Array(33, 34, 42, 41), PackedInt32Array(34, 35, 43, 42), PackedInt32Array(35, 36, 44, 43), PackedInt32Array(36, 37, 45, 44), PackedInt32Array(37, 38, 46, 45), PackedInt32Array(38, 39, 47, 46), PackedInt32Array(40, 41, 49, 48), PackedInt32Array(41, 42, 50, 49), PackedInt32Array(42, 43, 51, 50), PackedInt32Array(43, 44, 52, 51), PackedInt32Array(46, 47, 55, 54), PackedInt32Array(48, 49, 57, 56), PackedInt32Array(49, 50, 58, 57), PackedInt32Array(50, 51, 59, 58), PackedInt32Array(51, 52, 60, 59), PackedInt32Array(52, 53, 61, 60), PackedInt32Array(53, 54, 62, 61), PackedInt32Array(54, 55, 63, 62)]
+
+[sub_resource type="NavigationPolygon" id="nav1"]
+vertices = PackedVector2Array(432, 12, 537, 12, 573, 12, 615, 12, 626, 12, 659, 12, 673, 12, 808, 12, 432, 116, 537, 116, 573, 116, 615, 116, 626, 116, 659, 116, 673, 116, 808, 116, 432, 170, 537, 170, 573, 170, 615, 170, 626, 170, 659, 170, 673, 170, 808, 170, 432, 203, 537, 203, 573, 203, 615, 203, 626, 203, 659, 203, 673, 203, 808, 203, 432, 249, 537, 249, 573, 249, 615, 249, 626, 249, 659, 249, 673, 249, 808, 249, 432, 289, 537, 289, 573, 289, 615, 289, 626, 289, 659, 289, 673, 289, 808, 289, 432, 345, 537, 345, 573, 345, 615, 345, 626, 345, 659, 345, 673, 345, 808, 345, 432, 448, 537, 448, 573, 448, 615, 448, 626, 448, 659, 448, 673, 448, 808, 448)
+polygons = [PackedInt32Array(0, 1, 9, 8), PackedInt32Array(1, 2, 10, 9), PackedInt32Array(2, 3, 11, 10), PackedInt32Array(3, 4, 12, 11), PackedInt32Array(4, 5, 13, 12), PackedInt32Array(5, 6, 14, 13), PackedInt32Array(6, 7, 15, 14), PackedInt32Array(8, 9, 17, 16), PackedInt32Array(12, 13, 21, 20), PackedInt32Array(13, 14, 22, 21), PackedInt32Array(14, 15, 23, 22), PackedInt32Array(16, 17, 25, 24), PackedInt32Array(17, 18, 26, 25), PackedInt32Array(18, 19, 27, 26), PackedInt32Array(19, 20, 28, 27), PackedInt32Array(20, 21, 29, 28), PackedInt32Array(21, 22, 30, 29), PackedInt32Array(22, 23, 31, 30), PackedInt32Array(24, 25, 33, 32), PackedInt32Array(25, 26, 34, 33), PackedInt32Array(26, 27, 35, 34), PackedInt32Array(30, 31, 39, 38), PackedInt32Array(32, 33, 41, 40), PackedInt32Array(33, 34, 42, 41), PackedInt32Array(34, 35, 43, 42), PackedInt32Array(35, 36, 44, 43), PackedInt32Array(36, 37, 45, 44), PackedInt32Array(37, 38, 46, 45), PackedInt32Array(38, 39, 47, 46), PackedInt32Array(40, 41, 49, 48), PackedInt32Array(41, 42, 50, 49), PackedInt32Array(45, 46, 54, 53), PackedInt32Array(46, 47, 55, 54), PackedInt32Array(48, 49, 57, 56), PackedInt32Array(49, 50, 58, 57), PackedInt32Array(50, 51, 59, 58), PackedInt32Array(51, 52, 60, 59), PackedInt32Array(52, 53, 61, 60), PackedInt32Array(53, 54, 62, 61), PackedInt32Array(54, 55, 63, 62)]
+
+[sub_resource type="RectangleShape2D" id="wall0"]
+size = Vector2(28, 91)
+
+[sub_resource type="RectangleShape2D" id="wall1"]
+size = Vector2(28, 101)
+
+[sub_resource type="RectangleShape2D" id="wall2"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="wall3"]
+size = Vector2(28, 101)
+
+[sub_resource type="RectangleShape2D" id="wall4"]
+size = Vector2(28, 31)
+
+[sub_resource type="RectangleShape2D" id="wall5"]
+size = Vector2(72, 38)
+
+[sub_resource type="RectangleShape2D" id="wall6"]
+size = Vector2(73, 36)
+
+[sub_resource type="RectangleShape2D" id="wall7"]
+size = Vector2(73, 38)
+
+[sub_resource type="RectangleShape2D" id="wall8"]
+size = Vector2(70, 40)
+
+[sub_resource type="RectangleShape2D" id="wall9"]
+size = Vector2(42, 30)
+
+[sub_resource type="RectangleShape2D" id="wall10"]
+size = Vector2(42, 30)
+
+[sub_resource type="RectangleShape2D" id="door"]
+size = Vector2(28, 32)
+
+[sub_resource type="RectangleShape2D" id="occupancy"]
+size = Vector2(42, 32)
+
+[node name="Layout" type="Node2D"]
+
+[node name="Region0" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("nav0")
+
+[node name="Region1" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("nav1")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall0" type="StaticBody2D" parent="Walls"]
+position = Vector2(410, 45.5)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall0"]
+shape = SubResource("wall0")
+
+[node name="Wall1" type="StaticBody2D" parent="Walls"]
+position = Vector2(410, 163.5)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall1"]
+shape = SubResource("wall1")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(410, 260)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall2"]
+shape = SubResource("wall2")
+
+[node name="Wall3" type="StaticBody2D" parent="Walls"]
+position = Vector2(410, 356.5)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall3"]
+shape = SubResource("wall3")
+
+[node name="Wall4" type="StaticBody2D" parent="Walls"]
+position = Vector2(410, 444.5)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall4"]
+shape = SubResource("wall4")
+
+[node name="Wall5" type="StaticBody2D" parent="Walls"]
+position = Vector2(238, 149)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall5"]
+shape = SubResource("wall5")
+
+[node name="Wall6" type="StaticBody2D" parent="Walls"]
+position = Vector2(262.5, 321)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall6"]
+shape = SubResource("wall6")
+
+[node name="Wall7" type="StaticBody2D" parent="Walls"]
+position = Vector2(581.5, 143)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall7"]
+shape = SubResource("wall7")
+
+[node name="Wall8" type="StaticBody2D" parent="Walls"]
+position = Vector2(616, 317)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall8"]
+shape = SubResource("wall8")
+
+[node name="Wall9" type="StaticBody2D" parent="Walls"]
+position = Vector2(176, 230)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall9"]
+shape = SubResource("wall9")
+
+[node name="Wall10" type="StaticBody2D" parent="Walls"]
+position = Vector2(644, 226)
+
+[node name="Shape" type="CollisionShape2D" parent="Walls/Wall10"]
+shape = SubResource("wall10")
+
+[node name="Bypass102" type="NavigationLink2D" parent="."]
+position = Vector2(410, 102)
+start_position = Vector2(-24, 0)
+end_position = Vector2(24, 0)
+
+[node name="Bypass418" type="NavigationLink2D" parent="."]
+position = Vector2(410, 418)
+start_position = Vector2(-24, 0)
+end_position = Vector2(24, 0)
+
+[node name="Devices" type="Node2D" parent="."]
+
+[node name="Door0" type="Node2D" parent="Devices"]
+position = Vector2(410, 230)
+script = ExtResource("device")
+kind = 1
+caption = "Gate 1"
+
+[node name="Link" type="NavigationLink2D" parent="Devices/Door0"]
+start_position = Vector2(-24, 0)
+end_position = Vector2(24, 0)
+
+[node name="Barrier" type="StaticBody2D" parent="Devices/Door0"]
+
+[node name="Shape" type="CollisionShape2D" parent="Devices/Door0/Barrier"]
+shape = SubResource("door")
+disabled = true
+
+[node name="Occupancy" type="Area2D" parent="Devices/Door0"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Devices/Door0/Occupancy"]
+shape = SubResource("occupancy")
+
+[node name="Door1" type="Node2D" parent="Devices"]
+position = Vector2(410, 290)
+script = ExtResource("device")
+kind = 1
+caption = "Gate 2"
+
+[node name="Link" type="NavigationLink2D" parent="Devices/Door1"]
+start_position = Vector2(-24, 0)
+end_position = Vector2(24, 0)
+
+[node name="Barrier" type="StaticBody2D" parent="Devices/Door1"]
+
+[node name="Shape" type="CollisionShape2D" parent="Devices/Door1/Barrier"]
+shape = SubResource("door")
+disabled = true
+
+[node name="Occupancy" type="Area2D" parent="Devices/Door1"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Devices/Door1/Occupancy"]
+shape = SubResource("occupancy")
+
+[node name="Terminal" type="Node2D" parent="Devices"]
+position = Vector2(525, 221)
+script = ExtResource("device")
+caption = "Terminal"
+coverage = Rect2(280, 0, 540, 460)
+
+[node name="TurretA" type="Node2D" parent="Devices"]
+position = Vector2(486, 102)
+script = ExtResource("device")
+kind = 2
+caption = "Turret A"
+
+[node name="TurretB" type="Node2D" parent="Devices"]
+position = Vector2(486, 418)
+script = ExtResource("device")
+kind = 2
+caption = "Turret B"
+

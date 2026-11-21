@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/operations/operative.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="body"]
+radius = 5.0
+
+[node name="Operative" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("body")
+
+[node name="Agent" type="NavigationAgent2D" parent="."]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+avoidance_enabled = true
+radius = 6.0
+neighbor_distance = 45.0
+max_neighbors = 10
+time_horizon_agents = 0.6
+max_speed = 65.0
+
+[connection signal="velocity_computed" from="Agent" to="." method="_on_safe_velocity"]

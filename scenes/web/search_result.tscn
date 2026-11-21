@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[node name="SearchResult" type="Button"]
+text = ""
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3

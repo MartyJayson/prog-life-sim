@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+<linearGradient id="sky" x2=".65" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#06245b"/><stop offset=".53" stop-color="#1166a5"/><stop offset="1" stop-color="#183867"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#a0e9f0" stop-opacity=".8"/><stop offset="1" stop-color="#6fbbde" stop-opacity="0"/></radialGradient>
+<linearGradient id="band" x2="1" y2="1"><stop stop-color="#80dddb" stop-opacity=".03"/><stop offset=".56" stop-color="#99eafa" stop-opacity=".5"/><stop offset="1" stop-color="#428fd7" stop-opacity=".03"/></linearGradient>
+</defs>
+<path fill="url(#sky)" d="M0 0h1920v1080H0z"/>
+<ellipse fill="url(#light)" cx="1390" cy="307" rx="785" ry="530"/>
+<ellipse fill="url(#light)" opacity=".42" cx="461" cy="912" rx="770" ry="460"/>
+<path fill="url(#band)" d="M0 831C411 990 727 875 1050 610S1540 253 1920 285v142c-386-56-549 39-856 264S401 1025 0 910z"/>
+<path fill="url(#band)" opacity=".72" d="M0 980c454 31 631-107 994-275s664-164 926-95v148c-271-129-525-127-907 25S417 1058 0 1034z"/>
+<path fill="none" stroke="#c0f8ff" opacity=".32" stroke-width="2" d="M0 890c407 103 742-49 1055-267s570-322 865-291"/>
+<path fill="none" stroke="#88d8f8" opacity=".25" stroke-width="2" d="M0 1012c451 39 682-128 1007-267s636-162 913-42"/>
+</svg>

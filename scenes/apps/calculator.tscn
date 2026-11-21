@@ -1,0 +1,200 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/calculator.gd" id="script"]
+
+[sub_resource type="StyleBoxFlat" id="display"]
+bg_color = Color(0.957, 0.984, 0.98, 1)
+content_margin_right = 12.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[node name="Calculator" type="VBoxContainer"]
+script = ExtResource("script")
+
+[node name="Display" type="Label" parent="."]
+unique_name_in_owner = true
+text = "0"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 33
+custom_minimum_size = Vector2(0, 66)
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 3
+theme_override_styles/normal = SubResource("display")
+
+[node name="Keys" type="GridContainer" parent="."]
+columns = 4
+size_flags_vertical = 3
+
+[node name="Key0" type="Button" parent="Keys"]
+text = "C"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key1" type="Button" parent="Keys"]
+text = "±"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key2" type="Button" parent="Keys"]
+text = "⌫"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key3" type="Button" parent="Keys"]
+text = "÷"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key4" type="Button" parent="Keys"]
+text = "7"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key5" type="Button" parent="Keys"]
+text = "8"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key6" type="Button" parent="Keys"]
+text = "9"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key7" type="Button" parent="Keys"]
+text = "×"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key8" type="Button" parent="Keys"]
+text = "4"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key9" type="Button" parent="Keys"]
+text = "5"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key10" type="Button" parent="Keys"]
+text = "6"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key11" type="Button" parent="Keys"]
+text = "−"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key12" type="Button" parent="Keys"]
+text = "1"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key13" type="Button" parent="Keys"]
+text = "2"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key14" type="Button" parent="Keys"]
+text = "3"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key15" type="Button" parent="Keys"]
+text = "+"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key16" type="Button" parent="Keys"]
+text = "0"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key17" type="Button" parent="Keys"]
+text = "."
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Key18" type="Button" parent="Keys"]
+text = "="
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Keys/Key0" to="." method="_press" binds=["C"]]
+
+[connection signal="pressed" from="Keys/Key1" to="." method="_press" binds=["±"]]
+
+[connection signal="pressed" from="Keys/Key2" to="." method="_press" binds=["⌫"]]
+
+[connection signal="pressed" from="Keys/Key3" to="." method="_press" binds=["÷"]]
+
+[connection signal="pressed" from="Keys/Key4" to="." method="_press" binds=["7"]]
+
+[connection signal="pressed" from="Keys/Key5" to="." method="_press" binds=["8"]]
+
+[connection signal="pressed" from="Keys/Key6" to="." method="_press" binds=["9"]]
+
+[connection signal="pressed" from="Keys/Key7" to="." method="_press" binds=["×"]]
+
+[connection signal="pressed" from="Keys/Key8" to="." method="_press" binds=["4"]]
+
+[connection signal="pressed" from="Keys/Key9" to="." method="_press" binds=["5"]]
+
+[connection signal="pressed" from="Keys/Key10" to="." method="_press" binds=["6"]]
+
+[connection signal="pressed" from="Keys/Key11" to="." method="_press" binds=["−"]]
+
+[connection signal="pressed" from="Keys/Key12" to="." method="_press" binds=["1"]]
+
+[connection signal="pressed" from="Keys/Key13" to="." method="_press" binds=["2"]]
+
+[connection signal="pressed" from="Keys/Key14" to="." method="_press" binds=["3"]]
+
+[connection signal="pressed" from="Keys/Key15" to="." method="_press" binds=["+"]]
+
+[connection signal="pressed" from="Keys/Key16" to="." method="_press" binds=["0"]]
+
+[connection signal="pressed" from="Keys/Key17" to="." method="_press" binds=["."]]
+
+[connection signal="pressed" from="Keys/Key18" to="." method="_press" binds=["="]]
