@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-## casino.oc/blackjack — classic 21 against the dealer, paid from the shared Wallet.
+## casino.oc/blackjack — classic 21 against the dealer, played with Casino OC tokens.
 
 const Lights = preload("res://scripts/web/marquee_lights.gd")
 const CARD = preload("res://scenes/web/playing_card.tscn")
@@ -21,12 +21,12 @@ var _effects: Array[Tween] = []
 @onready var banner: Label = %Banner
 
 func _ready() -> void:
-	Wallet.changed.connect(_balance_changed)
-	_balance_changed(Wallet.balance)
+	Wallet.tokens_changed.connect(_balance_changed)
+	_balance_changed(Wallet.tokens)
 	_render()
 
 func _balance_changed(balance: int) -> void:
-	%Balance.text = "Balance: " + Wallet.format_money(balance)
+	%Balance.text = "Balance: " + Wallet.format_tokens(balance)
 
 static func score(hand: Array[int]) -> int:
 	var total := 0
@@ -44,8 +44,8 @@ func _deal() -> void:
 		return
 	%Bet.apply()
 	var amount := int(%Bet.value)
-	if not Wallet.withdraw(amount, "Blackjack — bet"):
-		%Status.text = "Insufficient funds for this bet."
+	if not Wallet.bet_tokens(amount, "Blackjack — bet"):
+		%Status.text = "Not enough tokens for this bet. Top up at the Cashier."
 		return
 	stake = amount
 	_clear_effects()
@@ -90,15 +90,15 @@ func _settle() -> void:
 	var yours := score(player)
 	var theirs := score(dealer)
 	if yours > 21 or (theirs <= 21 and theirs > yours):
-		%Status.text = "Dealer wins. You lost " + Wallet.format_money(bet)
+		%Status.text = "Dealer wins. You lost " + Wallet.format_tokens(bet)
 		_announce("BUST!" if yours > 21 else "DEALER WINS", Color("#ff6b78"), false)
 	elif yours == theirs:
-		Wallet.deposit(bet, "Blackjack — bet refund")
+		Wallet.win_tokens(bet, "Blackjack — bet refund")
 		%Status.text = "Push. Your bet is returned."
 		_announce("PUSH", Color("#d9c8f5"), false)
 	else:
-		Wallet.deposit(bet * 2, "Blackjack — win")
-		%Status.text = "You win! Payout " + Wallet.format_money(bet * 2)
+		Wallet.win_tokens(bet * 2, "Blackjack — win")
+		%Status.text = "You win! Payout " + Wallet.format_tokens(bet * 2)
 		var natural := yours == 21 and player.size() == 2
 		_announce("BLACKJACK!" if natural else ("DEALER BUSTS!" if theirs > 21 else "YOU WIN!"), Color("#ffd23f"), true)
 
@@ -139,7 +139,7 @@ func _set_bet(amount: int) -> void:
 		%Bet.value = clampi(amount, int(%Bet.min_value), int(%Bet.max_value))
 
 func _bet_max() -> void:
-	_set_bet(mini(Wallet.balance, int(%Bet.max_value)))
+	_set_bet(mini(Wallet.tokens, int(%Bet.max_value)))
 
 func _announce(text: String, color: Color, win: bool) -> void:
 	if _leaving:

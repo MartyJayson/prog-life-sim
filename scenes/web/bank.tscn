@@ -133,13 +133,6 @@ mouse_filter = 2
 [node name="Actions" type="HBoxContainer" parent="Hero/Account/Stack"]
 theme_override_constants/separation = 10
 
-[node name="Slots" type="Button" parent="Hero/Account/Stack/Actions"]
-text = "Slots OS"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_type_variation = &"BankPrimary"
-metadata/destination = "casino.oc/slots"
-
 [node name="Home" type="Button" parent="Hero/Account/Stack/Actions"]
 text = "OS home page"
 focus_mode = 0

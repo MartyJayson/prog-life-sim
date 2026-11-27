@@ -25,11 +25,3 @@ mouse_default_cursor_shape = 2
 alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "news.oc/desk"
-
-[node name="arcade" type="Button" parent="."]
-text = "A new high score at the arcade"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-alignment = 0
-text_overrun_behavior = 3
-metadata/destination = "news.oc/arcade"

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "Dana Whitfield, QA Lead"
+sender_address = "qa@tinysoft.oc"
+subject = "Task {task} rejected — next task {next_task}"
+body = "Hi,
+
+Your report for task {task} has been [b]rejected[/b]: {mistakes} of the checks did not match the verified results. Under the terms of your contract, no payment is made for this task.
+
+Please test every control carefully before submitting.
+
+[b]Task {next_task}:[/b] {link}
+Checklist: {checks} checks, 1 to 3 defects. Payment on acceptance: {reward}.
+
+Regards,
+Dana Whitfield
+QA Lead, TinySoft Inc."

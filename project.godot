@@ -18,6 +18,11 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 Wallet="*res://scripts/wallet.gd"
+Mailbox="*res://scripts/mail/mailbox.gd"
+Jobs="*res://scripts/jobs/job_board.gd"
+SaveGame="*res://scripts/save_game.gd"
+Profiles="*res://scripts/profiles.gd"
+GameSettings="*res://scripts/game_settings.gd"
 
 [display]
 

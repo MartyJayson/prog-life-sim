@@ -1,0 +1,165 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/settings_dialog.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/generated/settings.svg" id="icon"]
+
+[node name="SettingsDialog" type="PanelContainer"]
+custom_minimum_size = Vector2(560, 0)
+theme_type_variation = &"Card"
+script = ExtResource("script")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="Layout"]
+layout_mode = 2
+theme_type_variation = &"HeaderPanel"
+
+[node name="Row" type="HBoxContainer" parent="Layout/Header"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Layout/Header/Row"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Layout/Header/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderTitle"
+theme_override_font_sizes/font_size = 19
+text = "Settings"
+
+[node name="Close" type="Button" parent="Layout/Header/Row"]
+custom_minimum_size = Vector2(30, 28)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_type_variation = &"TitleClose"
+text = "✕"
+
+[node name="Body" type="MarginContainer" parent="Layout"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 18
+
+[node name="List" type="VBoxContainer" parent="Layout/Body"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SoundTitle" type="Label" parent="Layout/Body/List"]
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+text = "Sound volume"
+
+[node name="SoundRow" type="HBoxContainer" parent="Layout/Body/List"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Volume" type="HSlider" parent="Layout/Body/List/SoundRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 100.0
+step = 5.0
+value = 80.0
+
+[node name="VolumeValue" type="Label" parent="Layout/Body/List/SoundRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "80 %"
+horizontal_alignment = 2
+
+[node name="Gap1" type="Control" parent="Layout/Body/List"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="ScreenTitle" type="Label" parent="Layout/Body/List"]
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+text = "Screen size"
+
+[node name="Screen" type="OptionButton" parent="Layout/Body/List"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="Gap2" type="Control" parent="Layout/Body/List"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="SavesTitle" type="Label" parent="Layout/Body/List"]
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+text = "Saved games"
+
+[node name="SavesHint" type="Label" parent="Layout/Body/List"]
+layout_mode = 2
+theme_type_variation = &"MailMuted"
+text = "Deletes every user and their progress."
+
+[node name="Reset" type="Button" parent="Layout/Body/List"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"DangerButton"
+text = "Reset saves"
+
+[node name="Confirm" type="HBoxContainer" parent="Layout/Body/List"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Question" type="Label" parent="Layout/Body/List/Confirm"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delete all users? This cannot be undone."
+autowrap_mode = 3
+
+[node name="Delete" type="Button" parent="Layout/Body/List/Confirm"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"DangerButton"
+text = "Delete"
+
+[node name="Cancel" type="Button" parent="Layout/Body/List/Confirm"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "Cancel"
+
+[node name="Gap3" type="Control" parent="Layout/Body/List"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Ok" type="Button" parent="Layout/Body/List"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "OK"
+
+[connection signal="pressed" from="Layout/Header/Row/Close" to="." method="_close"]
+[connection signal="value_changed" from="Layout/Body/List/SoundRow/Volume" to="." method="_volume_changed"]
+[connection signal="item_selected" from="Layout/Body/List/Screen" to="." method="_screen_selected"]
+[connection signal="pressed" from="Layout/Body/List/Reset" to="." method="_ask_reset"]
+[connection signal="pressed" from="Layout/Body/List/Confirm/Delete" to="." method="_reset"]
+[connection signal="pressed" from="Layout/Body/List/Confirm/Cancel" to="." method="_cancel_reset"]
+[connection signal="pressed" from="Layout/Body/List/Ok" to="." method="_close"]

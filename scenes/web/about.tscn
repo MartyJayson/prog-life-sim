@@ -17,7 +17,7 @@ autowrap_mode = 3
 theme_override_font_sizes/font_size = 20
 
 [node name="Description" type="Label" parent="."]
-text = "OS is a fictional desktop environment with a local web, an arcade and everyday utilities."
+text = "OS is a fictional desktop environment with a local web, a casino and everyday utilities."
 mouse_filter = 2
 autowrap_mode = 3
 theme_override_font_sizes/font_size = 23

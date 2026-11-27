@@ -1,31 +1,32 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cxqmillsh2gf8"]
 
-[node name="Arcade" type="VBoxContainer"]
+[node name="Arcade" type="VBoxContainer" unique_id=717003851]
 size_flags_horizontal = 3
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="."]
-text = "A new high score at the arcade"
-mouse_filter = 2
-autowrap_mode = 3
+[node name="Title" type="Label" parent="." unique_id=233791519]
+layout_mode = 2
 theme_override_font_sizes/font_size = 38
-
-[node name="Subtitle" type="Label" parent="."]
-text = "News OS  /  The Desktop Edition"
-mouse_filter = 2
+text = "A new high score at the arcade"
 autowrap_mode = 3
+
+[node name="Subtitle" type="Label" parent="." unique_id=153459076]
+layout_mode = 2
 theme_override_font_sizes/font_size = 20
-
-[node name="Article" type="Label" parent="."]
-text = "The Games OS team released Snake this morning. The game speeds up with each point, so experienced players have been planning their turns well ahead of the next snack."
-mouse_filter = 2
+text = "News OS  /  The Desktop Edition"
 autowrap_mode = 3
-theme_override_font_sizes/font_size = 23
 
-[node name="AllHeadlines" type="Button" parent="."]
-text = "All headlines"
+[node name="Article" type="Label" parent="." unique_id=1432334570]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "The Games OS team released Snake this morning. The game speeds up with each point, so experienced players have been planning their turns well ahead of the next snack."
+autowrap_mode = 3
+
+[node name="AllHeadlines" type="Button" parent="." unique_id=1410701549]
+layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
+text = "All headlines"
 alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "news.oc"

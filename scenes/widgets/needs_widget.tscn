@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/widgets/needs_widget.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/widgets/need_gauge.tscn" id="gauge"]
+[ext_resource type="Texture2D" path="res://assets/generated/sleep.svg" id="sleep"]
+[ext_resource type="Texture2D" path="res://assets/generated/hunger.svg" id="hunger"]
+[ext_resource type="Texture2D" path="res://assets/generated/happiness.svg" id="happiness"]
+[ext_resource type="Texture2D" path="res://assets/generated/social.svg" id="social"]
+
+[node name="NeedsWidget" type="PanelContainer"]
+theme_type_variation = &"Widget"
+script = ExtResource("script")
+
+[node name="Layout" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Heading" type="Label" parent="Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Status"
+
+[node name="Grid" type="GridContainer" parent="Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="sleep" parent="Layout/Grid" instance=ExtResource("gauge")]
+layout_mode = 2
+title = "Sleep"
+icon = ExtResource("sleep")
+color = Color(0.42, 0.37, 0.86, 1)
+value = 72.0
+
+[node name="hunger" parent="Layout/Grid" instance=ExtResource("gauge")]
+layout_mode = 2
+title = "Hunger"
+icon = ExtResource("hunger")
+color = Color(1, 0.6, 0.15, 1)
+value = 58.0
+
+[node name="happiness" parent="Layout/Grid" instance=ExtResource("gauge")]
+layout_mode = 2
+title = "Happiness"
+icon = ExtResource("happiness")
+color = Color(0.95, 0.76, 0.19, 1)
+value = 85.0
+
+[node name="social" parent="Layout/Grid" instance=ExtResource("gauge")]
+layout_mode = 2
+title = "Social"
+icon = ExtResource("social")
+color = Color(0.24, 0.66, 0.29, 1)
+value = 40.0

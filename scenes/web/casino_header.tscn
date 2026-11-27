@@ -1,6 +1,23 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/web/casino_header.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 1.0
+
+[sub_resource type="StyleBoxFlat" id="bonus"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.788, 0.235, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(1, 0.788, 0.235, 0.45)
+shadow_size = 10
 
 [node name="CasinoHeader" type="PanelContainer"]
 theme_type_variation = &"CasinoHeader"
@@ -9,13 +26,19 @@ script = ExtResource("script")
 [node name="Row" type="HBoxContainer" parent="."]
 theme_override_constants/separation = 6
 
-[node name="Logo" type="Label" parent="Row"]
-text = "★ CASINO OC ★"
-mouse_filter = 2
-theme_type_variation = &"CasinoLogo"
+[node name="Logo" type="Button" parent="Row"]
+text = "CASINO·OC"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoLink"
+theme_override_colors/font_color = Color(1, 0.788, 0.235, 1)
+theme_override_colors/font_hover_color = Color(1, 0.86, 0.45, 1)
+theme_override_fonts/font = SubResource("bold")
+theme_override_font_sizes/font_size = 30
+metadata/destination = "casino.oc"
 
 [node name="Gap" type="Control" parent="Row"]
-custom_minimum_size = Vector2(14, 0)
+custom_minimum_size = Vector2(18, 0)
 mouse_filter = 2
 
 [node name="Lobby" type="Button" parent="Row"]
@@ -45,23 +68,66 @@ theme_type_variation = &"CasinoNav"
 metadata/destination = "casino.oc/blackjack"
 metadata/section = "blackjack"
 
+[node name="Cashier" type="Button" parent="Row"]
+unique_name_in_owner = true
+text = "Cashier"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoNav"
+metadata/destination = "casino.oc/cashier"
+metadata/section = "cashier"
+
 [node name="Spacer" type="Control" parent="Row"]
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Balance" type="Label" parent="Row"]
+[node name="Bonus" type="PanelContainer" parent="Row"]
 unique_name_in_owner = true
-text = "Balance: $ 0"
+visible = false
+size_flags_vertical = 4
 mouse_filter = 2
+theme_override_styles/panel = SubResource("bonus")
+
+[node name="Text" type="Label" parent="Row/Bonus"]
+mouse_filter = 2
+text = "+100 welcome bonus!"
 theme_type_variation = &"CasinoStrong"
+theme_override_colors/font_color = Color(0.2, 0.11, 0, 1)
+theme_override_font_sizes/font_size = 17
 
-[node name="Gap2" type="Control" parent="Row"]
-custom_minimum_size = Vector2(10, 0)
+[node name="BonusGap" type="Control" parent="Row"]
+custom_minimum_size = Vector2(8, 0)
 mouse_filter = 2
 
-[node name="Bank" type="Button" parent="Row"]
-text = "OS Bank →"
+[node name="Wallet" type="PanelContainer" parent="Row"]
+size_flags_vertical = 4
+theme_type_variation = &"CasinoBalance"
+
+[node name="Row" type="HBoxContainer" parent="Row/Wallet"]
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Row/Wallet/Row"]
+custom_minimum_size = Vector2(26, 26)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Balance" type="Label" parent="Row/Wallet/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+mouse_filter = 2
+text = "0"
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 21
+
+[node name="Deposit" type="Button" parent="Row/Wallet/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+text = "Deposit"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoLink"
-metadata/destination = "bank.oc"
+theme_type_variation = &"CasinoPrimary"
+theme_override_font_sizes/font_size = 18
+metadata/destination = "casino.oc/cashier"

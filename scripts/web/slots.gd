@@ -1,17 +1,25 @@
 extends VBoxContainer
 
-## casino.oc/slots — a 3×3 slot machine paid from the shared Wallet.
+## casino.oc/slots — a 3×3 slot machine played with Casino OC tokens from the shared Wallet.
 ## Every row, column and diagonal is a payline and each paying line is counted separately:
 ##   three equal symbols pay bet × PAYOUTS, 💩 pays nothing and only blocks lines;
 ##   two $ on one line pay bet × 2; a $ anywhere without such a line returns the bet once.
 ## Reels spin until the player stops them one column at a time, left to right, with the
 ## main button (or the auto-stop kicks in).
+##
+## The machine adapts to the player. Base strips return ~94.9 %. Before each spin `luck` gives a
+## value in -1..1; with probability |luck| × LUCK_UP (or LUCK_DOWN) a second random stop is drawn
+## and the better (luck > 0) or worse (luck < 0) of the two is played. The reels always show the
+## stop that was paid. Approximate return: luck +1 → ~132 %, 0 → ~95 %, −1 → ~65 %.
+##   new players start hot for HONEYMOON_SPINS spins;
+##   every losing spin after STREAK_GRACE in a row adds STREAK_STEP of luck;
+##   being ahead (net tokens won) takes luck away, fully at PROFIT_SPAN bets of profit.
 
 const POOP := "💩"
 const PAYOUTS := {"10": 3, "J": 4, "Q": 8, "K": 10, "$": 50}
 const DOLLAR_PAIR := 2
 const DOLLAR_REFUND := 1
-const BETS := [10, 25, 50, 100, 250, 500]
+const BETS := [1, 2, 5, 10, 25, 50]
 # Reel strips tuned for ~94.9% return to player (exact enumeration of all 32 768 stops).
 const REELS := [
 	["$", "💩", "J", "💩", "J", "10", "J", "Q", "Q", "K", "J", "J", "💩", "10", "J", "💩",
@@ -32,6 +40,13 @@ const LINES := [
 	[Vector2i(0, 0), Vector2i(1, 1), Vector2i(2, 2)],
 	[Vector2i(0, 2), Vector2i(1, 1), Vector2i(2, 0)]
 ]
+const LUCK_UP := 0.5
+const LUCK_DOWN := 0.4
+const HONEYMOON_SPINS := 20
+const STREAK_GRACE := 3
+const STREAK_STEP := 0.1
+const STREAK_CAP := 0.8
+const PROFIT_SPAN := 30.0
 const AUTO_STOP_DELAY := 6.0
 const AUTO_STOP_STEP := 0.45
 const Reel = preload("res://scripts/web/slot_reel.gd")
@@ -70,7 +85,7 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	# Leaving the page mid-spin must not swallow a win that was already decided.
 	if pending_win > 0:
-		Wallet.deposit(pending_win, "Slots OS — win")
+		Wallet.win_tokens(pending_win, "Slots OS — win")
 		pending_win = 0
 
 static func build_grid(stops: Array) -> Array:
@@ -112,6 +127,31 @@ static func evaluate(grid: Array, bet: int) -> Array[Dictionary]:
 			wins.append(_win("$", "$", DOLLAR_REFUND, bet, -1, dollars))
 	return wins
 
+## How much the machine currently favours (> 0) or works against (< 0) the player.
+static func luck(spins: int, loss_streak: int, net: int, bet: int) -> float:
+	var honeymoon := maxf(1.0 - float(spins) / HONEYMOON_SPINS, 0.0)
+	var streak := minf(maxi(loss_streak - STREAK_GRACE + 1, 0) * STREAK_STEP, STREAK_CAP)
+	var profit := clampf(net / (maxi(bet, 1) * PROFIT_SPAN), 0.0, 1.0)
+	return clampf(honeymoon + streak - profit, -1.0, 1.0)
+
+static func random_stops() -> Array[int]:
+	var stops: Array[int] = []
+	for strip: Array in REELS:
+		stops.append(randi() % strip.size())
+	return stops
+
+## Picks the reel stops for a spin, nudged by `luck` (see the header comment).
+static func pick_stops(lucky: float) -> Array[int]:
+	var stops := random_stops()
+	var chance := absf(lucky) * (LUCK_UP if lucky > 0.0 else LUCK_DOWN)
+	if randf() < chance:
+		var other := random_stops()
+		var first := total_payout(evaluate(build_grid(stops), 1))
+		var second := total_payout(evaluate(build_grid(other), 1))
+		if (second > first) == (lucky > 0.0) and second != first:
+			stops = other
+	return stops
+
 static func _win(combo: String, symbol: String, multiplier: int, bet: int, line: int, cells: Array) -> Dictionary:
 	return {"combo": combo, "symbol": symbol, "multiplier": multiplier, "payout": bet * multiplier, "line": line, "cells": cells}
 
@@ -131,16 +171,15 @@ func _spin() -> void:
 		stop_next()
 		return
 	var bet: int = BETS[bet_index]
-	if not Wallet.withdraw(bet, "Slots OS — bet"):
-		_notify("Insufficient funds. Lower your bet." if Wallet.balance >= BETS[0] else "Your account is empty — visit OS Bank.")
+	if not Wallet.bet_tokens(bet, "Slots OS — bet"):
+		_notify("Not enough tokens. Lower your bet." if Wallet.tokens >= BETS[0] else "Out of tokens — top up at the Cashier.")
 		return
 	_clear_result()
 	_bet = bet
-	_stops.clear()
-	for strip: Array in REELS:
-		_stops.append(randi() % strip.size())
+	_stops = pick_stops(luck(Wallet.slots_spins, Wallet.slots_loss_streak, Wallet.slots_net, bet))
 	_wins = evaluate(build_grid(_stops), bet)
 	pending_win = total_payout(_wins)
+	Wallet.record_slots_spin(bet, pending_win)
 	spinning = true
 	overlay.mode = Overlay.Mode.SPIN
 	win_label.text = "Stop the reels!"
@@ -178,7 +217,7 @@ func _on_reel_stopped() -> void:
 
 func _show_result(wins: Array[Dictionary], bet: int) -> void:
 	var total := total_payout(wins)
-	Wallet.deposit(total, "Slots OS — win" if total > bet else "Slots OS — bet refund")
+	Wallet.win_tokens(total, "Slots OS — win" if total > bet else "Slots OS — bet refund")
 	pending_win = 0
 	spinning = false
 	_refresh_controls()
@@ -205,7 +244,7 @@ func _show_result(wins: Array[Dictionary], bet: int) -> void:
 		var part := "%s ×%d" % [combo, multiplier] if combo != "$" else "$ — bet refund"
 		if count > 1:
 			part += " × %d %s" % [count, "lines"]
-		parts.append(part + " = " + Wallet.format_money(bet * multiplier * count))
+		parts.append(part + " = " + Wallet.format_tokens(bet * multiplier * count))
 	breakdown.text = "   ·   ".join(parts)
 	overlay.show_lines(lines)
 	var refund_only := total <= bet
@@ -259,10 +298,10 @@ func _clear_result() -> void:
 		reel.queue_redraw()
 
 func _show_win_amount(value: float, refund: bool) -> void:
-	win_label.text = ("REFUND: " if refund else "WIN: ") + Wallet.format_money(roundi(value))
+	win_label.text = ("REFUND: " if refund else "WIN: ") + Wallet.format_tokens(roundi(value))
 
 func _refresh_controls() -> void:
-	bet_label.text = Wallet.format_money(BETS[bet_index])
+	bet_label.text = Wallet.group_digits(BETS[bet_index])
 	less_button.disabled = spinning or bet_index == 0
 	more_button.disabled = spinning or bet_index == BETS.size() - 1
 	var waiting := false

@@ -1,0 +1,554 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/casino_cashier.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
+
+[sub_resource type="StyleBoxFlat" id="card"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.11, 0.33, 0.72, 1)
+border_width_bottom = 3
+border_color = Color(1, 0.788, 0.235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Cashier" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Page" type="PanelContainer" parent="."]
+theme_type_variation = &"CasinoPage"
+
+[node name="Stack" type="VBoxContainer" parent="Page"]
+theme_override_constants/separation = 18
+
+[node name="Header" parent="Page/Stack" instance=ExtResource("header")]
+section = "cashier"
+
+[node name="Title" type="VBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 2
+
+[node name="Name" type="Label" parent="Page/Stack/Title"]
+text = "Cashier"
+mouse_filter = 2
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 34
+
+[node name="Tagline" type="Label" parent="Page/Stack/Title"]
+text = "Buy tokens with your bank card or cash them out. Every transfer is instant."
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="Body" type="HBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 18
+
+[node name="Main" type="PanelContainer" parent="Page/Stack/Body"]
+size_flags_horizontal = 3
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Main"]
+theme_override_constants/separation = 14
+
+[node name="Tabs" type="HBoxContainer" parent="Page/Stack/Body/Main/Column"]
+theme_override_constants/separation = 8
+
+[node name="DepositTab" type="Button" parent="Page/Stack/Body/Main/Column/Tabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+text = "Deposit"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoTabActive"
+
+[node name="WithdrawTab" type="Button" parent="Page/Stack/Body/Main/Column/Tabs"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170, 48)
+text = "Withdraw"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoTab"
+
+[node name="Separator" type="HSeparator" parent="Page/Stack/Body/Main/Column"]
+theme_override_constants/separation = 2
+
+[node name="DepositPane" type="VBoxContainer" parent="Page/Stack/Body/Main/Column"]
+unique_name_in_owner = true
+theme_override_constants/separation = 10
+
+[node name="MethodCaption" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane"]
+text = "PAY WITH"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Card" type="PanelContainer" parent="Page/Stack/Body/Main/Column/DepositPane"]
+theme_type_variation = &"CasinoInset"
+
+[node name="Row" type="HBoxContainer" parent="Page/Stack/Body/Main/Column/DepositPane/Card"]
+theme_override_constants/separation = 12
+
+[node name="Brand" type="PanelContainer" parent="Page/Stack/Body/Main/Column/DepositPane/Card/Row"]
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("card")
+
+[node name="Text" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Card/Row/Brand"]
+text = "OS BANK"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 13
+
+[node name="Number" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Card/Row"]
+size_flags_horizontal = 3
+text = "Visa  ••••  2048"
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+
+[node name="CardBalance" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Card/Row"]
+unique_name_in_owner = true
+size_flags_vertical = 4
+text = ""
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="AmountCaption" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane"]
+text = "TOKENS TO BUY"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Presets" type="HBoxContainer" parent="Page/Stack/Body/Main/Column/DepositPane"]
+theme_override_constants/separation = 8
+
+[node name="P10" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "10"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P20" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "20"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P50" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "50"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P100" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "100"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P200" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "200"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="DepositAmount" type="SpinBox" parent="Page/Stack/Body/Main/Column/DepositPane"]
+unique_name_in_owner = true
+min_value = 1.0
+max_value = 100000.0
+value = 20.0
+rounded = true
+suffix = "tokens"
+
+[node name="Summary" type="PanelContainer" parent="Page/Stack/Body/Main/Column/DepositPane"]
+theme_type_variation = &"CasinoInset"
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/Main/Column/DepositPane/Summary"]
+columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 8
+
+[node name="RateCaption" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "Rate"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="DepositRate" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="GetCaption" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "You get"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="DepositGet" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="PayCaption" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "Charged to your card"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="DepositPay" type="Label" parent="Page/Stack/Body/Main/Column/DepositPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 22
+
+[node name="Deposit" type="Button" parent="Page/Stack/Body/Main/Column/DepositPane"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+text = "Deposit"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoPrimary"
+
+[node name="WithdrawPane" type="VBoxContainer" parent="Page/Stack/Body/Main/Column"]
+unique_name_in_owner = true
+visible = false
+theme_override_constants/separation = 10
+
+[node name="MethodCaption" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+text = "PAY OUT TO"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Card" type="PanelContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+theme_type_variation = &"CasinoInset"
+
+[node name="Row" type="HBoxContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane/Card"]
+theme_override_constants/separation = 12
+
+[node name="Brand" type="PanelContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane/Card/Row"]
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("card")
+
+[node name="Text" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Card/Row/Brand"]
+text = "OS BANK"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 13
+
+[node name="Number" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Card/Row"]
+size_flags_horizontal = 3
+text = "Visa  ••••  2048"
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+
+[node name="AmountCaption" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+text = "TOKENS TO SELL"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Presets" type="HBoxContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+theme_override_constants/separation = 8
+
+[node name="P10" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "10"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P50" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "50"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="P100" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "100"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="Half" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "½"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="All" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane/Presets"]
+custom_minimum_size = Vector2(76, 44)
+size_flags_horizontal = 3
+text = "MAX"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoChip"
+theme_override_font_sizes/font_size = 18
+
+[node name="WithdrawAmount" type="SpinBox" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+unique_name_in_owner = true
+min_value = 1.0
+max_value = 100000.0
+value = 10.0
+rounded = true
+suffix = "tokens"
+
+[node name="Summary" type="PanelContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+theme_type_variation = &"CasinoInset"
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary"]
+columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 8
+
+[node name="RateCaption" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "Rate"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="WithdrawRate" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="FeeCaption" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "Exchange fee"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="WithdrawFee" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 17
+
+[node name="ReceiveCaption" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+size_flags_horizontal = 3
+text = "Paid to your card"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
+
+[node name="WithdrawReceive" type="Label" parent="Page/Stack/Body/Main/Column/WithdrawPane/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 22
+
+[node name="Withdraw" type="Button" parent="Page/Stack/Body/Main/Column/WithdrawPane"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
+text = "Withdraw"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoPrimary"
+
+[node name="Notice" type="Label" parent="Page/Stack/Body/Main/Column"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 26)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+
+[node name="Side" type="VBoxContainer" parent="Page/Stack/Body"]
+custom_minimum_size = Vector2(340, 0)
+theme_override_constants/separation = 16
+
+[node name="Balance" type="PanelContainer" parent="Page/Stack/Body/Side"]
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Side/Balance"]
+theme_override_constants/separation = 4
+
+[node name="Caption" type="Label" parent="Page/Stack/Body/Side/Balance/Column"]
+text = "YOUR BALANCE"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Amount" type="HBoxContainer" parent="Page/Stack/Body/Side/Balance/Column"]
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Page/Stack/Body/Side/Balance/Column/Amount"]
+custom_minimum_size = Vector2(40, 40)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tokens" type="Label" parent="Page/Stack/Body/Side/Balance/Column/Amount"]
+unique_name_in_owner = true
+text = "0"
+mouse_filter = 2
+theme_type_variation = &"CasinoToken"
+theme_override_font_sizes/font_size = 42
+
+[node name="Value" type="Label" parent="Page/Stack/Body/Side/Balance/Column"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Rates" type="PanelContainer" parent="Page/Stack/Body/Side"]
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Side/Rates"]
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Page/Stack/Body/Side/Rates/Column"]
+text = "Exchange rates"
+mouse_filter = 2
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 20
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/Side/Rates/Column"]
+columns = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 6
+
+[node name="Buy" type="Label" parent="Page/Stack/Body/Side/Rates/Column/Grid"]
+size_flags_horizontal = 3
+text = "Buy"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+
+[node name="BuyRate" type="Label" parent="Page/Stack/Body/Side/Rates/Column/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 18
+
+[node name="Sell" type="Label" parent="Page/Stack/Body/Side/Rates/Column/Grid"]
+size_flags_horizontal = 3
+text = "Sell"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 17
+
+[node name="SellRate" type="Label" parent="Page/Stack/Body/Side/Rates/Column/Grid"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 18
+
+[node name="Note" type="Label" parent="Page/Stack/Body/Side/Rates/Column"]
+text = "One token is one chip at every table. The buy and sell spread is the casino exchange fee."
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+
+[node name="History" type="PanelContainer" parent="Page/Stack/Body/Side"]
+size_flags_vertical = 3
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Side/History"]
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Page/Stack/Body/Side/History/Column"]
+text = "Transactions"
+mouse_filter = 2
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 20
+
+[node name="Rows" type="VBoxContainer" parent="Page/Stack/Body/Side/History/Column"]
+unique_name_in_owner = true
+theme_override_constants/separation = 8
+
+[node name="Empty" type="Label" parent="Page/Stack/Body/Side/History/Column"]
+unique_name_in_owner = true
+text = "No deposits or withdrawals yet."
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Legal" type="Label" parent="Page/Stack"]
+text = "18+  ·  Play responsibly  ·  Casino OC is a fictional online casino on the OS web"
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/Tabs/DepositTab" to="." method="show_tab" binds=["deposit"]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/Tabs/WithdrawTab" to="." method="show_tab" binds=["withdraw"]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Presets/P10" to="." method="_set_deposit" binds=[10]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Presets/P20" to="." method="_set_deposit" binds=[20]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Presets/P50" to="." method="_set_deposit" binds=[50]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Presets/P100" to="." method="_set_deposit" binds=[100]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Presets/P200" to="." method="_set_deposit" binds=[200]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/DepositPane/Deposit" to="." method="_deposit"]
+[connection signal="value_changed" from="Page/Stack/Body/Main/Column/DepositPane/DepositAmount" to="." method="_refresh_summary" unbinds=1]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Presets/P10" to="." method="_set_withdraw" binds=[10]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Presets/P50" to="." method="_set_withdraw" binds=[50]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Presets/P100" to="." method="_set_withdraw" binds=[100]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Presets/Half" to="." method="_withdraw_share" binds=[0.5]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Presets/All" to="." method="_withdraw_share" binds=[1.0]]
+[connection signal="pressed" from="Page/Stack/Body/Main/Column/WithdrawPane/Withdraw" to="." method="_withdraw"]
+[connection signal="value_changed" from="Page/Stack/Body/Main/Column/WithdrawPane/WithdrawAmount" to="." method="_refresh_summary" unbinds=1]

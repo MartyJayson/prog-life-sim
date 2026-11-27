@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><rect x="3" y="3" width="42" height="42" rx="7" fill="#172b40" stroke="#77edcd" stroke-width="2"/><path d="M24 8v32M8 24h32" stroke="#547690"/><circle cx="24" cy="24" r="13" fill="none" stroke="#77edcd" stroke-width="2"/><path d="M24 24l10-8" stroke="#77edcd" stroke-width="2"/><circle cx="18" cy="28" r="3" fill="#ffba74"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="frame" x2="0" y2="1">
+      <stop stop-color="#7cc4ff"/>
+      <stop offset="1" stop-color="#1f5fbf"/>
+    </linearGradient>
+    <radialGradient id="screen" cx="0.36" cy="0.34" r="0.73">
+      <stop stop-color="#275867"/>
+      <stop offset="1" stop-color="#122640"/>
+    </radialGradient>
+  </defs>
+  <rect x="6" y="8" width="53" height="53" rx="10" fill="#123a73" opacity="0.34"/>
+  <rect x="5" y="5" width="54" height="54" rx="10" fill="url(#frame)" stroke="#123a73" stroke-width="2"/>
+  <circle cx="32" cy="32" r="22" fill="url(#screen)" stroke="#123a73" stroke-width="2"/>
+  <path d="M32 32V11a21 21 0 0 1 17.9 10Z" fill="#5cc96f" opacity="0.36"/>
+  <g fill="none" stroke="#86e59d" stroke-width="1.5" opacity="0.75">
+    <circle cx="32" cy="32" r="15"/>
+    <circle cx="32" cy="32" r="7.5"/>
+    <path d="M32 11v42M11 32h42"/>
+  </g>
+  <path d="m32 32 16-15" stroke="#bbf4c4" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="40" cy="24" r="3" fill="#d8ffe2"/>
+</svg>

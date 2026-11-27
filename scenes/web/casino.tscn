@@ -3,19 +3,96 @@
 [ext_resource type="Script" path="res://scripts/web/casino.gd" id="script"]
 [ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
-[ext_resource type="Script" path="res://scripts/web/marquee_lights.gd" id="lights"]
 [ext_resource type="Texture2D" path="res://assets/generated/slots.svg" id="slots_icon"]
-
-[sub_resource type="FontVariation" id="bold"]
-variation_embolden = 0.9
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
 
 [sub_resource type="StyleBoxFlat" id="mini_card"]
-bg_color = Color(0.99, 0.97, 0.91, 1)
+bg_color = Color(0.99, 0.97, 0.93, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.75, 0.68, 0.55, 1)
+border_color = Color(0.75, 0.7, 0.62, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="cover_slots"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.6, 0.16, 0.42, 1)
+border_width_bottom = 4
+border_color = Color(1, 0.788, 0.235, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="cover_blackjack"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.05, 0.42, 0.27, 1)
+border_width_bottom = 4
+border_color = Color(0.12, 0.784, 0.416, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="cover_soon"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.13, 0.19, 0.25, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="tag_hot"]
+content_margin_left = 8.0
+content_margin_top = 1.0
+content_margin_right = 8.0
+content_margin_bottom = 1.0
+bg_color = Color(0.91, 0.255, 0.31, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="tag_new"]
+content_margin_left = 8.0
+content_margin_top = 1.0
+content_margin_right = 8.0
+content_margin_bottom = 1.0
+bg_color = Color(0.12, 0.784, 0.416, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="tag_soon"]
+content_margin_left = 8.0
+content_margin_top = 1.0
+content_margin_right = 8.0
+content_margin_bottom = 1.0
+bg_color = Color(0.19, 0.28, 0.36, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="live_dot"]
+bg_color = Color(0.12, 0.784, 0.416, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -30,7 +107,7 @@ script = ExtResource("script")
 theme_type_variation = &"CasinoPage"
 
 [node name="Stack" type="VBoxContainer" parent="Page"]
-theme_override_constants/separation = 18
+theme_override_constants/separation = 20
 
 [node name="Header" parent="Page/Stack" instance=ExtResource("header")]
 section = "lobby"
@@ -39,95 +116,117 @@ section = "lobby"
 theme_type_variation = &"CasinoHero"
 
 [node name="Content" type="HBoxContainer" parent="Page/Stack/Hero"]
-theme_override_constants/separation = 24
+theme_override_constants/separation = 28
 
 [node name="Text" type="VBoxContainer" parent="Page/Stack/Hero/Content"]
 size_flags_horizontal = 3
-theme_override_constants/separation = 6
+theme_override_constants/separation = 8
 
-[node name="Welcome" type="Label" parent="Page/Stack/Hero/Content/Text"]
-text = "WELCOME TO"
+[node name="Kicker" type="Label" parent="Page/Stack/Hero/Content/Text"]
+text = "CASINO·OC ORIGINALS"
 mouse_filter = 2
-theme_override_colors/font_color = Color(1, 0.86, 0.9, 1)
-theme_override_font_sizes/font_size = 20
+theme_type_variation = &"CasinoToken"
+theme_override_font_sizes/font_size = 17
 
 [node name="Name" type="Label" parent="Page/Stack/Hero/Content/Text"]
-text = "CASINO OC"
+text = "Spin. Win. Cash out."
 mouse_filter = 2
-theme_type_variation = &"CasinoLogo"
-theme_override_constants/outline_size = 14
-theme_override_font_sizes/font_size = 62
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 52
 
 [node name="Tagline" type="Label" parent="Page/Stack/Hero/Content/Text"]
-text = "Slots, blackjack and big wins — right in your browser."
+text = "Every game runs on tokens. Top up from your bank card in a second and cash out whenever you like."
 autowrap_mode = 3
 mouse_filter = 2
-theme_override_colors/font_color = Color(1, 0.9, 0.93, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.85, 0.82, 1, 1)
+theme_override_font_sizes/font_size = 19
 
 [node name="Gap" type="Control" parent="Page/Stack/Hero/Content/Text"]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(0, 6)
 mouse_filter = 2
 
 [node name="Actions" type="HBoxContainer" parent="Page/Stack/Hero/Content/Text"]
-theme_override_constants/separation = 14
+theme_override_constants/separation = 12
+
+[node name="BuyTokens" type="Button" parent="Page/Stack/Hero/Content/Text/Actions"]
+custom_minimum_size = Vector2(0, 56)
+text = "Buy tokens"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"CasinoPrimary"
+metadata/destination = "casino.oc/cashier"
 
 [node name="PlaySlots" type="Button" parent="Page/Stack/Hero/Content/Text/Actions"]
-custom_minimum_size = Vector2(0, 58)
-text = "PLAY SLOTS"
+custom_minimum_size = Vector2(0, 56)
+text = "Play slots"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoGold"
+theme_type_variation = &"CasinoChip"
 metadata/destination = "casino.oc/slots"
 
-[node name="PlayBlackjack" type="Button" parent="Page/Stack/Hero/Content/Text/Actions"]
-text = "Join the 21 table"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoLink"
-theme_override_font_sizes/font_size = 20
-metadata/destination = "casino.oc/blackjack"
+[node name="Rate" type="Label" parent="Page/Stack/Hero/Content/Text"]
+unique_name_in_owner = true
+text = "1 token = $ 5"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.68, 0.64, 0.9, 1)
+theme_override_font_sizes/font_size = 15
 
 [node name="Jackpot" type="PanelContainer" parent="Page/Stack/Hero/Content"]
+custom_minimum_size = Vector2(280, 0)
 size_flags_vertical = 4
 theme_type_variation = &"CasinoBanner"
 
 [node name="Column" type="VBoxContainer" parent="Page/Stack/Hero/Content/Jackpot"]
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 
 [node name="Caption" type="Label" parent="Page/Stack/Hero/Content/Jackpot/Column"]
-text = "JACKPOT  $ · $ · $"
-horizontal_alignment = 1
-mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_font_sizes/font_size = 18
-
-[node name="MaxWin" type="Label" parent="Page/Stack/Hero/Content/Jackpot/Column"]
-unique_name_in_owner = true
-text = "$ 0"
-horizontal_alignment = 1
-mouse_filter = 2
-theme_type_variation = &"CasinoLogo"
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 46
-
-[node name="Note" type="Label" parent="Page/Stack/Hero/Content/Jackpot/Column"]
-text = "top win from a single spin"
+text = "TOP WIN · ONE SPIN"
 horizontal_alignment = 1
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
-theme_override_colors/font_color = Color(0.9, 0.78, 0.6, 1)
+theme_override_font_sizes/font_size = 15
 
-[node name="Lights" type="Control" parent="Page/Stack/Hero"]
+[node name="Amount" type="HBoxContainer" parent="Page/Stack/Hero/Content/Jackpot/Column"]
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Page/Stack/Hero/Content/Jackpot/Column/Amount"]
+custom_minimum_size = Vector2(44, 44)
+size_flags_vertical = 4
 mouse_filter = 2
-script = ExtResource("lights")
-spacing = 34.0
-inset = -17.0
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="GamesTitle" type="Label" parent="Page/Stack"]
-text = "GAMES"
+[node name="MaxWin" type="Label" parent="Page/Stack/Hero/Content/Jackpot/Column/Amount"]
+unique_name_in_owner = true
+text = "0"
+mouse_filter = 2
+theme_type_variation = &"CasinoToken"
+theme_override_font_sizes/font_size = 46
+
+[node name="Note" type="Label" parent="Page/Stack/Hero/Content/Jackpot/Column"]
+unique_name_in_owner = true
+text = "≈ $ 0"
+horizontal_alignment = 1
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="GamesHead" type="HBoxContainer" parent="Page/Stack"]
+
+[node name="Title" type="Label" parent="Page/Stack/GamesHead"]
+size_flags_horizontal = 3
+text = "Casino games"
 mouse_filter = 2
 theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 24
+
+[node name="Count" type="Label" parent="Page/Stack/GamesHead"]
+size_flags_vertical = 4
+text = "2 live · 2 coming soon"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
 
 [node name="Games" type="HBoxContainer" parent="Page/Stack"]
 theme_override_constants/separation = 16
@@ -137,48 +236,50 @@ size_flags_horizontal = 3
 theme_type_variation = &"CasinoTile"
 
 [node name="Column" type="VBoxContainer" parent="Page/Stack/Games/SlotsTile"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
-[node name="Top" type="HBoxContainer" parent="Page/Stack/Games/SlotsTile/Column"]
+[node name="Cover" type="PanelContainer" parent="Page/Stack/Games/SlotsTile/Column"]
+custom_minimum_size = Vector2(0, 130)
+theme_override_styles/panel = SubResource("cover_slots")
 
-[node name="Icon" type="TextureRect" parent="Page/Stack/Games/SlotsTile/Column/Top"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Icon" type="TextureRect" parent="Page/Stack/Games/SlotsTile/Column/Cover"]
+custom_minimum_size = Vector2(90, 90)
+mouse_filter = 2
 texture = ExtResource("slots_icon")
 expand_mode = 1
 stretch_mode = 5
-mouse_filter = 2
 
-[node name="Spacer" type="Control" parent="Page/Stack/Games/SlotsTile/Column/Top"]
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Tag" type="Label" parent="Page/Stack/Games/SlotsTile/Column/Top"]
-text = "HOT"
+[node name="Tag" type="PanelContainer" parent="Page/Stack/Games/SlotsTile/Column/Cover"]
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_font_sizes/font_size = 15
+theme_override_styles/panel = SubResource("tag_hot")
+
+[node name="Text" type="Label" parent="Page/Stack/Games/SlotsTile/Column/Cover/Tag"]
+text = "HOT"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_font_sizes/font_size = 13
 
 [node name="Name" type="Label" parent="Page/Stack/Games/SlotsTile/Column"]
-text = "Slots"
+text = "Slots OS"
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-
+theme_type_variation = &"CasinoStrong"
 
 [node name="Description" type="Label" parent="Page/Stack/Games/SlotsTile/Column"]
-custom_minimum_size = Vector2(0, 48)
-text = "3×3 · 8 lines · $-$-$ ×50"
-autowrap_mode = 3
+text = "3×3 · 8 lines · up to ×50"
+text_overrun_behavior = 3
 mouse_filter = 2
-
+theme_type_variation = &"CasinoMuted"
 
 [node name="Slots" type="Button" parent="Page/Stack/Games/SlotsTile/Column"]
 unique_name_in_owner = true
-text = "PLAY"
+custom_minimum_size = Vector2(0, 44)
+text = "Play"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoGold"
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"CasinoPrimary"
+theme_override_font_sizes/font_size = 20
 metadata/destination = "casino.oc/slots"
 
 [node name="BlackjackTile" type="PanelContainer" parent="Page/Stack/Games"]
@@ -186,68 +287,78 @@ size_flags_horizontal = 3
 theme_type_variation = &"CasinoTile"
 
 [node name="Column" type="VBoxContainer" parent="Page/Stack/Games/BlackjackTile"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
-[node name="Top" type="HBoxContainer" parent="Page/Stack/Games/BlackjackTile/Column"]
+[node name="Cover" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column"]
+custom_minimum_size = Vector2(0, 130)
+theme_override_styles/panel = SubResource("cover_blackjack")
 
-[node name="Card0" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column/Top"]
-custom_minimum_size = Vector2(46, 64)
+[node name="Cards" type="HBoxContainer" parent="Page/Stack/Games/BlackjackTile/Column/Cover"]
+alignment = 1
+theme_override_constants/separation = -12
+
+[node name="Card0" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column/Cover/Cards"]
+custom_minimum_size = Vector2(60, 84)
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("mini_card")
 
-[node name="Face" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Top/Card0"]
-text = "A\n♠"
+[node name="Face" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Cover/Cards/Card0"]
+text = "A
+♠"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
-theme_override_colors/font_color = Color(0.08, 0.17, 0.22, 1)
+theme_override_colors/font_color = Color(0.08, 0.12, 0.16, 1)
 theme_override_constants/line_spacing = -6
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 26
 
-[node name="Card1" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column/Top"]
-custom_minimum_size = Vector2(46, 64)
+[node name="Card1" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column/Cover/Cards"]
+custom_minimum_size = Vector2(60, 84)
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("mini_card")
 
-[node name="Face" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Top/Card1"]
-text = "K\n♥"
+[node name="Face" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Cover/Cards/Card1"]
+text = "K
+♥"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
-theme_override_colors/font_color = Color(0.68, 0.16, 0.26, 1)
+theme_override_colors/font_color = Color(0.78, 0.13, 0.22, 1)
 theme_override_constants/line_spacing = -6
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 26
 
-
-[node name="Spacer" type="Control" parent="Page/Stack/Games/BlackjackTile/Column/Top"]
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Tag" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Top"]
-text = "NEW"
+[node name="Tag" type="PanelContainer" parent="Page/Stack/Games/BlackjackTile/Column/Cover"]
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_font_sizes/font_size = 15
+theme_override_styles/panel = SubResource("tag_new")
+
+[node name="Text" type="Label" parent="Page/Stack/Games/BlackjackTile/Column/Cover/Tag"]
+text = "NEW"
+mouse_filter = 2
+theme_type_variation = &"CasinoStrong"
+theme_override_colors/font_color = Color(0.02, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 13
 
 [node name="Name" type="Label" parent="Page/Stack/Games/BlackjackTile/Column"]
 text = "Blackjack"
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-
+theme_type_variation = &"CasinoStrong"
 
 [node name="Description" type="Label" parent="Page/Stack/Games/BlackjackTile/Column"]
-custom_minimum_size = Vector2(0, 48)
-text = "Classic 21 · win ×2"
-autowrap_mode = 3
+text = "Classic 21 · win pays ×2"
+text_overrun_behavior = 3
 mouse_filter = 2
-
+theme_type_variation = &"CasinoMuted"
 
 [node name="Blackjack" type="Button" parent="Page/Stack/Games/BlackjackTile/Column"]
 unique_name_in_owner = true
-text = "PLAY"
+custom_minimum_size = Vector2(0, 44)
+text = "Play"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoGold"
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"CasinoPrimary"
+theme_override_font_sizes/font_size = 20
 metadata/destination = "casino.oc/blackjack"
 
 [node name="RouletteTile" type="PanelContainer" parent="Page/Stack/Games"]
@@ -255,44 +366,47 @@ size_flags_horizontal = 3
 theme_type_variation = &"CasinoTileSoon"
 
 [node name="Column" type="VBoxContainer" parent="Page/Stack/Games/RouletteTile"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
-[node name="Top" type="HBoxContainer" parent="Page/Stack/Games/RouletteTile/Column"]
+[node name="Cover" type="PanelContainer" parent="Page/Stack/Games/RouletteTile/Column"]
+custom_minimum_size = Vector2(0, 130)
+theme_override_styles/panel = SubResource("cover_soon")
 
-[node name="Icon" type="Label" parent="Page/Stack/Games/RouletteTile/Column/Top"]
-custom_minimum_size = Vector2(64, 64)
+[node name="Icon" type="Label" parent="Page/Stack/Games/RouletteTile/Column/Cover"]
 text = "◎"
+horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
-theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0.36, 0.45, 0.54, 1)
+theme_override_font_sizes/font_size = 64
 
-[node name="Spacer" type="Control" parent="Page/Stack/Games/RouletteTile/Column/Top"]
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Tag" type="Label" parent="Page/Stack/Games/RouletteTile/Column/Top"]
-text = "SOON"
+[node name="Tag" type="PanelContainer" parent="Page/Stack/Games/RouletteTile/Column/Cover"]
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("tag_soon")
+
+[node name="Text" type="Label" parent="Page/Stack/Games/RouletteTile/Column/Cover/Tag"]
+text = "SOON"
+mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 
 [node name="Name" type="Label" parent="Page/Stack/Games/RouletteTile/Column"]
 text = "Roulette"
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)
+theme_type_variation = &"CasinoStrong"
+theme_override_colors/font_color = Color(0.49, 0.553, 0.62, 1)
 
 [node name="Description" type="Label" parent="Page/Stack/Games/RouletteTile/Column"]
-custom_minimum_size = Vector2(0, 48)
-text = "European roulette with a single zero."
-autowrap_mode = 3
+text = "European, single zero"
+text_overrun_behavior = 3
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
 
 [node name="Soon" type="Button" parent="Page/Stack/Games/RouletteTile/Column"]
-text = "SOON"
+custom_minimum_size = Vector2(0, 44)
+text = "Coming soon"
 disabled = true
 focus_mode = 0
 
@@ -301,49 +415,124 @@ size_flags_horizontal = 3
 theme_type_variation = &"CasinoTileSoon"
 
 [node name="Column" type="VBoxContainer" parent="Page/Stack/Games/PokerTile"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
-[node name="Top" type="HBoxContainer" parent="Page/Stack/Games/PokerTile/Column"]
+[node name="Cover" type="PanelContainer" parent="Page/Stack/Games/PokerTile/Column"]
+custom_minimum_size = Vector2(0, 130)
+theme_override_styles/panel = SubResource("cover_soon")
 
-[node name="Icon" type="Label" parent="Page/Stack/Games/PokerTile/Column/Top"]
-custom_minimum_size = Vector2(64, 64)
-text = "♠♥"
+[node name="Icon" type="Label" parent="Page/Stack/Games/PokerTile/Column/Cover"]
+text = "♠♥♦♣"
+horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
-theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0.36, 0.45, 0.54, 1)
+theme_override_font_sizes/font_size = 44
 
-[node name="Spacer" type="Control" parent="Page/Stack/Games/PokerTile/Column/Top"]
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="Tag" type="Label" parent="Page/Stack/Games/PokerTile/Column/Top"]
-text = "SOON"
+[node name="Tag" type="PanelContainer" parent="Page/Stack/Games/PokerTile/Column/Cover"]
+size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("tag_soon")
+
+[node name="Text" type="Label" parent="Page/Stack/Games/PokerTile/Column/Cover/Tag"]
+text = "SOON"
+mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 
 [node name="Name" type="Label" parent="Page/Stack/Games/PokerTile/Column"]
 text = "Poker"
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)
+theme_type_variation = &"CasinoStrong"
+theme_override_colors/font_color = Color(0.49, 0.553, 0.62, 1)
 
 [node name="Description" type="Label" parent="Page/Stack/Games/PokerTile/Column"]
-custom_minimum_size = Vector2(0, 48)
-text = "Texas hold'em against the dealer."
-autowrap_mode = 3
+text = "Texas hold'em vs the dealer"
+text_overrun_behavior = 3
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
 
 [node name="Soon" type="Button" parent="Page/Stack/Games/PokerTile/Column"]
-text = "SOON"
+custom_minimum_size = Vector2(0, 44)
+text = "Coming soon"
 disabled = true
 focus_mode = 0
 
 [node name="Bottom" type="HBoxContainer" parent="Page/Stack"]
 theme_override_constants/separation = 16
+
+[node name="Live" type="PanelContainer" parent="Page/Stack/Bottom"]
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.4
+theme_type_variation = &"CasinoPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Bottom/Live"]
+theme_override_constants/separation = 8
+
+[node name="Head" type="HBoxContainer" parent="Page/Stack/Bottom/Live/Column"]
+theme_override_constants/separation = 10
+
+[node name="Dot" type="Panel" parent="Page/Stack/Bottom/Live/Column/Head"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(12, 12)
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("live_dot")
+
+[node name="Heading" type="Label" parent="Page/Stack/Bottom/Live/Column/Head"]
+size_flags_horizontal = 3
+text = "Live wins"
+mouse_filter = 2
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 21
+
+[node name="Online" type="Label" parent="Page/Stack/Bottom/Live/Column/Head"]
+unique_name_in_owner = true
+size_flags_vertical = 4
+text = "0 playing"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+
+[node name="Columns" type="HBoxContainer" parent="Page/Stack/Bottom/Live/Column"]
+theme_override_constants/separation = 10
+
+[node name="Game" type="Label" parent="Page/Stack/Bottom/Live/Column/Columns"]
+custom_minimum_size = Vector2(120, 0)
+text = "GAME"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 13
+
+[node name="Player" type="Label" parent="Page/Stack/Bottom/Live/Column/Columns"]
+size_flags_horizontal = 3
+text = "PLAYER"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 13
+
+[node name="Multiplier" type="Label" parent="Page/Stack/Bottom/Live/Column/Columns"]
+custom_minimum_size = Vector2(70, 0)
+text = "MULTI"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 13
+
+[node name="Payout" type="Label" parent="Page/Stack/Bottom/Live/Column/Columns"]
+custom_minimum_size = Vector2(106, 0)
+text = "PAYOUT"
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 13
+
+[node name="Separator" type="HSeparator" parent="Page/Stack/Bottom/Live/Column"]
+theme_override_constants/separation = 2
+
+[node name="LiveFeed" type="VBoxContainer" parent="Page/Stack/Bottom/Live/Column"]
+unique_name_in_owner = true
+theme_override_constants/separation = 8
 
 [node name="Recent" type="PanelContainer" parent="Page/Stack/Bottom"]
 size_flags_horizontal = 3
@@ -353,52 +542,69 @@ theme_type_variation = &"CasinoPanel"
 theme_override_constants/separation = 8
 
 [node name="Heading" type="Label" parent="Page/Stack/Bottom/Recent/Column"]
-text = "YOUR RECENT GAMES"
+text = "My bets"
 mouse_filter = 2
 theme_type_variation = &"CasinoTitle"
 theme_override_font_sizes/font_size = 21
 
+[node name="Separator" type="HSeparator" parent="Page/Stack/Bottom/Recent/Column"]
+theme_override_constants/separation = 2
+
 [node name="Feed" type="VBoxContainer" parent="Page/Stack/Bottom/Recent/Column"]
 unique_name_in_owner = true
-theme_override_constants/separation = 6
+theme_override_constants/separation = 8
 
 [node name="FeedEmpty" type="Label" parent="Page/Stack/Bottom/Recent/Column"]
 unique_name_in_owner = true
-text = "Your bets and wins will appear here. Good luck at the table!"
+text = "No bets yet. Your 100 welcome tokens are waiting — try your luck!"
 autowrap_mode = 3
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
 theme_override_font_sizes/font_size = 17
 
-[node name="Cashier" type="PanelContainer" parent="Page/Stack/Bottom"]
-custom_minimum_size = Vector2(300, 0)
-theme_type_variation = &"CasinoPanel"
+[node name="Footer" type="VBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 6
 
-[node name="Column" type="VBoxContainer" parent="Page/Stack/Bottom/Cashier"]
-theme_override_constants/separation = 10
+[node name="Separator" type="HSeparator" parent="Page/Stack/Footer"]
 
-[node name="Heading" type="Label" parent="Page/Stack/Bottom/Cashier/Column"]
-text = "CASHIER"
+[node name="Badges" type="HBoxContainer" parent="Page/Stack/Footer"]
+alignment = 1
+theme_override_constants/separation = 28
+
+[node name="Instant" type="Label" parent="Page/Stack/Footer/Badges"]
+text = "Instant deposits"
 mouse_filter = 2
-theme_type_variation = &"CasinoTitle"
-theme_override_font_sizes/font_size = 21
-
-[node name="Text" type="Label" parent="Page/Stack/Bottom/Cashier/Column"]
-text = "Bets are charged to your OS Bank account and wins are paid into it instantly."
-autowrap_mode = 3
-mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
 theme_override_font_sizes/font_size = 16
 
-[node name="Bank" type="Button" parent="Page/Stack/Bottom/Cashier/Column"]
-text = "Open OS Bank →"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoLink"
-metadata/destination = "bank.oc"
+[node name="Cashout" type="Label" parent="Page/Stack/Footer/Badges"]
+text = "Cash out any time"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
 
-[node name="Footer" type="Label" parent="Page/Stack"]
+[node name="Fair" type="Label" parent="Page/Stack/Footer/Badges"]
+text = "Slots RTP 94.9 %"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Support" type="Label" parent="Page/Stack/Footer/Badges"]
+text = "24/7 support"
+mouse_filter = 2
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Legal" type="Label" parent="Page/Stack/Footer"]
 text = "18+  ·  Play responsibly  ·  Casino OC is a fictional online casino on the OS web"
 horizontal_alignment = 1
 autowrap_mode = 3
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="LiveTimer" type="Timer" parent="."]
+wait_time = 2.2
+autostart = true
+
+[connection signal="timeout" from="LiveTimer" to="." method="_add_live_win"]

@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" path="res://scenes/web_shortcut.tscn" id="web_shortcut"]
 
 [ext_resource type="Script" path="res://scripts/window_manager.gd" id="manager"]
+[ext_resource type="PackedScene" path="res://scenes/widgets/needs_widget.tscn" id="needs_widget"]
 
 [ext_resource type="Texture2D" path="res://assets/generated/browser.svg" id="browser"]
+[ext_resource type="Texture2D" path="res://assets/generated/mail.svg" id="mail"]
 
 [ext_resource type="Texture2D" path="res://assets/generated/operations.svg" id="operations"]
-[ext_resource type="Texture2D" path="res://assets/generated/snake.svg" id="snake"]
 
 [ext_resource type="Texture2D" path="res://assets/generated/notepad.svg" id="notepad"]
 
@@ -25,7 +26,10 @@
 [ext_resource type="Texture2D" path="res://assets/generated/terminal.svg" id="terminal"]
 
 [ext_resource type="Script" path="res://scripts/notifications/notification_center.gd" id="notifications"]
-[ext_resource type="Resource" path="res://data/notifications/rent_payment.tres" id="rent_payment"]
+[ext_resource type="Script" path="res://scripts/mail/mail_sequence.gd" id="mail_sequence"]
+[ext_resource type="Resource" path="res://data/mail/welcome.tres" id="mail_welcome"]
+[ext_resource type="Resource" path="res://data/mail/landlord_rent.tres" id="mail_rent"]
+[ext_resource type="Resource" path="res://data/mail/friend_job.tres" id="mail_friend"]
 
 [sub_resource type="ButtonGroup" id="selection"]
 resource_local_to_scene = false
@@ -90,9 +94,9 @@ text = "Browser"
 icon = ExtResource("browser")
 button_group = SubResource("selection")
 
-[node name="snake" instance=ExtResource("shortcut") parent="Shortcuts"]
-text = "Snake"
-icon = ExtResource("snake")
+[node name="mail" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "Mail"
+icon = ExtResource("mail")
 button_group = SubResource("selection")
 
 [node name="notepad" instance=ExtResource("shortcut") parent="Shortcuts"]
@@ -127,6 +131,16 @@ button_group = SubResource("selection")
 text = "Terminal"
 icon = ExtResource("terminal")
 button_group = SubResource("selection")
+
+[node name="NeedsWidget" parent="." instance=ExtResource("needs_widget")]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160
+offset_top = 24
+offset_right = -24
+grow_horizontal = 0
 
 [node name="WindowManager" type="Control" parent="."]
 anchors_preset = 15
@@ -198,7 +212,12 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_constants/separation = 10
 script = ExtResource("notifications")
-scheduled = Array[Resource]([ExtResource("rent_payment")])
+
+[node name="IntroMail" type="Node" parent="."]
+script = ExtResource("mail_sequence")
+letters = Array[Resource]([ExtResource("mail_welcome"), ExtResource("mail_rent"), ExtResource("mail_friend")])
+first_delay = 3.0
+interval = 8.0
 
 [node name="ClockTimer" type="Timer" parent="."]
 autostart = true
@@ -236,11 +255,11 @@ theme_type_variation = &"MenuItem"
 custom_minimum_size = Vector2(245, 0)
 theme_override_constants/icon_max_width = 26
 
-[node name="snake" type="Button" parent="Menu/List"]
-text = "Snake"
+[node name="mail" type="Button" parent="Menu/List"]
+text = "Mail"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-icon = ExtResource("snake")
+icon = ExtResource("mail")
 alignment = 0
 theme_type_variation = &"MenuItem"
 custom_minimum_size = Vector2(245, 0)
@@ -305,10 +324,6 @@ theme_override_constants/icon_max_width = 26
 
 [connection signal="pressed" from="Menu/List/browser" to="." method="_open" binds=["browser"]]
 
-[connection signal="launched" from="Shortcuts/snake" to="." method="_open" binds=["snake"]]
-
-[connection signal="pressed" from="Menu/List/snake" to="." method="_open" binds=["snake"]]
-
 [connection signal="launched" from="Shortcuts/notepad" to="." method="_open" binds=["notepad"]]
 
 [connection signal="pressed" from="Menu/List/notepad" to="." method="_open" binds=["notepad"]]
@@ -322,6 +337,9 @@ theme_override_constants/icon_max_width = 26
 [connection signal="pressed" from="Menu/List/about" to="." method="_open" binds=["about"]]
 
 [connection signal="launch_requested" from="WindowManager" to="." method="_open"]
+[connection signal="site_requested" from="WindowManager" to="." method="_open_site"]
+[connection signal="launched" from="Shortcuts/mail" to="." method="_open" binds=["mail"]]
+[connection signal="pressed" from="Menu/List/mail" to="." method="_open" binds=["mail"]]
 
 [connection signal="window_interacted" from="WindowManager" to="." method="_hide_menu"]
 

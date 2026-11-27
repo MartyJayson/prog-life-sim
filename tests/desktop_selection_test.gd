@@ -47,15 +47,15 @@ func run() -> void:
 		check(selected_count(shortcuts) == 1 and icon.button_pressed, "click selects only " + str(icon.name))
 	check(desktop.manager.windows.is_empty(), "single clicks do not launch apps")
 	var browser = shortcuts.get_node("browser")
-	var snake = shortcuts.get_node("snake")
+	var mail = shortcuts.get_node("mail")
 	await click(browser.get_global_rect().get_center())
-	await click(snake.get_global_rect().get_center())
-	check(not browser.button_pressed and snake.button_pressed and selected_count(shortcuts) == 1, "selecting second icon clears first selection")
-	await click(snake.get_global_rect().get_center())
-	check(snake.button_pressed and selected_count(shortcuts) == 1, "clicking selected icon keeps it selected")
+	await click(mail.get_global_rect().get_center())
+	check(not browser.button_pressed and mail.button_pressed and selected_count(shortcuts) == 1, "selecting second icon clears first selection")
+	await click(mail.get_global_rect().get_center())
+	check(mail.button_pressed and selected_count(shortcuts) == 1, "clicking selected icon keeps it selected")
 	move_mouse(browser.get_global_rect().get_center())
 	await process_frame
-	check(not browser.button_pressed and snake.button_pressed, "hover does not change selection")
+	check(not browser.button_pressed and mail.button_pressed, "hover does not change selection")
 	if "--capture" in OS.get_cmdline_user_args():
 		await RenderingServer.frame_post_draw
 		root.get_texture().get_image().save_png("res://.godot/desktop-selection.png")

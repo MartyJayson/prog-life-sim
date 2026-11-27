@@ -20,10 +20,23 @@ func filled(symbol: String) -> Array:
 	return [[symbol, symbol, symbol], [symbol, symbol, symbol], [symbol, symbol, symbol]]
 
 func run() -> void:
+	load("res://scripts/apps/browser.gd").instant_loading = true
 	Slots = load("res://scripts/web/slots.gd")
 	var wallet: Node = root.get_node("Wallet")
 	check(wallet.format_money(1234567) == "$ 1 234 567", "money is grouped by thousands")
 	check(wallet.balance == wallet.START_BALANCE and wallet.history.size() == 1, "every launch starts with a fresh account")
+	check(wallet.tokens == 0 and not wallet.welcome_bonus_claimed and wallet.format_tokens(1250) == "1 250 tokens", "a fresh account has no casino tokens")
+
+	# Tokens are bought at $5 and sold back at $4.
+	check(not wallet.buy_tokens(wallet.balance / wallet.TOKEN_PRICE + 1) and wallet.tokens == 0, "tokens cannot be bought beyond the bank balance")
+	check(wallet.buy_tokens(10) and wallet.tokens == 10 and wallet.balance == wallet.START_BALANCE - 50, "buying 10 tokens costs $50")
+	check(not wallet.sell_tokens(11) and wallet.tokens == 10, "cannot sell more tokens than owned")
+	check(wallet.sell_tokens(10) and wallet.tokens == 0 and wallet.balance == wallet.START_BALANCE - 10, "selling 10 tokens pays $40 back")
+	check(wallet.history[0].amount == 40 and wallet.token_history[0].title == "Withdrawal", "cashier moves show in bank and token histories")
+	var restored: Dictionary = wallet.save_state()
+	wallet.buy_tokens(3)
+	wallet.load_state(restored)
+	check(wallet.tokens == 0 and wallet.balance == wallet.START_BALANCE - 10, "tokens are saved and restored with the wallet")
 
 	# Payout rules.
 	check(Slots.total_payout(Slots.evaluate(filled("$"), 10)) == 8 * 50 * 10, "full $ grid pays all 8 lines at x50")
@@ -61,6 +74,22 @@ func run() -> void:
 	print("RTP %.4f, hit rate %.3f" % [rtp, float(hits) / spins])
 	check(rtp > 0.9 and rtp < 1.0, "machine keeps a small house edge")
 
+	# Adaptive luck: hot start, comeback after a losing streak, cold while the player is ahead.
+	check(is_equal_approx(Slots.luck(0, 0, 0, 1), 1.0), "a brand-new player starts with full luck")
+	check(is_equal_approx(Slots.luck(10, 0, 0, 1), 0.5), "the welcome luck fades over the first spins")
+	check(is_zero_approx(Slots.luck(40, 2, 0, 10)), "a short losing run changes nothing")
+	check(is_equal_approx(Slots.luck(40, 6, 0, 10), 0.4), "a long losing streak raises luck step by step")
+	check(is_equal_approx(Slots.luck(40, 0, 150, 10), -0.5) and is_equal_approx(Slots.luck(40, 0, 3000, 10), -1.0), "profit lowers luck down to the floor")
+	seed(7)
+	var averages := {}
+	for value: float in [-1.0, 0.0, 1.0]:
+		var total := 0
+		for i in 6000:
+			total += Slots.total_payout(Slots.evaluate(Slots.build_grid(Slots.pick_stops(value)), 1))
+		averages[value] = total / 6000.0
+	print("Return at luck -1 / 0 / +1: %.3f / %.3f / %.3f" % [averages[-1.0], averages[0.0], averages[1.0]])
+	check(averages[1.0] > 1.2 and averages[0.0] > 0.85 and averages[0.0] < 1.05 and averages[-1.0] < 0.75, "luck shifts the machine's return both ways")
+
 	# Desktop shortcuts open the sites in the browser.
 	var desktop = load("res://scenes/desktop.tscn").instantiate()
 	root.add_child(desktop)
@@ -79,16 +108,44 @@ func run() -> void:
 	shortcuts.get_node("slots").launched.emit()
 	await process_frame
 	check(browser.address.text == "casino.oc" and desktop.manager.windows.size() == 1, "slots shortcut reuses the browser window")
+	check(browser.page.find_children("*", "Button").all(func(b): return not str(b.get_meta("destination", "")).begins_with("bank.oc")), "the casino lobby has no links to the bank")
+	check(wallet.tokens == wallet.WELCOME_BONUS and wallet.token_history[0].title == "Welcome bonus", "the first casino visit grants the welcome bonus")
+	check(browser.page.get_node("Page/Stack/Header").get_node("%Bonus").visible, "the header announces the welcome bonus")
+	browser.reload()
+	check(wallet.tokens == wallet.WELCOME_BONUS and not browser.page.get_node("Page/Stack/Header").get_node("%Bonus").visible, "the welcome bonus is paid only once")
+	var restored_bonus: Dictionary = wallet.save_state()
+	wallet.load_state(restored_bonus)
+	check(wallet.welcome_bonus_claimed, "the claimed bonus is saved")
 
+	# The cashier tab buys and sells tokens.
+	browser.page.get_node("Page/Stack/Header").get_node("%Deposit").pressed.emit()
+	check(browser.address.text == "casino.oc/cashier", "the header deposit button opens the cashier")
+	var cashier = browser.page
+	var dollars: int = wallet.balance
+	cashier.get_node("%DepositAmount").value = 40
+	check(cashier.get_node("%DepositPay").text == "$ 200", "the deposit summary shows the dollar price")
+	cashier.get_node("%Deposit").pressed.emit()
+	check(wallet.tokens == 140 and wallet.balance == dollars - 200, "depositing 40 tokens charges $200")
+	check(cashier.get_node("%Tokens").text == "140" and cashier.get_node("Page/Stack/Header").get_node("%Balance").text == "140", "cashier and header show the new token balance")
+	cashier.get_node("%WithdrawTab").pressed.emit()
+	check(cashier.get_node("%WithdrawPane").visible and not cashier.get_node("%DepositPane").visible, "the withdraw tab switches panes")
+	cashier._withdraw_share(0.5)
+	cashier.get_node("%Withdraw").pressed.emit()
+	check(wallet.tokens == 70 and wallet.balance == dollars - 200 + 280, "withdrawing 70 tokens pays $280")
+	check(cashier.get_node("%Rows").get_child_count() == 5 and cashier.get_node("%Rows").get_child(0).get_node("Title").text == "Withdrawal", "cashier lists its transactions, newest first")
+	browser.open_url("casino.oc")
 	browser.page.get_node("%Slots").pressed.emit()
 
-	# A real spin moves money through the wallet and matches the reels on screen.
-	wallet.deposit(1000, "Test")
+	# A real spin moves tokens through the wallet and matches the reels on screen.
+	wallet.win_tokens(1000, "Test")
 	var slots = browser.page
-	var start: int = wallet.balance
+	var start: int = wallet.tokens
+	var bank_before: int = wallet.balance
+	var spins_before: int = wallet.slots_spins
 	slots.bet_index = 1
 	slots._spin()
-	check(slots.spinning and wallet.balance == start - 25, "spin withdraws the bet immediately")
+	check(wallet.slots_spins == spins_before + 1 and wallet.slots_net == -2 + slots.pending_win, "every spin is recorded for the luck system")
+	check(slots.spinning and wallet.tokens == start - 2, "spin takes the bet in tokens immediately")
 	var expected: int = slots.pending_win
 	for i in 40:
 		await process_frame
@@ -97,7 +154,7 @@ func run() -> void:
 	check(slots.reels[0].stopping and not slots.reels[1].stopping, "spin button stops only the next reel")
 	while slots.reels[0].spinning:
 		await process_frame
-	check(slots.spinning and slots.reels[1].spinning and slots.reels[2].spinning and wallet.balance == start - 25, "no payout while reels still spin")
+	check(slots.spinning and slots.reels[1].spinning and slots.reels[2].spinning and wallet.tokens == start - 2, "no payout while reels still spin")
 	slots._spin()
 	check(slots.reels[1].stopping and not slots.reels[2].stopping, "reels stop left to right, one per press")
 	slots._spin()
@@ -106,32 +163,35 @@ func run() -> void:
 	var grid_on_screen := []
 	for row in 3:
 		grid_on_screen.append([slots.reels[0].symbol_at(row), slots.reels[1].symbol_at(row), slots.reels[2].symbol_at(row)])
-	var shown: int = Slots.total_payout(Slots.evaluate(grid_on_screen, 25))
-	check(shown == expected and wallet.balance == start - 25 + expected, "paid amount matches the visible reels")
+	var shown: int = Slots.total_payout(Slots.evaluate(grid_on_screen, 2))
+	check(shown == expected and wallet.tokens == start - 2 + expected, "paid amount matches the visible reels")
+	check(wallet.balance == bank_before, "slots never touch the bank account")
 
 	# Leaving mid-spin still settles a decided win.
-	var paid_before: int = wallet.balance
+	var paid_before: int = wallet.tokens
 	slots.auto_stop.wait_time = 0.2
 	slots._spin()
 	slots.auto_stop.start(0.2)
 	while slots.spinning:
 		await process_frame
 	check(true, "auto-stop finishes an untouched spin")
-	paid_before = wallet.balance
+	paid_before = wallet.tokens
 	slots._spin()
 	slots.pending_win = 77
 	browser.open_url("bank.oc")
 	await process_frame
-	check(wallet.balance == paid_before - 25 + 77, "leaving the page mid-spin pays the pending win")
+	check(wallet.tokens == paid_before - 2 + 77, "leaving the page mid-spin pays the pending win")
+	check(browser.page.find_children("*", "Button").all(func(b): return not str(b.get_meta("destination", "")).begins_with("casino.oc")), "the bank has no links to the casino")
 	check(browser.page.get_node("%Rows").get_child_count() > 0, "bank lists recent operations")
 
 	# Not enough money: no spin, no withdrawal.
 	browser.open_url("casino.oc/slots")
 	await process_frame
 	slots = browser.page
-	wallet.withdraw(wallet.balance, "Test")
+	wallet.bet_tokens(wallet.tokens, "Test")
 	slots._spin()
-	check(not slots.spinning and wallet.balance == 0 and slots.message.text != "", "empty wallet blocks the spin with a message")
+	check(not slots.spinning and wallet.tokens == 0 and slots.message.text != "", "no tokens blocks the spin with a message")
+	wallet.withdraw(wallet.balance, "Test")
 
 	# Rent uses the same wallet and stays paid when navigating between bank pages.
 	browser.open_url("bank.oc")

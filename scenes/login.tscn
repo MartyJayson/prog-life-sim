@@ -1,0 +1,307 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/login.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/generated/os_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/user_tile.tscn" id="user_tile"]
+[ext_resource type="PackedScene" path="res://scenes/settings_dialog.tscn" id="settings_dialog"]
+[ext_resource type="Texture2D" path="res://assets/generated/new_user.svg" id="new_user"]
+[ext_resource type="Texture2D" path="res://assets/generated/go.svg" id="go"]
+[ext_resource type="Texture2D" path="res://assets/generated/power.svg" id="power"]
+[ext_resource type="Texture2D" path="res://assets/generated/settings.svg" id="settings"]
+
+[sub_resource type="Gradient" id="glow_gradient"]
+colors = PackedColorArray(1, 1, 1, 0.42, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="glow"]
+gradient = SubResource("glow_gradient")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.18, 0.12)
+fill_to = Vector2(0.75, 0.75)
+
+[sub_resource type="Gradient" id="divider_gradient"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.55, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="divider"]
+gradient = SubResource("divider_gradient")
+width = 2
+height = 256
+fill_to = Vector2(0, 1)
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Body" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LoginBody"
+
+[node name="Glow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 1150.0
+offset_bottom = 950.0
+mouse_filter = 2
+texture = SubResource("glow")
+expand_mode = 1
+
+[node name="TopBand" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_type_variation = &"LoginTopBand"
+
+[node name="BottomBand" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -130.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"LoginBottomBand"
+
+[node name="Row" type="HBoxContainer" parent="BottomBand"]
+layout_mode = 2
+
+[node name="PowerOff" type="Button" parent="BottomBand/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"LoginPower"
+text = "Turn off computer"
+icon = ExtResource("power")
+
+[node name="Spacer" type="Control" parent="BottomBand/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Right" type="VBoxContainer" parent="BottomBand/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="Settings" type="Button" parent="BottomBand/Row/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"LoginPower"
+text = "Settings"
+icon = ExtResource("settings")
+
+[node name="Hint" type="Label" parent="BottomBand/Row/Right"]
+layout_mode = 2
+theme_type_variation = &"LoginHint"
+text = "Every user keeps a separate saved game.
+To start a new game, click New user."
+horizontal_alignment = 2
+
+[node name="Center" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 120.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Left" type="MarginContainer" parent="Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 64
+
+[node name="Intro" type="VBoxContainer" parent="Center/Left"]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="Brand" type="VBoxContainer" parent="Center/Left/Intro"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = -18
+
+[node name="Maker" type="Label" parent="Center/Left/Intro/Brand"]
+layout_mode = 2
+theme_type_variation = &"LoginMaker"
+text = "Byteforge®"
+
+[node name="Logo" type="Label" parent="Center/Left/Intro/Brand"]
+layout_mode = 2
+theme_type_variation = &"LoginLogo"
+text = "OS"
+
+[node name="Prompt" type="Label" parent="Center/Left/Intro"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"LoginText"
+text = "To begin, click your user name"
+horizontal_alignment = 2
+
+[node name="Welcome" type="Label" parent="Center/Left/Intro"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"LoginLogo"
+theme_override_font_sizes/font_size = 96
+text = "welcome"
+
+[node name="Loading" type="Label" parent="Center/Left/Intro"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"LoginText"
+text = "Loading your personal settings…"
+horizontal_alignment = 2
+
+[node name="Divider" type="TextureRect" parent="Center"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("divider")
+expand_mode = 1
+
+[node name="Right" type="MarginContainer" parent="Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Scroll" type="ScrollContainer" parent="Center/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Users" type="VBoxContainer" parent="Center/Right/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="NewUser" parent="Center/Right/Scroll/Users" instance=ExtResource("user_tile")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "New user"
+icon = ExtResource("new_user")
+
+[node name="NewUserForm" type="HBoxContainer" parent="Center/Right/Scroll/Users"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Avatar" type="TextureRect" parent="Center/Right/Scroll/Users/NewUserForm"]
+custom_minimum_size = Vector2(84, 72)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("new_user")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Fields" type="VBoxContainer" parent="Center/Right/Scroll/Users/NewUserForm"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="Caption" type="Label" parent="Center/Right/Scroll/Users/NewUserForm/Fields"]
+layout_mode = 2
+theme_type_variation = &"LoginText"
+text = "Type your name"
+
+[node name="Row" type="HBoxContainer" parent="Center/Right/Scroll/Users/NewUserForm/Fields"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameEdit" type="LineEdit" parent="Center/Right/Scroll/Users/NewUserForm/Fields/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 44)
+layout_mode = 2
+placeholder_text = "Your name"
+max_length = 20
+
+[node name="Go" type="Button" parent="Center/Right/Scroll/Users/NewUserForm/Fields/Row"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Create user"
+theme_type_variation = &"GoButton"
+icon = ExtResource("go")
+icon_alignment = 1
+
+[node name="Back" type="Button" parent="Center/Right/Scroll/Users/NewUserForm/Fields/Row"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Cancel"
+text = "✕"
+
+[node name="Error" type="Label" parent="Center/Right/Scroll/Users/NewUserForm/Fields"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"LoginError"
+
+[node name="Modal" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ModalDim"
+
+[node name="Center" type="CenterContainer" parent="Modal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsDialog" parent="Modal/Center" instance=ExtResource("settings_dialog")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="pressed" from="BottomBand/Row/PowerOff" to="." method="_power_off"]
+[connection signal="pressed" from="BottomBand/Row/Right/Settings" to="." method="_open_settings"]
+[connection signal="pressed" from="Center/Right/Scroll/Users/NewUser" to="." method="_open_form"]
+[connection signal="text_submitted" from="Center/Right/Scroll/Users/NewUserForm/Fields/Row/NameEdit" to="." method="_create" unbinds=1]
+[connection signal="pressed" from="Center/Right/Scroll/Users/NewUserForm/Fields/Row/Go" to="." method="_create"]
+[connection signal="pressed" from="Center/Right/Scroll/Users/NewUserForm/Fields/Row/Back" to="." method="_close_form"]
+[connection signal="closed" from="Modal/Center/SettingsDialog" to="." method="_close_settings"]

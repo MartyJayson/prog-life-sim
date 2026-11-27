@@ -4,6 +4,7 @@
 [ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
 [ext_resource type="Script" path="res://scripts/web/marquee_lights.gd" id="lights"]
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
 
 [sub_resource type="FontVariation" id="bold"]
 variation_embolden = 0.8
@@ -55,17 +56,19 @@ section = "blackjack"
 theme_override_constants/separation = 16
 
 [node name="Name" type="Label" parent="Page/Stack/Title"]
-text = "★ BLACKJACK ★"
+text = "Blackjack"
 mouse_filter = 2
-theme_type_variation = &"CasinoLogo"
-theme_override_font_sizes/font_size = 30
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 32
 
 [node name="Tagline" type="Label" parent="Page/Stack/Title"]
 size_flags_horizontal = 3
 size_flags_vertical = 4
-text = "Beat the dealer without going over 21!"
+text = "Casino OC Originals  ·  Beat the dealer without going over 21"
 mouse_filter = 2
 text_overrun_behavior = 3
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
 
 [node name="Body" type="HBoxContainer" parent="Page/Stack"]
 theme_override_constants/separation = 18
@@ -300,7 +303,7 @@ theme_override_font_sizes/font_size = 20
 
 
 [node name="Limits" type="Label" parent="Page/Stack/Body/Side/List"]
-text = "Bets from $ 500 to $ 10 000."
+text = "Bets from 5 to 500 tokens."
 autowrap_mode = 3
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
@@ -322,36 +325,36 @@ mouse_filter = 2
 [node name="Bet" type="SpinBox" parent="Page/Stack/Controls/Column/BetRow"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(170, 0)
-min_value = 500.0
-max_value = 10000.0
-step = 100.0
-value = 500.0
-prefix = "$"
+min_value = 5.0
+max_value = 500.0
+step = 5.0
+value = 5.0
+suffix = "tokens"
 
-[node name="Chip500" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+[node name="Chip5" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
 custom_minimum_size = Vector2(64, 48)
-text = "500"
+text = "5"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"CasinoChip"
 
-[node name="Chip1000" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+[node name="Chip10" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
 custom_minimum_size = Vector2(64, 48)
-text = "1K"
+text = "10"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"CasinoChip"
 
-[node name="Chip2500" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+[node name="Chip25" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
 custom_minimum_size = Vector2(64, 48)
-text = "2.5K"
+text = "25"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"CasinoChip"
 
-[node name="Chip5000" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
+[node name="Chip100" type="Button" parent="Page/Stack/Controls/Column/BetRow"]
 custom_minimum_size = Vector2(64, 48)
-text = "5K"
+text = "100"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"CasinoChip"
@@ -367,12 +370,20 @@ theme_type_variation = &"CasinoChip"
 size_flags_horizontal = 3
 mouse_filter = 2
 
+[node name="TokenIcon" type="TextureRect" parent="Page/Stack/Controls/Column/BetRow"]
+custom_minimum_size = Vector2(24, 24)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Balance" type="Label" parent="Page/Stack/Controls/Column/BetRow"]
 unique_name_in_owner = true
 size_flags_vertical = 4
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 17
 
 [node name="Actions" type="HBoxContainer" parent="Page/Stack/Controls/Column"]
 alignment = 1
@@ -384,7 +395,7 @@ custom_minimum_size = Vector2(220, 60)
 text = "DEAL"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_type_variation = &"CasinoGold"
+theme_type_variation = &"CasinoPrimary"
 
 [node name="Hit" type="Button" parent="Page/Stack/Controls/Column/Actions"]
 unique_name_in_owner = true
@@ -406,8 +417,8 @@ theme_type_variation = &"CasinoRed"
 [connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Deal" to="." method="_deal"]
 [connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Hit" to="." method="_hit"]
 [connection signal="pressed" from="Page/Stack/Controls/Column/Actions/Stand" to="." method="_stand"]
-[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip500" to="." method="_set_bet" binds=[500]]
-[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip1000" to="." method="_set_bet" binds=[1000]]
-[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip2500" to="." method="_set_bet" binds=[2500]]
-[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip5000" to="." method="_set_bet" binds=[5000]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip5" to="." method="_set_bet" binds=[5]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip10" to="." method="_set_bet" binds=[10]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip25" to="." method="_set_bet" binds=[25]]
+[connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/Chip100" to="." method="_set_bet" binds=[100]]
 [connection signal="pressed" from="Page/Stack/Controls/Column/BetRow/ChipMax" to="." method="_bet_max"]

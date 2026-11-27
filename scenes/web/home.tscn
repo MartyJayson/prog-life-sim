@@ -32,14 +32,6 @@ alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "news.oc"
 
-[node name="Site2" type="Button" parent="."]
-text = "Games OS   ·   Play classic desktop games"
-focus_mode = 0
-mouse_default_cursor_shape = 2
-alignment = 0
-text_overrun_behavior = 3
-metadata/destination = "games.oc"
-
 [node name="Site3" type="Button" parent="."]
 text = "About OS   ·   Read about the operating system"
 focus_mode = 0
@@ -63,3 +55,11 @@ mouse_default_cursor_shape = 2
 alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "bank.oc"
+
+[node name="Site6" type="Button" parent="."]
+text = "stupidjob.oc   ·   Find jobs and apply in one click"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "stupidjob.oc"

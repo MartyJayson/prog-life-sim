@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="JobListing" format=3]
+
+[ext_resource type="Script" path="res://scripts/jobs/job_listing.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "tinysoft_qa"
+title = "QA Tester (Remote)"
+company = "TinySoft Inc."
+initials = "TS"
+logo_color = Color(0.42, 0.29, 0.85, 1)
+location = "Remote · Worldwide"
+pay = "$100 per task"
+tags = PackedStringArray("Remote", "Contract", "Entry level", "Per task")
+summary = "TinySoft is looking for detail-oriented testers to check new builds of our online store before release. You will receive a test build, click through every control on the checklist and report which ones are broken. No experience required — a short paid test assignment comes first."
+posted = "Posted 2 days ago · 14 applicants"

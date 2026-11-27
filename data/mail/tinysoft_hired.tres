@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "TinySoft Recruiting"
+sender_address = "careers@tinysoft.oc"
+subject = "Offer of employment — welcome to TinySoft"
+body = "Hello,
+
+Congratulations! Your test report was [b]100% accurate[/b], and we are pleased to offer you the position of [b]QA Tester (Remote)[/b] at TinySoft.
+
+{paid} has been transferred to your OS Bank account for the trial assignment.
+
+[b]Terms of engagement[/b]
+• Payment: {reward} per task, paid on acceptance of the report.
+• A report is accepted only if every check is marked correctly.
+• Each build contains between 1 and 3 defects.
+
+Your first task ({next_task}) is ready: {link}
+
+Welcome aboard,
+Hiring Team
+TinySoft Inc."

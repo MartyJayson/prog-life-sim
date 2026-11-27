@@ -1,0 +1,263 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/apps/mail.gd" id="script"]
+
+[sub_resource type="ButtonGroup" id="folders"]
+allow_unpress = false
+
+[sub_resource type="ButtonGroup" id="rows"]
+allow_unpress = false
+
+[node name="Mail" type="VBoxContainer"]
+theme_override_constants/separation = 0
+script = ExtResource("script")
+account = "user@mail.oc"
+row_group = SubResource("rows")
+
+[node name="Ribbon" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"MailRibbon"
+
+[node name="Row" type="HBoxContainer" parent="Ribbon"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NewMail" type="Button" parent="Ribbon/Row"]
+layout_mode = 2
+disabled = true
+focus_mode = 0
+tooltip_text = "Sending mail is not available yet."
+text = "✉  New mail"
+
+[node name="ToggleRead" type="Button" parent="Ribbon/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "Mark as unread"
+
+[node name="Spacer" type="Control" parent="Ribbon/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Search" type="LineEdit" parent="Ribbon/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+placeholder_text = "Search mail"
+clear_button_enabled = true
+
+[node name="Panes" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Folders" type="PanelContainer" parent="Panes"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_type_variation = &"MailSidebar"
+
+[node name="List" type="VBoxContainer" parent="Panes/Folders"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Account" type="Label" parent="Panes/Folders/List"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+theme_override_font_sizes/font_size = 16
+text_overrun_behavior = 3
+
+[node name="Gap" type="Control" parent="Panes/Folders/List"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Inbox" type="Button" parent="Panes/Folders/List"]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("folders")
+text = "Inbox"
+alignment = 0
+theme_type_variation = &"MailFolder"
+metadata/folder = 0
+metadata/caption = "Inbox"
+
+[node name="Sent" type="Button" parent="Panes/Folders/List"]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("folders")
+text = "Sent Items"
+alignment = 0
+theme_type_variation = &"MailFolder"
+metadata/folder = 1
+metadata/caption = "Sent Items"
+
+[node name="Drafts" type="Button" parent="Panes/Folders/List"]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("folders")
+text = "Drafts"
+alignment = 0
+theme_type_variation = &"MailFolder"
+metadata/folder = 2
+metadata/caption = "Drafts"
+
+[node name="Deleted" type="Button" parent="Panes/Folders/List"]
+layout_mode = 2
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = SubResource("folders")
+text = "Deleted Items"
+alignment = 0
+theme_type_variation = &"MailFolder"
+metadata/folder = 3
+metadata/caption = "Deleted Items"
+
+[node name="Messages" type="PanelContainer" parent="Panes"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_type_variation = &"MailList"
+
+[node name="Stack" type="VBoxContainer" parent="Panes/Messages"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Heading" type="MarginContainer" parent="Panes/Messages/Stack"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="FolderName" type="Label" parent="Panes/Messages/Stack/Heading"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+theme_override_font_sizes/font_size = 22
+text = "Inbox"
+
+[node name="Scroller" type="ScrollContainer" parent="Panes/Messages/Stack"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Rows" type="VBoxContainer" parent="Panes/Messages/Stack/Scroller"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Empty" type="Label" parent="Panes/Messages/Stack/Scroller/Rows"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_type_variation = &"MailMuted"
+text = "Nothing in this folder."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reader" type="PanelContainer" parent="Panes"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"MailReader"
+
+[node name="Placeholder" type="Label" parent="Panes/Reader"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailMuted"
+theme_override_font_sizes/font_size = 18
+text = "Select a letter to read it."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Letter" type="VBoxContainer" parent="Panes/Reader"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Subject" type="Label" parent="Panes/Reader/Letter"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+theme_override_font_sizes/font_size = 26
+autowrap_mode = 3
+
+[node name="Sender" type="HBoxContainer" parent="Panes/Reader/Letter"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Avatar" type="PanelContainer" parent="Panes/Reader/Letter/Sender"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"MailAvatar"
+
+[node name="Initials" type="Label" parent="Panes/Reader/Letter/Sender/Avatar"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Names" type="VBoxContainer" parent="Panes/Reader/Letter/Sender"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="From" type="Label" parent="Panes/Reader/Letter/Sender/Names"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailStrong"
+theme_override_font_sizes/font_size = 18
+text_overrun_behavior = 3
+
+[node name="Address" type="Label" parent="Panes/Reader/Letter/Sender/Names"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MailMuted"
+text_overrun_behavior = 3
+
+[node name="Received" type="Label" parent="Panes/Reader/Letter/Sender"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"MailMuted"
+
+[node name="Rule" type="HSeparator" parent="Panes/Reader/Letter"]
+layout_mode = 2
+
+[node name="Body" type="RichTextLabel" parent="Panes/Reader/Letter"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+theme_type_variation = &"MailBody"
+bbcode_enabled = true
+selection_enabled = true
+context_menu_enabled = true
+
+[connection signal="pressed" from="Ribbon/Row/ToggleRead" to="." method="_toggle_read"]
+[connection signal="text_changed" from="Ribbon/Row/Search" to="." method="_search_changed"]
+[connection signal="pressed" from="Panes/Folders/List/Inbox" to="." method="_open_folder" binds=[0]]
+[connection signal="pressed" from="Panes/Folders/List/Sent" to="." method="_open_folder" binds=[1]]
+[connection signal="pressed" from="Panes/Folders/List/Drafts" to="." method="_open_folder" binds=[2]]
+[connection signal="pressed" from="Panes/Folders/List/Deleted" to="." method="_open_folder" binds=[3]]
+[connection signal="meta_clicked" from="Panes/Reader/Letter/Body" to="." method="_link_clicked"]
+[connection signal="meta_hover_started" from="Panes/Reader/Letter/Body" to="." method="_link_hovered" binds=[true]]
+[connection signal="meta_hover_ended" from="Panes/Reader/Letter/Body" to="." method="_link_hovered" binds=[false]]

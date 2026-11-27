@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "TinySoft Recruiting"
+sender_address = "careers@tinysoft.oc"
+subject = "Your QA test assignment — TinySoft"
+body = "Hello,
+
+Thank you for applying for the [b]QA Tester (Remote)[/b] position at TinySoft. Before we make a decision, we ask every candidate to complete a short test assignment.
+
+[b]Your test environment:[/b] {link}
+
+The link opens a private test build of our online store together with the DEBUG report window. Your checklist contains [b]{checks} checks[/b], and exactly one of them is broken.
+
+How to report:
+• click a check once if the control works as described (green tick);
+• click it again if the control is broken (red cross);
+• when every check is marked, press SUBMIT.
+
+A fully correct report earns {reward} and an employment offer. An incorrect report ends your application.
+
+Good luck,
+Hiring Team
+TinySoft Inc."

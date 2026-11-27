@@ -1,6 +1,7 @@
 extends Control
 
 signal launch_requested(id: String)
+signal site_requested(address: String)
 signal window_interacted
 signal window_closed(id: String)
 
@@ -26,6 +27,8 @@ func open(id: String, caption: String, icon: Texture2D, app_scene: PackedScene, 
 	var app: Control = app_scene.instantiate()
 	if app.has_signal("launch_requested"):
 		app.launch_requested.connect(launch_requested.emit)
+	if app.has_signal("site_requested"):
+		app.site_requested.connect(site_requested.emit)
 	if app.has_signal("close_requested"):
 		app.close_requested.connect(close_app.bind(id), CONNECT_DEFERRED)
 	window.close_requested.connect(close_app.bind(id))

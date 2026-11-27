@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "Martha Greaves, Landlord"
+sender_address = "m.greaves@mail.oc"
+subject = "Rent for September is due"
+body = "Hello,
+
+Just a reminder that the rent for your flat is due: [b]$ 500[/b] for September.
+
+You can pay it online in [url=bank.oc/payments]OS Bank → Payments[/url]. Please do not leave it too long — I have my own bills to pay.
+
+Thank you,
+Martha Greaves"

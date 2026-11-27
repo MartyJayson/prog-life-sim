@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "TinySoft Recruiting"
+sender_address = "careers@tinysoft.oc"
+subject = "Your application — TinySoft"
+body = "Hello,
+
+Thank you for completing the test assignment for the QA Tester (Remote) position.
+
+Unfortunately, {mistakes} of the checks in your report did not match our records. We will not be moving forward with your application, and your trial engagement has been terminated.
+
+This decision is final. We wish you every success in your job search.
+
+Kind regards,
+Hiring Team
+TinySoft Inc."

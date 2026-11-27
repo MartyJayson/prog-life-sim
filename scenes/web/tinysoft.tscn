@@ -1,0 +1,297 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/tinysoft.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/tinysoft_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://scenes/web/tinysoft_product.tscn" id="product"]
+[ext_resource type="PackedScene" path="res://scenes/web/tinysoft_cart_line.tscn" id="cart_line"]
+
+[node name="TinySoft" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+theme_override_constants/separation = 14
+script = ExtResource("script")
+cart_line_scene = ExtResource("cart_line")
+
+[node name="Banner" type="PanelContainer" parent="."]
+theme_type_variation = &"ShopBanner"
+
+[node name="Row" type="HBoxContainer" parent="Banner"]
+theme_override_constants/separation = 14
+
+[node name="Stage" type="Label" parent="Banner/Row"]
+text = "TEST ENVIRONMENT"
+mouse_filter = 2
+theme_type_variation = &"ShopStrong"
+theme_override_colors/font_color = Color(0.23, 0.18, 0.0, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Build" type="Label" parent="Banner/Row"]
+unique_name_in_owner = true
+text = "Build 0.9 · no session"
+mouse_filter = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+theme_override_colors/font_color = Color(0.23, 0.18, 0.0, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Private" type="Label" parent="Banner/Row"]
+text = "Internal QA only — do not share"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.23, 0.18, 0.0, 1)
+theme_override_font_sizes/font_size = 15
+
+[node name="Store" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+theme_override_constants/separation = 14
+
+[node name="Header" type="PanelContainer" parent="Store"]
+theme_type_variation = &"ShopHeader"
+
+[node name="Row" type="HBoxContainer" parent="Store/Header"]
+theme_override_constants/separation = 6
+
+[node name="Logo" type="Label" parent="Store/Header/Row"]
+text = "tinysoft"
+mouse_filter = 2
+theme_type_variation = &"ShopHeading"
+theme_override_colors/font_color = Color(0.42, 0.29, 0.85, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="Store" type="Label" parent="Store/Header/Row"]
+text = "store"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ShopMuted"
+theme_override_font_sizes/font_size = 22
+
+[node name="Tabs" type="HBoxContainer" parent="Store/Header/Row"]
+unique_name_in_owner = true
+theme_override_constants/separation = 4
+
+[node name="home" type="Button" parent="Store/Header/Row/Tabs"]
+text = "Home"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopTabActive"
+
+[node name="catalog" type="Button" parent="Store/Header/Row/Tabs"]
+text = "Catalog"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopTab"
+
+[node name="cart" type="Button" parent="Store/Header/Row/Tabs"]
+text = "Cart (0)"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopTab"
+
+[node name="contacts" type="Button" parent="Store/Header/Row/Tabs"]
+text = "Contacts"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopTab"
+
+[node name="Error" type="PanelContainer" parent="Store"]
+unique_name_in_owner = true
+visible = false
+theme_type_variation = &"ShopError"
+
+[node name="Stack" type="VBoxContainer" parent="Store/Error"]
+
+[node name="Title" type="Label" parent="Store/Error/Stack"]
+text = "Something went wrong"
+mouse_filter = 2
+theme_type_variation = &"ShopStrong"
+theme_override_colors/font_color = Color(0.62, 0.1, 0.1, 1)
+
+[node name="ErrorText" type="Label" parent="Store/Error/Stack"]
+unique_name_in_owner = true
+text = "Error"
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.45, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="Notice" type="Label" parent="Store"]
+unique_name_in_owner = true
+visible = false
+text = "Notice"
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"ShopNotice"
+
+[node name="Sections" type="VBoxContainer" parent="Store"]
+unique_name_in_owner = true
+
+[node name="home" type="PanelContainer" parent="Store/Sections"]
+theme_type_variation = &"ShopCard"
+
+[node name="Stack" type="VBoxContainer" parent="Store/Sections/home"]
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Store/Sections/home/Stack"]
+text = "Small gadgets for big ideas"
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"ShopHeading"
+theme_override_font_sizes/font_size = 32
+
+[node name="Text" type="Label" parent="Store/Sections/home/Stack"]
+text = "Everything your desk needs, from mice and keyboards to lamps and mugs. Free delivery on orders over $50."
+mouse_filter = 2
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Store/Sections/home/Stack"]
+text = "Open the Catalog tab to see this week's products."
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"ShopMuted"
+
+[node name="catalog" type="VBoxContainer" parent="Store/Sections"]
+visible = false
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Store/Sections/catalog"]
+text = "Catalog"
+mouse_filter = 2
+theme_type_variation = &"ShopHeading"
+
+[node name="Grid" type="GridContainer" parent="Store/Sections/catalog"]
+unique_name_in_owner = true
+columns = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="mouse" parent="Store/Sections/catalog/Grid" instance=ExtResource("product")]
+product_name = "Wireless Mouse"
+price = 25
+color = Color(0.25, 0.47, 0.86, 1)
+
+[node name="keyboard" parent="Store/Sections/catalog/Grid" instance=ExtResource("product")]
+product_name = "Compact Keyboard"
+price = 49
+color = Color(0.2, 0.62, 0.55, 1)
+
+[node name="lamp" parent="Store/Sections/catalog/Grid" instance=ExtResource("product")]
+product_name = "Desk Lamp"
+price = 35
+color = Color(0.93, 0.62, 0.2, 1)
+
+[node name="mug" parent="Store/Sections/catalog/Grid" instance=ExtResource("product")]
+product_name = "Coffee Mug"
+price = 12
+color = Color(0.82, 0.33, 0.42, 1)
+
+[node name="cart" type="PanelContainer" parent="Store/Sections"]
+visible = false
+theme_type_variation = &"ShopCard"
+
+[node name="Stack" type="VBoxContainer" parent="Store/Sections/cart"]
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Store/Sections/cart/Stack"]
+text = "Your cart"
+mouse_filter = 2
+theme_type_variation = &"ShopHeading"
+
+[node name="Lines" type="VBoxContainer" parent="Store/Sections/cart/Stack"]
+unique_name_in_owner = true
+theme_override_constants/separation = 8
+
+[node name="CartEmpty" type="Label" parent="Store/Sections/cart/Stack"]
+unique_name_in_owner = true
+text = "Your cart is empty."
+mouse_filter = 2
+theme_type_variation = &"ShopMuted"
+
+[node name="Divider" type="HSeparator" parent="Store/Sections/cart/Stack"]
+
+[node name="TotalRow" type="HBoxContainer" parent="Store/Sections/cart/Stack"]
+
+[node name="Caption" type="Label" parent="Store/Sections/cart/Stack/TotalRow"]
+text = "Total"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ShopStrong"
+theme_override_font_sizes/font_size = 22
+
+[node name="Total" type="Label" parent="Store/Sections/cart/Stack/TotalRow"]
+unique_name_in_owner = true
+text = "$0"
+mouse_filter = 2
+theme_type_variation = &"ShopPrice"
+
+[node name="Actions" type="HBoxContainer" parent="Store/Sections/cart/Stack"]
+
+[node name="ClearCart" type="Button" parent="Store/Sections/cart/Stack/Actions"]
+text = "Clear cart"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopSecondary"
+
+[node name="Spacer" type="Control" parent="Store/Sections/cart/Stack/Actions"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Checkout" type="Button" parent="Store/Sections/cart/Stack/Actions"]
+text = "Checkout"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ShopPrimary"
+
+[node name="contacts" type="PanelContainer" parent="Store/Sections"]
+visible = false
+theme_type_variation = &"ShopCard"
+
+[node name="Stack" type="VBoxContainer" parent="Store/Sections/contacts"]
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Store/Sections/contacts/Stack"]
+text = "Contacts"
+mouse_filter = 2
+theme_type_variation = &"ShopHeading"
+
+[node name="Company" type="Label" parent="Store/Sections/contacts/Stack"]
+text = "TinySoft Inc. · 12 Market Lane, Suite 4"
+mouse_filter = 2
+
+[node name="Mail" type="Label" parent="Store/Sections/contacts/Stack"]
+text = "support@tinysoft.oc"
+mouse_filter = 2
+
+[node name="Hours" type="Label" parent="Store/Sections/contacts/Stack"]
+text = "Monday to Friday, 9:00–18:00"
+mouse_filter = 2
+theme_type_variation = &"ShopMuted"
+
+[node name="Footer" type="Label" parent="Store"]
+text = "© 2028 TinySoft Inc.  ·  Store v0.9 (staging)"
+mouse_filter = 2
+horizontal_alignment = 1
+theme_type_variation = &"ShopMuted"
+
+[node name="Denied" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+theme_type_variation = &"ShopCard"
+
+[node name="Stack" type="VBoxContainer" parent="Denied"]
+theme_override_constants/separation = 10
+
+[node name="DeniedTitle" type="Label" parent="Denied/Stack"]
+unique_name_in_owner = true
+text = "Access denied"
+mouse_filter = 2
+theme_type_variation = &"ShopHeading"
+
+[node name="DeniedText" type="Label" parent="Denied/Stack"]
+unique_name_in_owner = true
+text = "This test environment needs a valid session link."
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"ShopMuted"
+theme_override_font_sizes/font_size = 18
+
+[connection signal="pressed" from="Store/Sections/cart/Stack/Actions/ClearCart" to="." method="_clear_pressed"]
+[connection signal="pressed" from="Store/Sections/cart/Stack/Actions/Checkout" to="." method="_checkout_pressed"]

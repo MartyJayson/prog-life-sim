@@ -72,6 +72,17 @@ Long titles are truncated with an ellipsis (`text_overrun_behavior = 3`).
 | `TaskButton` | Button | Taskbar window button; the active window's button is dark and pushed in |
 | `StartButton` | Button | Green Start button, rounded on the right |
 | `Button` (base) | | Light button with depth; orange border on hover |
+| `Widget` | PanelContainer | Phone-style desktop widget: radius 12, 92 % opaque panel, 1 px deep blue border, soft shadow |
+| `MailRibbon` | PanelContainer | Mail toolbar strip: hover-blue background, soft blue line at the bottom |
+| `MailSidebar` / `MailList` / `MailReader` | PanelContainer | Mail panes: folder column, white message list, white reading pane |
+| `MailFolder` | Button | Folder entry: transparent; selected gets a light blue fill and a 3 px primary blue stripe on the left |
+| `MailRow` | Button | Message in the list: white with a thin divider; selected gets a light blue fill and a 4 px primary blue stripe |
+| `MailAvatar` | PanelContainer | Round primary blue sender badge with white initials |
+| `MailStrong` / `MailAccent` / `MailMuted` | Label | Bold text / bold link-coloured text (unread subject) / 15 px secondary text |
+| `MailBody` | RichTextLabel | Letter body, 18 px; links are drawn in link colour and underlined |
+| `QaRow` | Button | DEBUG checklist entry: white with a thin divider, hover-blue on hover |
+| `QaBox` / `QaBoxPass` / `QaBoxFail` | PanelContainer | 30 px check box: empty with a soft blue border / start green with a white tick / close red with a white cross |
+| `QaSubmit` | Button | Green SUBMIT button of the DEBUG window |
 
 ### Card anatomy (notification)
 
@@ -109,14 +120,19 @@ All icons are generated SVGs in `assets/generated/`.
 - One warm accent per icon: orange `#FFB040`, red `#DE5433` or green `#5CC96F` / `#3CC46B`.
 - No text inside icons (symbols are fine).
 
-Set: `browser.svg` (globe with an orange orbit), `notepad.svg` (page with a pencil), `about.svg` (monitor with an "i"), `calculator.svg`, `terminal.svg`, `snake.svg`, `operations.svg`, `bank.svg`, `slots.svg`.
+Set: `browser.svg` (blue globe with green continents), `notepad.svg` (page with a pencil), `about.svg` (monitor with an "i"), `calculator.svg`, `mail.svg` (envelope with a letter and an orange "new" dot), `debug.svg` (report window with an orange bug), `check.svg` / `cross.svg` (white marks for `QaBoxPass` / `QaBoxFail`), `terminal.svg`, `operations.svg`, `bank.svg`, `slots.svg`, needs: `sleep.svg`, `hunger.svg`, `happiness.svg`, `social.svg`.
 
 ## 7. Desktop layout
 
 - Taskbar: height 66, background `#1F5EC7`, 2 px light line `#6BADFA` on top. Start sits flush against the left, top and bottom edges of the taskbar (no padding, as in XP). Task buttons are 46 px tall, centred vertically, 6 px apart. Clock and date in white on the right.
-- Notifications: a stack on the right above the clock, 12 px from the edge and 12 px above the taskbar, 10 px between cards. Newest on top.
+- Notifications: a stack on the right above the clock, 12 px from the edge and 12 px above the taskbar, 10 px between cards. Newest on top. Every notification comes from a new letter in Mail; clicking it opens that letter.
 - Start menu: a card above the button, with a `HeaderPanel` titled "OS" on top and `MenuItem` entries with 26 px icons below.
+- Status widget (`scenes/widgets/needs_widget.tscn`): top-right, 24 px from the edges, under the windows. Each need is a `need_gauge.tscn` ring (46 px, 5 px stroke, starts at 12 o'clock, clockwise) with its icon inside. Ring colours: sleep indigo `#6B5EDB`, hunger orange `#FF9926`, happiness yellow `#F2C230`, social green `#3DA84A`.
 - Desktop shortcut selection: semi-transparent primary blue; hovering a selected shortcut gives it an orange border.
+
+### Mail app
+
+Outlook-like three-pane layout (`scenes/apps/mail.tscn`): a `MailRibbon` toolbar with a search field on the right, then folders, message list and reading pane. An unread letter has a 4 px orange stripe, a bold sender and a bold link-coloured subject; the Inbox shows the unread count. Letters are `MailMessage` resources (`data/mail/*.tres`) with a BBCode body. Links (`[url=bank.oc]…[/url]`, or bare `https://…` / `*.oc` addresses) are clickable and open in the Browser. The story opens with three letters sent one by one by the `IntroMail` node in `desktop.tscn`: the OS Mail welcome, the landlord's rent bill (link to `bank.oc/payments`) and a friend's advice to look for work on `stupidjob.oc`. Each reaches a user once.
 
 ## 8. Adding new UI
 
@@ -124,3 +140,27 @@ Set: `browser.svg` (globe with an orange orbit), `notepad.svg` (page with a penc
 2. Take colours only from the palette (section 1).
 3. A new pop-up element is a `Card` + `HeaderPanel`.
 4. A new action is a base-type button; a dangerous action uses a red style like `TitleClose`.
+
+### Browser
+
+`BrowserToolbar` holds the Back, Forward, Refresh and Home icons. `BrowserAddress` starts with a globe and ends with a Go arrow. Disabled history buttons stay visible at reduced opacity. `BrowserSurface` provides a white background for the page.
+
+Pages load like on a real network: every navigation, Back/Forward and ↻ Refresh clears the page and fetches it again in 0.5–2 s (`load_time` on `scenes/apps/browser.tscn`). While loading, a 3 px primary blue `BrowserLoadBar` under the address bar fills up and a centred `BrowserStatus` label says "Waiting for <host>…". Only the latest navigation is shown; an older one still in flight is dropped.
+
+### Login screen
+
+`scenes/login.tscn` appears after the boot logo and replaces a main menu. Layout from top to bottom: a dark blue `LoginTopBand` (120 px, light blue line at the bottom), a `LoginBody` blue field with a soft white glow at the top-left, and a `LoginBottomBand` (130 px, 2–3 px orange line on top).
+
+- Left half: italic "Byteforge® / OS" logo (`LoginMaker`, `LoginLogo`) and the `LoginText` prompt, right-aligned. On login it switches to an italic "welcome" with "Loading your personal settings…".
+- A faded white vertical divider in the middle.
+- Right half: one `LoginTile` per user (`scenes/user_tile.tscn`: 72 px framed avatar, 30 px white name; hover gives a dark translucent fill with an orange border), then the "New user" tile. "New user" opens an inline name field with a green `GoButton` arrow; errors use `LoginError`.
+- Bottom band: `LoginPower` "Turn off computer" (quits the game) on the left, "Settings" with a `LoginHint` below on the right.
+- Settings (`scenes/settings_dialog.tscn`) is a `Card` over a `ModalDim` backdrop: volume slider, screen size, and a `DangerButton` "Reset saves" that asks for confirmation inline.
+
+Avatars are `avatar_rocket.svg`, `avatar_flower.svg`, `avatar_ball.svg`, `avatar_duck.svg` (framed with a 3 px white border); also `new_user.svg`, `power.svg`, `settings.svg`, `go.svg`.
+
+### DEBUG window (TinySoft QA)
+
+`scenes/apps/qa_debug.tscn` opens to the right of the Browser whenever a `tinysoft.test.oc/{uuid}` test build is loaded. A `MailRibbon` shows the task and session id, then a white `MailList` pane of `QaRow` checks (`scenes/qa/qa_check_row.tscn`). Clicking a check cycles: not tested → green tick (works) → red cross (bug) → not tested. The green `QaSubmit` button unlocks once every check is marked.
+
+The job board `stupidjob.oc` (`work_theme.tres`, navy and teal) and the TinySoft store (`tinysoft_theme.tres`, purple with a yellow "TEST ENVIRONMENT" banner) are third-party sites with their own themes.

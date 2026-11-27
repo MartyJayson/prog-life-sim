@@ -1,78 +1,127 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/apps/browser.gd" id="script"]
-
-[sub_resource type="StyleBoxFlat" id="surface"]
-content_margin_left = 12.0
-content_margin_top = 5.0
-content_margin_right = 12.0
-content_margin_bottom = 5.0
-bg_color = Color(0.973, 0.984, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.69, 0.788, 0.875, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_left = 5
-corner_radius_bottom_right = 5
+[ext_resource type="Theme" path="res://assets/generated/os_theme.tres" id="theme"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser_back.svg" id="back_icon"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser_forward.svg" id="forward_icon"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser_refresh.svg" id="refresh_icon"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser_home.svg" id="home_icon"]
+[ext_resource type="Texture2D" path="res://assets/generated/browser_address.svg" id="address_icon"]
 
 [node name="Browser" type="VBoxContainer"]
+theme = ExtResource("theme")
+theme_override_constants/separation = 0
 script = ExtResource("script")
 
-[node name="Navigation" type="HBoxContainer" parent="."]
+[node name="Toolbar" type="PanelContainer" parent="."]
+theme_type_variation = &"BrowserToolbar"
 
-[node name="Back" type="Button" parent="Navigation"]
+[node name="Navigation" type="HBoxContainer" parent="Toolbar"]
+theme_override_constants/separation = 4
+
+[node name="Back" type="Button" parent="Toolbar/Navigation"]
 unique_name_in_owner = true
-text = "←"
+custom_minimum_size = Vector2(34, 34)
+theme_type_variation = &"BrowserButton"
+icon = ExtResource("back_icon")
+icon_alignment = 1
+disabled = true
 focus_mode = 0
 mouse_default_cursor_shape = 2
 tooltip_text = "Back"
 
-[node name="Forward" type="Button" parent="Navigation"]
+[node name="Forward" type="Button" parent="Toolbar/Navigation"]
 unique_name_in_owner = true
-text = "→"
+custom_minimum_size = Vector2(34, 34)
+theme_type_variation = &"BrowserButton"
+icon = ExtResource("forward_icon")
+icon_alignment = 1
+disabled = true
 focus_mode = 0
 mouse_default_cursor_shape = 2
 tooltip_text = "Forward"
 
-[node name="Refresh" type="Button" parent="Navigation"]
-text = "↻"
+[node name="Refresh" type="Button" parent="Toolbar/Navigation"]
+custom_minimum_size = Vector2(34, 34)
+theme_type_variation = &"BrowserButton"
+icon = ExtResource("refresh_icon")
+icon_alignment = 1
 focus_mode = 0
 mouse_default_cursor_shape = 2
 tooltip_text = "Refresh"
 
-[node name="Home" type="Button" parent="Navigation"]
-text = "Home"
+[node name="Home" type="Button" parent="Toolbar/Navigation"]
+custom_minimum_size = Vector2(34, 34)
+theme_type_variation = &"BrowserButton"
+icon = ExtResource("home_icon")
+icon_alignment = 1
 focus_mode = 0
 mouse_default_cursor_shape = 2
+tooltip_text = "Home"
 
-[node name="Address" type="LineEdit" parent="Navigation"]
+[node name="Address" type="LineEdit" parent="Toolbar/Navigation"]
 unique_name_in_owner = true
 size_flags_horizontal = 3
+theme_type_variation = &"BrowserAddress"
+placeholder_text = "Enter an address"
+tooltip_text = "Web address"
 
-[node name="Go" type="Button" parent="Navigation"]
-text = "Go"
+[node name="SiteIcon" type="TextureRect" parent="Toolbar/Navigation/Address"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -9.0
+offset_right = 28.0
+offset_bottom = 9.0
+mouse_filter = 2
+texture = ExtResource("address_icon")
+
+[node name="Go" type="Button" parent="Toolbar/Navigation/Address"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -13.0
+offset_right = -5.0
+offset_bottom = 13.0
+theme_type_variation = &"BrowserButton"
+icon = ExtResource("forward_icon")
+icon_alignment = 1
 focus_mode = 0
 mouse_default_cursor_shape = 2
+tooltip_text = "Go to address"
+
+[node name="LoadBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+mouse_filter = 2
+theme_type_variation = &"BrowserLoadBar"
+max_value = 1.0
+step = 0.0
+show_percentage = false
 
 [node name="Surface" type="PanelContainer" parent="."]
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("surface")
+theme_type_variation = &"BrowserSurface"
 
 [node name="Scroller" type="ScrollContainer" parent="Surface"]
 unique_name_in_owner = true
 horizontal_scroll_mode = 0
 
-[connection signal="pressed" from="Navigation/Back" to="." method="_step" binds=[-1]]
+[node name="Status" type="Label" parent="Surface"]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 2
+theme_type_variation = &"BrowserStatus"
+text = "Connecting…"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="Navigation/Forward" to="." method="_step" binds=[1]]
-
-[connection signal="pressed" from="Navigation/Refresh" to="." method="_render"]
-
-[connection signal="pressed" from="Navigation/Home" to="." method="_go_home"]
-
-[connection signal="pressed" from="Navigation/Go" to="." method="_submit_address"]
-
-[connection signal="text_submitted" from="Navigation/Address" to="." method="_navigate"]
+[connection signal="pressed" from="Toolbar/Navigation/Back" to="." method="_step" binds=[-1]]
+[connection signal="pressed" from="Toolbar/Navigation/Forward" to="." method="_step" binds=[1]]
+[connection signal="pressed" from="Toolbar/Navigation/Refresh" to="." method="reload"]
+[connection signal="pressed" from="Toolbar/Navigation/Home" to="." method="_go_home"]
+[connection signal="pressed" from="Toolbar/Navigation/Address/Go" to="." method="_submit_address"]
+[connection signal="text_submitted" from="Toolbar/Navigation/Address" to="." method="_navigate"]

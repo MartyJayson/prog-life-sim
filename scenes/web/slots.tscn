@@ -6,32 +6,17 @@
 [ext_resource type="Texture2D" path="res://assets/generated/poop.svg" id="poop"]
 [ext_resource type="Theme" path="res://scenes/web/casino_theme.tres" id="casino_theme"]
 [ext_resource type="PackedScene" path="res://scenes/web/casino_header.tscn" id="header"]
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
 
 [sub_resource type="FontVariation" id="bold"]
 variation_embolden = 0.8
-
-[sub_resource type="StyleBoxFlat" id="casino"]
-content_margin_left = 18.0
-content_margin_top = 16.0
-content_margin_right = 18.0
-content_margin_bottom = 18.0
-bg_color = Color(0.086, 0.035, 0.157, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.478, 0.239, 0.702, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="machine"]
 content_margin_left = 16.0
 content_margin_top = 14.0
 content_margin_right = 16.0
 content_margin_bottom = 14.0
-bg_color = Color(0.31, 0.035, 0.11, 1)
+bg_color = Color(0.13, 0.08, 0.26, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -41,144 +26,24 @@ corner_radius_top_left = 22
 corner_radius_top_right = 22
 corner_radius_bottom_right = 22
 corner_radius_bottom_left = 22
-shadow_color = Color(0.89, 0.2, 0.45, 0.35)
+shadow_color = Color(0.43, 0.3, 1, 0.3)
 shadow_size = 16
-
-[sub_resource type="StyleBoxFlat" id="side"]
-content_margin_left = 16.0
-content_margin_top = 14.0
-content_margin_right = 16.0
-content_margin_bottom = 14.0
-bg_color = Color(0.125, 0.059, 0.22, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.427, 0.247, 0.62, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
-[sub_resource type="StyleBoxFlat" id="chip"]
-bg_color = Color(0.243, 0.098, 0.38, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.722, 0.471, 0.949, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="chip_hover"]
-bg_color = Color(0.353, 0.149, 0.53, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.882, 0.722, 1, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="chip_disabled"]
-bg_color = Color(0.157, 0.09, 0.22, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.31, 0.22, 0.4, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
 
 [sub_resource type="StyleBoxFlat" id="bet_box"]
 content_margin_left = 10.0
 content_margin_top = 4.0
 content_margin_right = 10.0
 content_margin_bottom = 4.0
-bg_color = Color(0.051, 0.02, 0.09, 1)
+bg_color = Color(0.043, 0.075, 0.102, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(1, 0.765, 0.235, 1)
+border_color = Color(0.188, 0.278, 0.357, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="spin_normal"]
-content_margin_left = 26.0
-content_margin_top = 8.0
-content_margin_right = 26.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.718, 0.012, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 6
-border_color = Color(0.835, 0.38, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(1, 0.72, 0.1, 0.45)
-shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="spin_hover"]
-content_margin_left = 26.0
-content_margin_top = 8.0
-content_margin_right = 26.0
-content_margin_bottom = 8.0
-bg_color = Color(1, 0.82, 0.29, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 6
-border_color = Color(0.92, 0.47, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(1, 0.8, 0.2, 0.6)
-shadow_size = 14
-
-[sub_resource type="StyleBoxFlat" id="spin_pressed"]
-content_margin_left = 26.0
-content_margin_top = 11.0
-content_margin_right = 26.0
-content_margin_bottom = 5.0
-bg_color = Color(0.93, 0.6, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.76, 0.33, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="spin_disabled"]
-content_margin_left = 26.0
-content_margin_top = 8.0
-content_margin_right = 26.0
-content_margin_bottom = 8.0
-bg_color = Color(0.43, 0.34, 0.24, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 6
-border_color = Color(0.3, 0.23, 0.16, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="Gradient" id="coin_tints"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -194,7 +59,7 @@ theme = ExtResource("casino_theme")
 script = ExtResource("script")
 
 [node name="Casino" type="PanelContainer" parent="."]
-theme_override_styles/panel = SubResource("casino")
+theme_type_variation = &"CasinoPage"
 
 [node name="Stack" type="VBoxContainer" parent="Casino"]
 theme_override_constants/separation = 14
@@ -206,17 +71,18 @@ section = "slots"
 theme_override_constants/separation = 16
 
 [node name="Name" type="Label" parent="Casino/Stack/Title"]
-text = "★ SLOTS ★"
+text = "Slots OS"
 mouse_filter = 2
-theme_type_variation = &"CasinoLogo"
-theme_override_font_sizes/font_size = 30
+theme_type_variation = &"CasinoTitle"
+theme_override_font_sizes/font_size = 32
 
 [node name="Tagline" type="Label" parent="Casino/Stack/Title"]
 size_flags_horizontal = 3
 size_flags_vertical = 4
-text = "Three in a row — take the prize!"
+text = "Casino OC Originals  ·  Three in a row takes the prize"
 mouse_filter = 2
-theme_override_font_sizes/font_size = 18
+theme_type_variation = &"CasinoMuted"
+theme_override_font_sizes/font_size = 17
 
 [node name="Body" type="HBoxContainer" parent="Casino/Stack"]
 theme_override_constants/separation = 18
@@ -357,7 +223,7 @@ theme_override_constants/separation = 10
 [node name="BetCaption" type="Label" parent="Casino/Stack/Body/Machine/Column/Controls"]
 text = "BET"
 mouse_filter = 2
-theme_override_colors/font_color = Color(0.9, 0.8, 1, 1)
+theme_override_colors/font_color = Color(0.85, 0.82, 1, 1)
 theme_override_font_sizes/font_size = 18
 
 [node name="Less" type="Button" parent="Casino/Stack/Body/Machine/Column/Controls"]
@@ -366,27 +232,32 @@ custom_minimum_size = Vector2(48, 48)
 text = "−"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(0.5, 0.42, 0.6, 1)
 theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("chip")
-theme_override_styles/hover = SubResource("chip_hover")
-theme_override_styles/pressed = SubResource("chip_hover")
-theme_override_styles/disabled = SubResource("chip_disabled")
+theme_type_variation = &"CasinoChip"
 
 [node name="BetBox" type="PanelContainer" parent="Casino/Stack/Body/Machine/Column/Controls"]
 custom_minimum_size = Vector2(120, 0)
 theme_override_styles/panel = SubResource("bet_box")
 
-[node name="Bet" type="Label" parent="Casino/Stack/Body/Machine/Column/Controls/BetBox"]
+[node name="Row" type="HBoxContainer" parent="Casino/Stack/Body/Machine/Column/Controls/BetBox"]
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Casino/Stack/Body/Machine/Column/Controls/BetBox/Row"]
+custom_minimum_size = Vector2(26, 26)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bet" type="Label" parent="Casino/Stack/Body/Machine/Column/Controls/BetBox/Row"]
 unique_name_in_owner = true
-text = "$ 10"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 mouse_filter = 2
-theme_override_colors/font_color = Color(1, 0.84, 0.26, 1)
+theme_override_colors/font_color = Color(1, 0.788, 0.235, 1)
 theme_override_fonts/font = SubResource("bold")
 theme_override_font_sizes/font_size = 26
 
@@ -396,15 +267,8 @@ custom_minimum_size = Vector2(48, 48)
 text = "+"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(0.5, 0.42, 0.6, 1)
 theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("chip")
-theme_override_styles/hover = SubResource("chip_hover")
-theme_override_styles/pressed = SubResource("chip_hover")
-theme_override_styles/disabled = SubResource("chip_disabled")
+theme_type_variation = &"CasinoChip"
 
 [node name="Gap" type="Control" parent="Casino/Stack/Body/Machine/Column/Controls"]
 custom_minimum_size = Vector2(12, 0)
@@ -416,16 +280,8 @@ custom_minimum_size = Vector2(200, 60)
 text = "SPIN"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0.36, 0.1, 0, 1)
-theme_override_colors/font_hover_color = Color(0.36, 0.1, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.36, 0.1, 0, 1)
-theme_override_colors/font_disabled_color = Color(0.75, 0.68, 0.6, 1)
-theme_override_fonts/font = SubResource("bold")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("spin_normal")
-theme_override_styles/hover = SubResource("spin_hover")
-theme_override_styles/pressed = SubResource("spin_pressed")
-theme_override_styles/disabled = SubResource("spin_disabled")
+theme_type_variation = &"CasinoPrimary"
 
 [node name="Message" type="Label" parent="Casino/Stack/Body/Machine/Column"]
 unique_name_in_owner = true
@@ -437,7 +293,7 @@ theme_override_font_sizes/font_size = 17
 
 [node name="Side" type="PanelContainer" parent="Casino/Stack/Body"]
 custom_minimum_size = Vector2(250, 0)
-theme_override_styles/panel = SubResource("side")
+theme_type_variation = &"CasinoPanel"
 
 [node name="List" type="VBoxContainer" parent="Casino/Stack/Body/Side"]
 theme_override_constants/separation = 10
@@ -609,7 +465,7 @@ theme_override_colors/font_color = Color(0.85, 0.78, 0.96, 1)
 theme_override_font_sizes/font_size = 16
 
 [node name="Legal" type="Label" parent="Casino/Stack/Body/Side/List"]
-text = "Bets are charged to your OS Bank account."
+text = "Bets and wins are paid in Casino OC tokens."
 autowrap_mode = 3
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.6, 0.52, 0.72, 1)

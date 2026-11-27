@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/boot.gd" id="script"]
 [ext_resource type="PackedScene" path="res://scenes/desktop.tscn" id="desktop"]
+[ext_resource type="PackedScene" path="res://scenes/login.tscn" id="login"]
 [ext_resource type="AudioStream" path="res://assets/sound/pc turn on sound.wav" id="power_on"]
 [ext_resource type="AudioStream" path="res://assets/sound/background pc sound.mp3" id="hum"]
 
@@ -57,8 +58,10 @@ fill_to = Vector2(0, 1)
 
 [node name="Boot" type="Node"]
 script = ExtResource("script")
+desktop_scene = ExtResource("desktop")
 
-[node name="Desktop" parent="." instance=ExtResource("desktop")]
+[node name="Login" parent="." instance=ExtResource("login")]
+unique_name_in_owner = true
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 100
@@ -218,3 +221,6 @@ stream = ExtResource("power_on")
 unique_name_in_owner = true
 stream = ExtResource("hum")
 volume_db = -10.0
+
+[connection signal="logged_in" from="Login" to="." method="_logged_in"]
+[connection signal="power_off_requested" from="Login" to="." method="_power_off"]

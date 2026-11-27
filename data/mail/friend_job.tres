@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3]
+
+[ext_resource type="Script" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "Max Turner"
+sender_address = "max.turner@mail.oc"
+subject = "You need a job, buddy"
+body = "Hey!
+
+Heard Martha is already chasing you for the rent. Savings won't last forever, so it's time to find some work.
+
+Try stupidjob.oc — silly name, but they post real vacancies and you apply in one click. That's how I found my last gig.
+
+Good luck, and let me know how it goes!
+Max"

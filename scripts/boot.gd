@@ -1,11 +1,16 @@
 extends Node
-## Plays a short fake power-on sequence (POST text, then the OS logo) over the
-## desktop, then reveals it instantly while the power-on sound fades out over the
+## Plays a short fake power-on sequence (POST text, then the OS logo) over the login screen,
+## then reveals it instantly while the power-on sound fades out over the
 ## looping PC hum.
 
 const MEMORY_KB := 262144
 const SILENT_DB := -60.0
 const FADE_TIME := 2.5
+const LOGIN_FADE_TIME := 0.4
+const SHUTDOWN_TIME := 0.8
+
+## Desktop created once a user logs in on the login screen.
+@export var desktop_scene: PackedScene
 
 const POST_HEADER: PackedStringArray = [
 	"Byteforge Modular BIOS v4.60QX, A Power Saver Partner",
@@ -26,6 +31,7 @@ const POST_DEVICES: PackedStringArray = [
 ]
 
 @onready var overlay: CanvasLayer = $Overlay
+@onready var login: Control = %Login
 @onready var post: Control = %Post
 @onready var lines: Label = %Lines
 @onready var footer: Label = %Footer
@@ -88,7 +94,24 @@ func _show_logo() -> void:
 	await _wait(2.4)
 	travel.kill()
 
-## Shows the desktop at once, then lets the power-on sound fade out over the looping hum.
+## Loads the chosen user's desktop under the login screen, then fades the login screen away.
+func _logged_in(_user_name: String) -> void:
+	var desktop: Control = desktop_scene.instantiate()
+	add_child(desktop)
+	move_child(desktop, login.get_index())
+	var fade := create_tween()
+	fade.tween_property(login, "modulate:a", 0.0, LOGIN_FADE_TIME)
+	fade.tween_callback(login.queue_free)
+
+## "Turn off computer": fades the screen and the hum to black and silence, then quits the game.
+func _power_off() -> void:
+	SaveGame.save()
+	var fade := create_tween().set_parallel()
+	fade.tween_property(login, "modulate", Color.BLACK, SHUTDOWN_TIME)
+	fade.tween_property(hum, "volume_db", SILENT_DB, SHUTDOWN_TIME)
+	fade.chain().tween_callback(get_tree().quit)
+
+## Shows the login screen at once, then lets the power-on sound fade out over the looping hum.
 func _finish() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	overlay.queue_free()

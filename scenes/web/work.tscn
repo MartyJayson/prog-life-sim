@@ -1,0 +1,201 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/work.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/work_theme.tres" id="theme"]
+[ext_resource type="Resource" path="res://data/jobs/tinysoft_qa.tres" id="tinysoft_qa"]
+
+[node name="Work" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+theme_override_constants/separation = 16
+script = ExtResource("script")
+listings = Array[Resource]([ExtResource("tinysoft_qa")])
+
+[node name="TopBar" type="PanelContainer" parent="."]
+theme_type_variation = &"WorkTopBar"
+
+[node name="Row" type="HBoxContainer" parent="TopBar"]
+theme_override_constants/separation = 26
+
+[node name="Logo" type="HBoxContainer" parent="TopBar/Row"]
+theme_override_constants/separation = 0
+
+[node name="Name" type="Label" parent="TopBar/Row/Logo"]
+text = "stupidjob"
+mouse_filter = 2
+theme_type_variation = &"WorkStrong"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="Domain" type="Label" parent="TopBar/Row/Logo"]
+text = ".oc"
+mouse_filter = 2
+theme_type_variation = &"WorkStrong"
+theme_override_colors/font_color = Color(0.0, 0.69, 0.63, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="FindJobs" type="Label" parent="TopBar/Row"]
+text = "Find jobs"
+mouse_filter = 2
+theme_type_variation = &"WorkStrong"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="Companies" type="Label" parent="TopBar/Row"]
+text = "Companies"
+mouse_filter = 2
+theme_type_variation = &"WorkLight"
+
+[node name="Salaries" type="Label" parent="TopBar/Row"]
+text = "Salaries"
+mouse_filter = 2
+theme_type_variation = &"WorkLight"
+
+[node name="Advice" type="Label" parent="TopBar/Row"]
+text = "Career advice"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"WorkLight"
+
+[node name="Account" type="Label" parent="TopBar/Row"]
+text = "●  Signed in"
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.0, 0.85, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="Hero" type="PanelContainer" parent="."]
+theme_type_variation = &"WorkHero"
+
+[node name="Stack" type="VBoxContainer" parent="Hero"]
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Hero/Stack"]
+text = "Find work that fits your life"
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"WorkStrong"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+
+[node name="Subtitle" type="Label" parent="Hero/Stack"]
+text = "Trusted employers hire on stupidjob.oc every day. Apply in one click."
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"WorkLight"
+
+[node name="Gap" type="Control" parent="Hero/Stack"]
+custom_minimum_size = Vector2(0, 6)
+mouse_filter = 2
+
+[node name="SearchRow" type="HBoxContainer" parent="Hero/Stack"]
+theme_override_constants/separation = 10
+
+[node name="Query" type="LineEdit" parent="Hero/Stack/SearchRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+placeholder_text = "Job title, skill or company"
+clear_button_enabled = true
+
+[node name="Search" type="Button" parent="Hero/Stack/SearchRow"]
+text = "Search jobs"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"WorkPrimary"
+
+[node name="Body" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 16
+
+[node name="Filters" type="PanelContainer" parent="Body"]
+custom_minimum_size = Vector2(230, 0)
+size_flags_vertical = 0
+theme_type_variation = &"WorkCard"
+
+[node name="Stack" type="VBoxContainer" parent="Body/Filters"]
+theme_override_constants/separation = 6
+
+[node name="Heading" type="Label" parent="Body/Filters/Stack"]
+text = "Filters"
+mouse_filter = 2
+theme_type_variation = &"WorkStrong"
+theme_override_font_sizes/font_size = 20
+
+[node name="LocationTitle" type="Label" parent="Body/Filters/Stack"]
+text = "Location"
+mouse_filter = 2
+theme_type_variation = &"WorkMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Location" type="Label" parent="Body/Filters/Stack"]
+text = "Anywhere · Remote"
+mouse_filter = 2
+
+[node name="TypeTitle" type="Label" parent="Body/Filters/Stack"]
+text = "Job type"
+mouse_filter = 2
+theme_type_variation = &"WorkMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Type" type="Label" parent="Body/Filters/Stack"]
+text = "All types"
+mouse_filter = 2
+
+[node name="PayTitle" type="Label" parent="Body/Filters/Stack"]
+text = "Pay"
+mouse_filter = 2
+theme_type_variation = &"WorkMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Pay" type="Label" parent="Body/Filters/Stack"]
+text = "Any"
+mouse_filter = 2
+
+[node name="PostedTitle" type="Label" parent="Body/Filters/Stack"]
+text = "Date posted"
+mouse_filter = 2
+theme_type_variation = &"WorkMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Posted" type="Label" parent="Body/Filters/Stack"]
+text = "Any time"
+mouse_filter = 2
+
+[node name="Results" type="VBoxContainer" parent="Body"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Body/Results"]
+
+[node name="Count" type="Label" parent="Body/Results/Header"]
+unique_name_in_owner = true
+text = "0 jobs found"
+mouse_filter = 2
+size_flags_horizontal = 3
+theme_type_variation = &"WorkStrong"
+theme_override_font_sizes/font_size = 20
+
+[node name="Sort" type="Label" parent="Body/Results/Header"]
+text = "Sort by: Most relevant"
+mouse_filter = 2
+theme_type_variation = &"WorkMuted"
+
+[node name="Listings" type="VBoxContainer" parent="Body/Results"]
+unique_name_in_owner = true
+theme_override_constants/separation = 12
+
+[node name="Empty" type="Label" parent="Body/Results"]
+unique_name_in_owner = true
+visible = false
+text = "No jobs match."
+mouse_filter = 2
+autowrap_mode = 3
+theme_type_variation = &"WorkMuted"
+
+[node name="Footer" type="Label" parent="."]
+text = "© 2028 stupidjob.oc  ·  Terms  ·  Privacy  ·  Employers: post a job"
+mouse_filter = 2
+horizontal_alignment = 1
+theme_type_variation = &"WorkMuted"
+theme_override_font_sizes/font_size = 14
+
+[connection signal="text_submitted" from="Hero/Stack/SearchRow/Query" to="." method="_filter"]
+[connection signal="text_changed" from="Hero/Stack/SearchRow/Query" to="." method="_filter"]
+[connection signal="pressed" from="Hero/Stack/SearchRow/Search" to="." method="_filter"]

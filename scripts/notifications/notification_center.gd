@@ -6,13 +6,6 @@ signal activated(data: NotificationData)
 
 const TOAST = preload("res://scenes/notification_toast.tscn")
 
-## Notifications delivered automatically after start-up, each after its own `delay`.
-@export var scheduled: Array[NotificationData] = []
-
-func _ready() -> void:
-	for data in scheduled:
-		get_tree().create_timer(data.delay).timeout.connect(push.bind(data))
-
 func push(data: NotificationData) -> Control:
 	var toast: Control = TOAST.instantiate()
 	add_child(toast)

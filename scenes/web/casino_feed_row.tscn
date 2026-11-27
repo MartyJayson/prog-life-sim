@@ -1,20 +1,31 @@
 [gd_scene format=3]
 
+[ext_resource type="Texture2D" path="res://assets/generated/token.svg" id="token"]
+
 [node name="FeedRow" type="HBoxContainer"]
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="."]
 size_flags_horizontal = 3
 mouse_filter = 2
 text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 17
 
 [node name="Time" type="Label" parent="."]
 mouse_filter = 2
 theme_type_variation = &"CasinoMuted"
 
 [node name="Amount" type="Label" parent="."]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(90, 0)
 horizontal_alignment = 2
 mouse_filter = 2
 theme_type_variation = &"CasinoStrong"
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 18
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(18, 18)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("token")
+expand_mode = 1
+stretch_mode = 5

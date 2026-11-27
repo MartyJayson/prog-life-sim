@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MailMessage" format=3 uid="uid://btt87xqd64dvs"]
+
+[ext_resource type="Script" uid="uid://ibvfhkuwkv7c" path="res://scripts/mail/mail_message.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+sender_name = "OS Mail Team"
+sender_address = "no-reply@mail.oc"
+subject = "Welcome to OS Mail"
+body = "Hello,
+
+Welcome to OS Mail! Your mailbox has been registered and is ready to use.
+
+New letters will appear in your Inbox. Click a letter in the list to read it, and click any link inside a letter to open the site in the Browser.
+
+A good place to start is the OS web portal at home.oc, and you can manage your money at [url=bank.oc]OS Bank[/url].
+
+Best regards,
+The OS Mail Team"
