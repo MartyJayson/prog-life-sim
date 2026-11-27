@@ -1,0 +1,635 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/skamcoin.gd" id="script"]
+[ext_resource type="Script" path="res://scripts/web/candle_chart.gd" id="chart"]
+[ext_resource type="Theme" path="res://scenes/web/skamcoin_theme.tres" id="theme"]
+
+[sub_resource type="ButtonGroup" id="timeframes"]
+
+[node name="SkamCoin" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Page" type="PanelContainer" parent="."]
+theme_type_variation = &"SkamPage"
+
+[node name="Stack" type="VBoxContainer" parent="Page"]
+theme_override_constants/separation = 16
+
+[node name="Header" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"SkamHeader"
+
+[node name="Row" type="HBoxContainer" parent="Page/Stack/Header"]
+theme_override_constants/separation = 12
+
+[node name="Logo" type="Label" parent="Page/Stack/Header/Row"]
+text = "SkamCoin"
+mouse_filter = 2
+theme_type_variation = &"SkamLogo"
+
+[node name="Exchange" type="Label" parent="Page/Stack/Header/Row"]
+text = "EXCHANGE"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+size_flags_vertical = 4
+
+[node name="Spacer" type="Control" parent="Page/Stack/Header/Row"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Links" type="Label" parent="Page/Stack/Header/Row"]
+text = "Spot   ·   Futures x500   ·   Earn 900% APY"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 15
+size_flags_vertical = 4
+
+[node name="Live" type="PanelContainer" parent="Page/Stack/Header/Row"]
+size_flags_vertical = 4
+mouse_filter = 2
+theme_type_variation = &"SkamBadge"
+
+[node name="Text" type="Label" parent="Page/Stack/Header/Row/Live"]
+text = "LIVE"
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.0863, 0.78, 0.518, 1)
+
+[node name="Balance" type="PanelContainer" parent="Page/Stack/Header/Row"]
+size_flags_vertical = 4
+mouse_filter = 2
+theme_type_variation = &"SkamInset"
+
+[node name="Row" type="HBoxContainer" parent="Page/Stack/Header/Row/Balance"]
+theme_override_constants/separation = 16
+
+[node name="Usd" type="VBoxContainer" parent="Page/Stack/Header/Row/Balance/Row"]
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Page/Stack/Header/Row/Balance/Row/Usd"]
+text = "USD"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 12
+
+[node name="HeaderUsd" type="Label" parent="Page/Stack/Header/Row/Balance/Row/Usd"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 17
+
+[node name="Divider" type="VSeparator" parent="Page/Stack/Header/Row/Balance/Row"]
+mouse_filter = 2
+
+[node name="Skam" type="VBoxContainer" parent="Page/Stack/Header/Row/Balance/Row"]
+theme_override_constants/separation = 0
+
+[node name="Caption" type="Label" parent="Page/Stack/Header/Row/Balance/Row/Skam"]
+text = "SKAM"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 12
+
+[node name="HeaderSkam" type="Label" parent="Page/Stack/Header/Row/Balance/Row/Skam"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.616, 0.482, 1, 1)
+
+[node name="Ticker" type="HBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 28
+
+[node name="Pair" type="VBoxContainer" parent="Page/Stack/Ticker"]
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Symbol" type="Label" parent="Page/Stack/Ticker/Pair"]
+text = "SKAM / USD"
+mouse_filter = 2
+theme_type_variation = &"SkamTitle"
+theme_override_font_sizes/font_size = 26
+
+[node name="Name" type="Label" parent="Page/Stack/Ticker/Pair"]
+text = "SkamCoin · Trust the chart"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+
+[node name="PriceBox" type="VBoxContainer" parent="Page/Stack/Ticker"]
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Price" type="Label" parent="Page/Stack/Ticker/PriceBox"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamPrice"
+
+[node name="Change" type="Label" parent="Page/Stack/Ticker/PriceBox"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 17
+
+[node name="Spacer" type="Control" parent="Page/Stack/Ticker"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DayHighBox" type="VBoxContainer" parent="Page/Stack/Ticker"]
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Caption" type="Label" parent="Page/Stack/Ticker/DayHighBox"]
+text = "1h high"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="DayHigh" type="Label" parent="Page/Stack/Ticker/DayHighBox"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 18
+
+[node name="DayLowBox" type="VBoxContainer" parent="Page/Stack/Ticker"]
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Caption" type="Label" parent="Page/Stack/Ticker/DayLowBox"]
+text = "1h low"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="DayLow" type="Label" parent="Page/Stack/Ticker/DayLowBox"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 18
+
+[node name="DayVolumeBox" type="VBoxContainer" parent="Page/Stack/Ticker"]
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Caption" type="Label" parent="Page/Stack/Ticker/DayVolumeBox"]
+text = "1h volume"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="DayVolume" type="Label" parent="Page/Stack/Ticker/DayVolumeBox"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 18
+
+[node name="Alert" type="PanelContainer" parent="Page/Stack"]
+visible = false
+theme_type_variation = &"SkamInset"
+unique_name_in_owner = true
+
+[node name="AlertText" type="Label" parent="Page/Stack/Alert"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 19
+horizontal_alignment = 1
+
+[node name="ChartPanel" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"SkamPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/ChartPanel"]
+theme_override_constants/separation = 8
+
+[node name="Toolbar" type="HBoxContainer" parent="Page/Stack/ChartPanel/Column"]
+theme_override_constants/separation = 4
+
+[node name="Caption" type="Label" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+text = "Time"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+size_flags_vertical = 4
+
+[node name="S30" type="Button" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+text = "30s"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamTimeframe"
+custom_minimum_size = Vector2(52, 34)
+toggle_mode = true
+button_group = SubResource("timeframes")
+
+[node name="M1" type="Button" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+text = "1m"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamTimeframe"
+custom_minimum_size = Vector2(52, 34)
+toggle_mode = true
+button_group = SubResource("timeframes")
+button_pressed = true
+
+[node name="M5" type="Button" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+text = "5m"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamTimeframe"
+custom_minimum_size = Vector2(52, 34)
+toggle_mode = true
+button_group = SubResource("timeframes")
+
+[node name="Spacer" type="Control" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Readout" type="Label" parent="Page/Stack/ChartPanel/Column/Toolbar"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 15
+size_flags_vertical = 4
+
+[node name="Chart" type="Control" parent="Page/Stack/ChartPanel/Column"]
+custom_minimum_size = Vector2(0, 430)
+mouse_default_cursor_shape = 3
+script = ExtResource("chart")
+unique_name_in_owner = true
+
+[node name="Body" type="HBoxContainer" parent="Page/Stack"]
+theme_override_constants/separation = 16
+
+[node name="BuyPanel" type="PanelContainer" parent="Page/Stack/Body"]
+size_flags_horizontal = 3
+theme_type_variation = &"SkamPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/BuyPanel"]
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Page/Stack/Body/BuyPanel/Column"]
+text = "Buy SKAM"
+mouse_filter = 2
+theme_type_variation = &"SkamTitle"
+
+[node name="BuyAvailable" type="Label" parent="Page/Stack/Body/BuyPanel/Column"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+
+[node name="BuyAmount" type="SpinBox" parent="Page/Stack/Body/BuyPanel/Column"]
+min_value = 1.0
+max_value = 100000000.0
+value = 100.0
+rounded = true
+allow_greater = true
+suffix = "USD"
+unique_name_in_owner = true
+
+[node name="Presets" type="HBoxContainer" parent="Page/Stack/Body/BuyPanel/Column"]
+theme_override_constants/separation = 6
+
+[node name="P25" type="Button" parent="Page/Stack/Body/BuyPanel/Column/Presets"]
+text = "25%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="P50" type="Button" parent="Page/Stack/Body/BuyPanel/Column/Presets"]
+text = "50%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="P75" type="Button" parent="Page/Stack/Body/BuyPanel/Column/Presets"]
+text = "75%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="Max" type="Button" parent="Page/Stack/Body/BuyPanel/Column/Presets"]
+text = "MAX"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="Summary" type="PanelContainer" parent="Page/Stack/Body/BuyPanel/Column"]
+theme_type_variation = &"SkamInset"
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/BuyPanel/Column/Summary"]
+columns = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 6
+
+[node name="PriceCaption" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+text = "Price"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="BuyPrice" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="FeeCaption" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+text = "Fee 0.5%"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="BuyFee" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="GetCaption" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+text = "You get"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="BuyGet" type="Label" parent="Page/Stack/Body/BuyPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+
+[node name="Buy" type="Button" parent="Page/Stack/Body/BuyPanel/Column"]
+unique_name_in_owner = true
+text = "Buy SKAM"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamBuy"
+custom_minimum_size = Vector2(0, 54)
+
+[node name="SellPanel" type="PanelContainer" parent="Page/Stack/Body"]
+size_flags_horizontal = 3
+theme_type_variation = &"SkamPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/SellPanel"]
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Page/Stack/Body/SellPanel/Column"]
+text = "Sell SKAM"
+mouse_filter = 2
+theme_type_variation = &"SkamTitle"
+
+[node name="SellAvailable" type="Label" parent="Page/Stack/Body/SellPanel/Column"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+
+[node name="SellAmount" type="SpinBox" parent="Page/Stack/Body/SellPanel/Column"]
+max_value = 1000000000.0
+step = 0.0001
+allow_greater = true
+suffix = "SKAM"
+unique_name_in_owner = true
+
+[node name="Presets" type="HBoxContainer" parent="Page/Stack/Body/SellPanel/Column"]
+theme_override_constants/separation = 6
+
+[node name="P25" type="Button" parent="Page/Stack/Body/SellPanel/Column/Presets"]
+text = "25%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="P50" type="Button" parent="Page/Stack/Body/SellPanel/Column/Presets"]
+text = "50%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="P75" type="Button" parent="Page/Stack/Body/SellPanel/Column/Presets"]
+text = "75%"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="Max" type="Button" parent="Page/Stack/Body/SellPanel/Column/Presets"]
+text = "MAX"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamChip"
+custom_minimum_size = Vector2(0, 34)
+size_flags_horizontal = 3
+
+[node name="Summary" type="PanelContainer" parent="Page/Stack/Body/SellPanel/Column"]
+theme_type_variation = &"SkamInset"
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/SellPanel/Column/Summary"]
+columns = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 6
+
+[node name="PriceCaption" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+text = "Price"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="SellPrice" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="FeeCaption" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+text = "Fee 0.5%"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="SellFee" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="GetCaption" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+text = "You receive"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="SellGet" type="Label" parent="Page/Stack/Body/SellPanel/Column/Summary/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 2
+
+[node name="Sell" type="Button" parent="Page/Stack/Body/SellPanel/Column"]
+unique_name_in_owner = true
+text = "Sell SKAM"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_type_variation = &"SkamSell"
+custom_minimum_size = Vector2(0, 54)
+
+[node name="Side" type="VBoxContainer" parent="Page/Stack/Body"]
+custom_minimum_size = Vector2(320, 0)
+theme_override_constants/separation = 16
+
+[node name="Portfolio" type="PanelContainer" parent="Page/Stack/Body/Side"]
+theme_type_variation = &"SkamPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Side/Portfolio"]
+theme_override_constants/separation = 4
+
+[node name="Caption" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column"]
+text = "YOUR SKAM"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Holdings" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 28
+
+[node name="HoldingsValue" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Separator" type="HSeparator" parent="Page/Stack/Body/Side/Portfolio/Column"]
+
+[node name="Grid" type="GridContainer" parent="Page/Stack/Body/Side/Portfolio/Column"]
+columns = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 6
+
+[node name="AveragePriceCaption" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column/Grid"]
+text = "Average buy price"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="AveragePrice" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="ProfitCaption" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column/Grid"]
+text = "Profit / loss"
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+
+[node name="Profit" type="Label" parent="Page/Stack/Body/Side/Portfolio/Column/Grid"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="Orders" type="PanelContainer" parent="Page/Stack/Body/Side"]
+size_flags_vertical = 3
+theme_type_variation = &"SkamPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Body/Side/Orders"]
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Page/Stack/Body/Side/Orders/Column"]
+text = "Your orders"
+mouse_filter = 2
+theme_type_variation = &"SkamTitle"
+theme_override_font_sizes/font_size = 20
+
+[node name="OrderRows" type="VBoxContainer" parent="Page/Stack/Body/Side/Orders/Column"]
+theme_override_constants/separation = 8
+unique_name_in_owner = true
+
+[node name="OrdersEmpty" type="Label" parent="Page/Stack/Body/Side/Orders/Column"]
+unique_name_in_owner = true
+text = "No orders yet."
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 16
+
+[node name="Notice" type="Label" parent="Page/Stack"]
+unique_name_in_owner = true
+text = ""
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+custom_minimum_size = Vector2(0, 26)
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Legal" type="Label" parent="Page/Stack"]
+text = "SkamCoin is a fictional cryptocurrency on the OS web. Its price can fly to the moon or drop to dust in a second. Not financial advice."
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="Page/Stack/ChartPanel/Column/Toolbar/S30" to="." method="set_timeframe" binds=[30]]
+[connection signal="pressed" from="Page/Stack/ChartPanel/Column/Toolbar/M1" to="." method="set_timeframe" binds=[60]]
+[connection signal="pressed" from="Page/Stack/ChartPanel/Column/Toolbar/M5" to="." method="set_timeframe" binds=[300]]
+[connection signal="pressed" from="Page/Stack/Body/BuyPanel/Column/Presets/P25" to="." method="_buy_share" binds=[0.25]]
+[connection signal="pressed" from="Page/Stack/Body/BuyPanel/Column/Presets/P50" to="." method="_buy_share" binds=[0.5]]
+[connection signal="pressed" from="Page/Stack/Body/BuyPanel/Column/Presets/P75" to="." method="_buy_share" binds=[0.75]]
+[connection signal="pressed" from="Page/Stack/Body/BuyPanel/Column/Presets/Max" to="." method="_buy_share" binds=[1.0]]
+[connection signal="pressed" from="Page/Stack/Body/BuyPanel/Column/Buy" to="." method="_buy"]
+[connection signal="value_changed" from="Page/Stack/Body/BuyPanel/Column/BuyAmount" to="." method="_refresh_trade" unbinds=1]
+[connection signal="pressed" from="Page/Stack/Body/SellPanel/Column/Presets/P25" to="." method="_sell_share" binds=[0.25]]
+[connection signal="pressed" from="Page/Stack/Body/SellPanel/Column/Presets/P50" to="." method="_sell_share" binds=[0.5]]
+[connection signal="pressed" from="Page/Stack/Body/SellPanel/Column/Presets/P75" to="." method="_sell_share" binds=[0.75]]
+[connection signal="pressed" from="Page/Stack/Body/SellPanel/Column/Presets/Max" to="." method="_sell_share" binds=[1.0]]
+[connection signal="pressed" from="Page/Stack/Body/SellPanel/Column/Sell" to="." method="_sell"]
+[connection signal="value_changed" from="Page/Stack/Body/SellPanel/Column/SellAmount" to="." method="_refresh_trade" unbinds=1]

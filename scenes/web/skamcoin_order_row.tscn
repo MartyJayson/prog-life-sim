@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[node name="OrderRow" type="HBoxContainer"]
+theme_override_constants/separation = 10
+
+[node name="Side" type="Label" parent="."]
+custom_minimum_size = Vector2(46, 0)
+size_flags_vertical = 4
+text = "BUY"
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 15
+
+[node name="Text" type="VBoxContainer" parent="."]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Amount" type="Label" parent="Text"]
+mouse_filter = 2
+text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 16
+
+[node name="Time" type="Label" parent="Text"]
+mouse_filter = 2
+theme_type_variation = &"SkamMuted"
+theme_override_font_sizes/font_size = 13
+
+[node name="Usd" type="Label" parent="."]
+size_flags_vertical = 4
+horizontal_alignment = 2
+mouse_filter = 2
+theme_type_variation = &"SkamStrong"
+theme_override_font_sizes/font_size = 16

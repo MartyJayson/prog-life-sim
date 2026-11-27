@@ -1,6 +1,5 @@
 extends Control
 
-const GAME_CLOCK = preload("res://scripts/game_clock.gd")
 const HACK_SCENE = preload("res://scenes/apps/operation_hack.tscn")
 const HACK_ID := "operation_hack"
 const DEBUG_SCENE = preload("res://scenes/apps/qa_debug.tscn")
@@ -28,8 +27,8 @@ const SITE_WINDOW_SIZE := Vector2(1120, 930)
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(preload("res://assets/generated/cursor.svg"), Input.CURSOR_ARROW, Vector2(2, 1))
 	manager.tasks = %Tasks
-	%Date.text = GAME_CLOCK.DATE
 	_update_clock()
+	GameClock.minute_changed.connect(_update_clock)
 	Mailbox.delivered.connect(_mail_delivered)
 
 func _open(id: String) -> void:
@@ -83,8 +82,8 @@ func _desktop_input(event: InputEvent) -> void:
 		manager.focus_window(null)
 
 func _update_clock() -> void:
-	var time := Time.get_time_dict_from_system()
-	clock.text = "%02d:%02d" % [time.hour, time.minute]
+	clock.text = GameClock.time_text()
+	%Date.text = GameClock.date_text()
 
 func _exit_tree() -> void:
 	Input.set_custom_mouse_cursor(null)

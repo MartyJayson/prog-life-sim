@@ -219,9 +219,6 @@ letters = Array[Resource]([ExtResource("mail_welcome"), ExtResource("mail_rent")
 first_delay = 3.0
 interval = 8.0
 
-[node name="ClockTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="Menu" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -318,7 +315,6 @@ theme_override_constants/icon_max_width = 26
 
 [connection signal="pressed" from="Taskbar/Row/Start" to="." method="_toggle_menu"]
 
-[connection signal="timeout" from="ClockTimer" to="." method="_update_clock"]
 
 [connection signal="launched" from="Shortcuts/browser" to="." method="_open" binds=["browser"]]
 

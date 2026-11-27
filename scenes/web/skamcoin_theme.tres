@@ -1,0 +1,379 @@
+[gd_resource type="Theme" format=3]
+
+[sub_resource type="StyleBoxFlat" id="page"]
+content_margin_left = 22.0
+content_margin_top = 0.0
+content_margin_right = 22.0
+content_margin_bottom = 22.0
+bg_color = Color(0.04314, 0.05882, 0.0902, 1)
+
+[sub_resource type="StyleBoxFlat" id="header"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.06667, 0.09412, 0.1529, 1)
+border_width_bottom = 2
+border_color = Color(0.1333, 0.1765, 0.2392, 1)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 10
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="panel"]
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+bg_color = Color(0.07451, 0.1059, 0.1529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1333, 0.1765, 0.2392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="inset"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.04706, 0.07059, 0.1059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.149, 0.1961, 0.2667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="badge"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
+bg_color = Color(0.6157, 0.4824, 1, 0.18)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="chip"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1098, 0.1451, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="chip_hover"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1529, 0.1961, 0.2667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="chip_pressed"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.6157, 0.4824, 1, 0.35)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="chip_disabled"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.08235, 0.1098, 0.1529, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="tf"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="tf_hover"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1098, 0.1451, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="tf_on"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 3.0
+bg_color = Color(0.1529, 0.1961, 0.2667, 1)
+border_width_bottom = 2
+border_color = Color(0.6157, 0.4824, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="buy"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.08627, 0.7804, 0.5176, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="buy_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1333, 0.8471, 0.5725, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="buy_pressed"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.06275, 0.6588, 0.4314, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="sell"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.9176, 0.2235, 0.2627, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="sell_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.949, 0.3216, 0.3569, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="sell_pressed"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.7882, 0.1804, 0.2196, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="action_disabled"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1098, 0.1451, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="input"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.04706, 0.07059, 0.1059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1647, 0.2078, 0.2745, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="input_focus"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.04706, 0.07059, 0.1059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6157, 0.4824, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxLine" id="sep"]
+color = Color(0.1333, 0.1765, 0.2392, 1)
+thickness = 1
+
+[sub_resource type="StyleBoxEmpty" id="none"]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 0.8
+
+[resource]
+default_font_size = 17
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(0.4902, 0.5294, 0.5843, 1)
+Button/styles/normal = SubResource("chip")
+Button/styles/hover = SubResource("chip_hover")
+Button/styles/pressed = SubResource("chip_pressed")
+Button/styles/hover_pressed = SubResource("chip_pressed")
+Button/styles/disabled = SubResource("chip_disabled")
+Button/styles/focus = SubResource("none")
+SkamBadge/base_type = &"PanelContainer"
+SkamBadge/styles/panel = SubResource("badge")
+SkamBuy/base_type = &"Button"
+SkamBuy/colors/font_color = Color(0.01569, 0.1412, 0.102, 1)
+SkamBuy/colors/font_focus_color = Color(0.01569, 0.1412, 0.102, 1)
+SkamBuy/colors/font_pressed_color = Color(0.01569, 0.1412, 0.102, 1)
+SkamBuy/colors/font_hover_color = Color(0.01569, 0.1412, 0.102, 1)
+SkamBuy/colors/font_hover_pressed_color = Color(0.01569, 0.1412, 0.102, 1)
+SkamBuy/colors/font_disabled_color = Color(0.4902, 0.5294, 0.5843, 1)
+SkamBuy/font_sizes/font_size = 22
+SkamBuy/fonts/font = SubResource("bold")
+SkamBuy/styles/normal = SubResource("buy")
+SkamBuy/styles/hover = SubResource("buy_hover")
+SkamBuy/styles/pressed = SubResource("buy_pressed")
+SkamBuy/styles/hover_pressed = SubResource("buy_pressed")
+SkamBuy/styles/disabled = SubResource("action_disabled")
+SkamBuy/styles/focus = SubResource("none")
+SkamChip/base_type = &"Button"
+SkamChip/colors/font_color = Color(1, 1, 1, 1)
+SkamChip/colors/font_focus_color = Color(1, 1, 1, 1)
+SkamChip/colors/font_pressed_color = Color(1, 1, 1, 1)
+SkamChip/colors/font_hover_color = Color(1, 1, 1, 1)
+SkamChip/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+SkamChip/colors/font_disabled_color = Color(0.4902, 0.5294, 0.5843, 1)
+SkamChip/font_sizes/font_size = 15
+SkamChip/styles/normal = SubResource("chip")
+SkamChip/styles/hover = SubResource("chip_hover")
+SkamChip/styles/pressed = SubResource("chip_pressed")
+SkamChip/styles/hover_pressed = SubResource("chip_pressed")
+SkamChip/styles/disabled = SubResource("chip_disabled")
+SkamChip/styles/focus = SubResource("none")
+SkamHeader/base_type = &"PanelContainer"
+SkamHeader/styles/panel = SubResource("header")
+SkamInset/base_type = &"PanelContainer"
+SkamInset/styles/panel = SubResource("inset")
+SkamLogo/base_type = &"Label"
+SkamLogo/colors/font_color = Color(0.6157, 0.4824, 1, 1)
+SkamLogo/font_sizes/font_size = 30
+SkamLogo/fonts/font = SubResource("bold")
+SkamMuted/base_type = &"Label"
+SkamMuted/colors/font_color = Color(0.4902, 0.5294, 0.5843, 1)
+SkamMuted/font_sizes/font_size = 15
+SkamPage/base_type = &"PanelContainer"
+SkamPage/styles/panel = SubResource("page")
+SkamPanel/base_type = &"PanelContainer"
+SkamPanel/styles/panel = SubResource("panel")
+SkamPrice/base_type = &"Label"
+SkamPrice/colors/font_color = Color(1, 1, 1, 1)
+SkamPrice/font_sizes/font_size = 40
+SkamPrice/fonts/font = SubResource("bold")
+SkamSell/base_type = &"Button"
+SkamSell/colors/font_color = Color(1, 1, 1, 1)
+SkamSell/colors/font_focus_color = Color(1, 1, 1, 1)
+SkamSell/colors/font_pressed_color = Color(1, 1, 1, 1)
+SkamSell/colors/font_hover_color = Color(1, 1, 1, 1)
+SkamSell/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+SkamSell/colors/font_disabled_color = Color(0.4902, 0.5294, 0.5843, 1)
+SkamSell/font_sizes/font_size = 22
+SkamSell/fonts/font = SubResource("bold")
+SkamSell/styles/normal = SubResource("sell")
+SkamSell/styles/hover = SubResource("sell_hover")
+SkamSell/styles/pressed = SubResource("sell_pressed")
+SkamSell/styles/hover_pressed = SubResource("sell_pressed")
+SkamSell/styles/disabled = SubResource("action_disabled")
+SkamSell/styles/focus = SubResource("none")
+SkamStrong/base_type = &"Label"
+SkamStrong/colors/font_color = Color(1, 1, 1, 1)
+SkamStrong/font_sizes/font_size = 18
+SkamStrong/fonts/font = SubResource("bold")
+SkamTimeframe/base_type = &"Button"
+SkamTimeframe/colors/font_color = Color(0.6667, 0.7059, 0.7529, 1)
+SkamTimeframe/colors/font_focus_color = Color(0.6667, 0.7059, 0.7529, 1)
+SkamTimeframe/colors/font_pressed_color = Color(0.6667, 0.7059, 0.7529, 1)
+SkamTimeframe/colors/font_hover_color = Color(0.6667, 0.7059, 0.7529, 1)
+SkamTimeframe/colors/font_hover_pressed_color = Color(0.6667, 0.7059, 0.7529, 1)
+SkamTimeframe/colors/font_disabled_color = Color(0.4902, 0.5294, 0.5843, 1)
+SkamTimeframe/font_sizes/font_size = 16
+SkamTimeframe/fonts/font = SubResource("bold")
+SkamTimeframe/styles/normal = SubResource("tf")
+SkamTimeframe/styles/hover = SubResource("tf_hover")
+SkamTimeframe/styles/pressed = SubResource("tf_on")
+SkamTimeframe/styles/hover_pressed = SubResource("tf_on")
+SkamTimeframe/styles/disabled = SubResource("tf")
+SkamTimeframe/styles/focus = SubResource("none")
+SkamTimeframe/colors/font_pressed_color = Color(1, 1, 1, 1)
+SkamTimeframe/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+SkamTitle/base_type = &"Label"
+SkamTitle/colors/font_color = Color(1, 1, 1, 1)
+SkamTitle/font_sizes/font_size = 22
+SkamTitle/fonts/font = SubResource("bold")
+HSeparator/constants/separation = 12
+HSeparator/styles/separator = SubResource("sep")
+Label/colors/font_color = Color(0.8745, 0.898, 0.9255, 1)
+LineEdit/colors/caret_color = Color(0.6157, 0.4824, 1, 1)
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.4902, 0.5294, 0.5843, 1)
+LineEdit/colors/font_placeholder_color = Color(0.4902, 0.5294, 0.5843, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/fonts/font = SubResource("bold")
+LineEdit/styles/focus = SubResource("input_focus")
+LineEdit/styles/normal = SubResource("input")
+LineEdit/styles/read_only = SubResource("input")

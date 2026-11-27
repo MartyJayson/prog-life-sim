@@ -7,7 +7,6 @@ signal changed(balance: int)
 ## Casino OC token account: tokens are bought with dollars and sold back at a lower rate.
 signal tokens_changed(tokens: int)
 
-const GAME_CLOCK = preload("res://scripts/game_clock.gd")
 const START_BALANCE := 1000
 const HISTORY_LIMIT := 40
 const RENT_AMOUNT := 500
@@ -161,5 +160,4 @@ func _apply_tokens(amount: int, title: String) -> void:
 	tokens_changed.emit(tokens)
 
 func _now() -> String:
-	var time := Time.get_time_dict_from_system()
-	return "%s  %02d:%02d" % [GAME_CLOCK.DATE, time.hour, time.minute]
+	return GameClock.stamp()

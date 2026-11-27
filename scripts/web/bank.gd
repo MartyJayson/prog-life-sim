@@ -18,8 +18,7 @@ func _ready() -> void:
 
 func _refresh() -> void:
 	balance_label.text = Wallet.format_money(Wallet.balance)
-	var time := Time.get_time_dict_from_system()
-	updated_label.text = "Updated today at %02d:%02d" % [time.hour, time.minute]
+	updated_label.text = "Updated today at " + GameClock.time_text()
 	for row in rows.get_children():
 		rows.remove_child(row)
 		row.queue_free()

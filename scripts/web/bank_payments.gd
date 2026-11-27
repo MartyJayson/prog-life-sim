@@ -1,14 +1,12 @@
 extends VBoxContainer
 
-const GAME_CLOCK = preload("res://scripts/game_clock.gd")
-
 @onready var balance_label: Label = %Balance
 @onready var pending: HBoxContainer = %Pending
 @onready var empty_label: Label = %Empty
 @onready var payment_error: Label = %PaymentError
 
 func _ready() -> void:
-	%Date.text = GAME_CLOCK.DATE
+	%Date.text = GameClock.date_text()
 	%RentAmount.text = Wallet.format_money(Wallet.RENT_AMOUNT)
 	Wallet.changed.connect(_refresh.unbind(1))
 	_refresh()

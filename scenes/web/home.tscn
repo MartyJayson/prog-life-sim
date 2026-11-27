@@ -63,3 +63,11 @@ mouse_default_cursor_shape = 2
 alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "stupidjob.oc"
+
+[node name="Site7" type="Button" parent="."]
+text = "SkamCoin   ·   Buy and sell SKAM crypto"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "skamcoin.oc"

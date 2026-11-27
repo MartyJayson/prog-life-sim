@@ -3,7 +3,7 @@ extends Node
 ## Per-user saved game, registered as the `SaveGame` autoload.
 ##
 ## Each user's progress lives in `user://saves/<profile id>.save`. Logging in loads it into the
-## game-state autoloads (Wallet, Mailbox, Jobs); a brand-new user starts from their defaults.
+## game-state autoloads (GameClock, Wallet, Mailbox, Jobs, SkamMarket); a brand-new user starts from their defaults.
 ## Progress is written shortly after every change, on a periodic timer and when the game closes.
 
 signal saved
@@ -28,6 +28,7 @@ func _ready() -> void:
 	Wallet.tokens_changed.connect(_changed.unbind(1))
 	Mailbox.changed.connect(_changed)
 	Jobs.changed.connect(_changed)
+	SkamMarket.portfolio_changed.connect(_changed)
 
 func _process(delta: float) -> void:
 	if profile_id.is_empty():
@@ -38,7 +39,8 @@ func _process(delta: float) -> void:
 		if _countdown <= 0.0:
 			save()
 	elif _autosave >= AUTOSAVE_INTERVAL:
-		# Keeps time-based state such as letters still on their way up to date.
+		# Keeps time-based state such as the game clock, the SkamCoin market and letters still
+		# on their way up to date.
 		save()
 
 func _notification(what: int) -> void:
@@ -55,9 +57,11 @@ func has_save(id: String) -> bool:
 func load_profile(id: String) -> void:
 	profile_id = id
 	var data := _read(path_for(id))
+	_restore(GameClock, data.get("clock", {}))
 	_restore(Wallet, data.get("wallet", {}))
 	_restore(Mailbox, data.get("mailbox", {}))
 	_restore(Jobs, data.get("jobs", {}))
+	_restore(SkamMarket, data.get("skam", {}))
 	_dirty = false
 	if data.is_empty():
 		save()
@@ -75,9 +79,11 @@ func save() -> bool:
 		return false
 	file.store_var({
 		"version": VERSION,
+		"clock": GameClock.save_state(),
 		"wallet": Wallet.save_state(),
 		"mailbox": Mailbox.save_state(),
 		"jobs": Jobs.save_state(),
+		"skam": SkamMarket.save_state(),
 	})
 	saved.emit()
 	return true

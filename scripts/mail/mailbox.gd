@@ -60,8 +60,7 @@ func deliver_once(letter: MailMessage) -> bool:
 
 func deliver(message: MailMessage) -> void:
 	if message.received.is_empty():
-		var time := Time.get_time_dict_from_system()
-		message.received = "%02d:%02d" % [time.hour, time.minute]
+		message.received = GameClock.time_text()
 	inbox.push_front(message)
 	delivered.emit(message)
 	changed.emit()

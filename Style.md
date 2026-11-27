@@ -164,3 +164,9 @@ Avatars are `avatar_rocket.svg`, `avatar_flower.svg`, `avatar_ball.svg`, `avatar
 `scenes/apps/qa_debug.tscn` opens to the right of the Browser whenever a `tinysoft.test.oc/{uuid}` test build is loaded. A `MailRibbon` shows the task and session id, then a white `MailList` pane of `QaRow` checks (`scenes/qa/qa_check_row.tscn`). Clicking a check cycles: not tested → green tick (works) → red cross (bug) → not tested. The green `QaSubmit` button unlocks once every check is marked.
 
 The job board `stupidjob.oc` (`work_theme.tres`, navy and teal) and the TinySoft store (`tinysoft_theme.tres`, purple with a yellow "TEST ENVIRONMENT" banner) are third-party sites with their own themes.
+
+### SkamCoin exchange
+
+`skamcoin.oc` (`scenes/web/skamcoin.tscn`, `skamcoin_theme.tres`: near-black navy with a violet `#9D7BFF` brand, green `#16C784` for up and red `#EA3943` for down) is a third-party crypto exchange. The top shows the SKAM/USD price, its 1h change, high, low and volume. Below is a candlestick chart (`scripts/web/candle_chart.gd`) with volume bars, a price axis, a live price tag and a hover crosshair; candles are 30s, 1m or 5m of game time. The market keeps only the last game hour of prices (120 candles of 30 game seconds), so the chart never covers more than that. Under the chart are the Buy and Sell forms (0.5 % fee), the player's SKAM with average price and profit, and their last orders. While a x5 / x10 pump or crash plays out, a banner above the chart warns about extreme volatility.
+
+The market lives in the `SkamMarket` autoload and moves every real second even with the site closed. Game time comes from the `GameClock` autoload: one game day lasts two real hours (one game minute is five real seconds).
