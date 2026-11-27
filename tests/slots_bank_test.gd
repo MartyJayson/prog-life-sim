@@ -238,6 +238,7 @@ func run() -> void:
 	check(not wallet.pay_rent() and wallet.history.all(func(entry): return entry.title != "Rent payment"), "rent stays paid when its receipt ages out of the history")
 
 	desktop.queue_free()
-	await process_frame
+	# Bank sounds still playing are released by the audio server on its next mix.
+	await create_timer(0.3).timeout
 	print("Slots and bank checks finished; failures: ", failures)
 	quit(1 if failures else 0)

@@ -176,5 +176,6 @@ func run() -> void:
 	check(closed.get_node("%Apply").disabled and closed.get_node("%Apply").text == "Position closed", "the vacancy is closed after being fired")
 
 	desktop.queue_free()
-	await process_frame
+	# Bank sounds still playing are released by the audio server on its next mix.
+	await create_timer(0.3).timeout
 	quit(failures)

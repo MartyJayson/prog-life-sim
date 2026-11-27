@@ -107,6 +107,10 @@ func run() -> void:
 	var red: Color = payment.get_theme_stylebox("panel").border_color
 	check(green.g > green.r and red.r > red.g and income.get_node("%Amount").get_theme_color("font_color") == green, "income is green and a payment is red")
 	check(not income.has_node("Layout/Header"), "bank notifications look different from mail cards")
+	var income_sound: AudioStreamPlayer = desktop.get_node("%IncomeSound")
+	var payment_sound: AudioStreamPlayer = desktop.get_node("%PaymentSound")
+	check(income_sound.stream.resource_path.ends_with("cash-register.mp3") and payment_sound.stream.resource_path.ends_with("beep.mp3"), "income rings the cash register and a payment beeps")
+	check(payment_sound.playing and income_sound.playing, "both sounds play for their transactions")
 	if "--screenshot" in OS.get_cmdline_user_args():
 		await create_timer(0.3).timeout
 		await RenderingServer.frame_post_draw
@@ -120,6 +124,7 @@ func run() -> void:
 	check(desktop.manager.windows.has("browser") and desktop.manager.windows["browser"].content.address.text == "bank.oc", "clicking a bank notification opens bank.oc")
 
 	desktop.queue_free()
-	await process_frame
+	# The audio server lets go of a stopped playback on its next mix.
+	await create_timer(0.3).timeout
 	print("FAILURES: ", failures)
 	quit(failures)

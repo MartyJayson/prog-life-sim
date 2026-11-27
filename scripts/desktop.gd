@@ -142,8 +142,9 @@ func _mail_delivered(message: MailMessage) -> void:
 	data.letter = message
 	%Notifications.push(data)
 
-## Every move of money in the bank account shows a short OS Bank notification: green when money
-## comes in, red for a payment. Clicking it opens bank.oc.
+## Every move of money in the bank account shows a short OS Bank notification and plays a sound:
+## green with a cash register when money comes in, red with a beep for a payment. Clicking the
+## notification opens bank.oc.
 func _bank_transaction(amount: int, title: String) -> void:
 	var data := NotificationData.new()
 	data.title = ("+ " if amount > 0 else "− ") + Wallet.format_money(absi(amount))
@@ -155,3 +156,4 @@ func _bank_transaction(amount: int, title: String) -> void:
 	data.toast = BANK_TOAST
 	data.lifetime = BANK_TOAST_LIFETIME
 	%Notifications.push(data)
+	(%IncomeSound if amount > 0 else %PaymentSound).play()
