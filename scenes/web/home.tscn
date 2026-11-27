@@ -71,3 +71,19 @@ mouse_default_cursor_shape = 2
 alignment = 0
 text_overrun_behavior = 3
 metadata/destination = "skamcoin.oc"
+
+[node name="Site8" type="Button" parent="."]
+text = "DeadDrive.oc   ·   Used flash drives, sold as is"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "deaddrive.oc"
+
+[node name="Site9" type="Button" parent="."]
+text = "cryptohack.oc   ·   SkamCoin wallet recovery"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+alignment = 0
+text_overrun_behavior = 3
+metadata/destination = "cryptohack.oc"

@@ -21,7 +21,7 @@
 
 [ext_resource type="Texture2D" path="res://assets/generated/calculator.svg" id="calculator"]
 
-[ext_resource type="Texture2D" path="res://assets/generated/about.svg" id="about"]
+[ext_resource type="Texture2D" path="res://assets/generated/computer.svg" id="computer"]
 
 [ext_resource type="Texture2D" path="res://assets/generated/terminal.svg" id="terminal"]
 
@@ -109,9 +109,9 @@ text = "Calculator"
 icon = ExtResource("calculator")
 button_group = SubResource("selection")
 
-[node name="about" instance=ExtResource("shortcut") parent="Shortcuts"]
-text = "About OS"
-icon = ExtResource("about")
+[node name="computer" instance=ExtResource("shortcut") parent="Shortcuts"]
+text = "My Computer"
+icon = ExtResource("computer")
 button_group = SubResource("selection")
 
 [node name="operations" instance=ExtResource("shortcut") parent="Shortcuts"]
@@ -301,11 +301,11 @@ theme_type_variation = &"MenuItem"
 custom_minimum_size = Vector2(245, 0)
 theme_override_constants/icon_max_width = 26
 
-[node name="about" type="Button" parent="Menu/List"]
-text = "About OS"
+[node name="computer" type="Button" parent="Menu/List"]
+text = "My Computer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
-icon = ExtResource("about")
+icon = ExtResource("computer")
 alignment = 0
 theme_type_variation = &"MenuItem"
 custom_minimum_size = Vector2(245, 0)
@@ -328,9 +328,9 @@ theme_override_constants/icon_max_width = 26
 
 [connection signal="pressed" from="Menu/List/calculator" to="." method="_open" binds=["calculator"]]
 
-[connection signal="launched" from="Shortcuts/about" to="." method="_open" binds=["about"]]
+[connection signal="launched" from="Shortcuts/computer" to="." method="_open" binds=["computer"]]
 
-[connection signal="pressed" from="Menu/List/about" to="." method="_open" binds=["about"]]
+[connection signal="pressed" from="Menu/List/computer" to="." method="_open" binds=["computer"]]
 
 [connection signal="launch_requested" from="WindowManager" to="." method="_open"]
 [connection signal="site_requested" from="WindowManager" to="." method="_open_site"]

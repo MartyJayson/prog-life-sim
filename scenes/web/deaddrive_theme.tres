@@ -1,0 +1,218 @@
+[gd_resource type="Theme" format=3]
+
+[sub_resource type="StyleBoxEmpty" id="none"]
+
+[sub_resource type="FontVariation" id="bold"]
+variation_embolden = 0.9
+
+[sub_resource type="StyleBoxFlat" id="page"]
+content_margin_left = 24.0
+content_margin_top = 0.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.949, 0.9333, 0.8941, 1)
+
+[sub_resource type="StyleBoxFlat" id="header"]
+content_margin_left = 22.0
+content_margin_top = 14.0
+content_margin_right = 22.0
+content_margin_bottom = 14.0
+bg_color = Color(0.1137, 0.1137, 0.1216, 1)
+border_width_bottom = 4
+border_color = Color(0.7843, 0.2118, 0.1686, 1)
+
+[sub_resource type="StyleBoxFlat" id="tape"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.9569, 0.7686, 0.1882, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.1137, 0.1137, 0.1216, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="card"]
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.1137, 0.1137, 0.1216, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0.1137, 0.1137, 0.1216, 1)
+shadow_size = 0
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="photo"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.902, 0.8824, 0.8353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7882, 0.7608, 0.698, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="buy"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1137, 0.1137, 0.1216, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="buy_hover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.7843, 0.2118, 0.1686, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="buy_pressed"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.6078, 0.1569, 0.1255, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="buy_disabled"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.8471, 0.8235, 0.7686, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="link"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1137, 0.1137, 0.1216, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9569, 0.7686, 0.1882, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="link_hover"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.9569, 0.7686, 0.1882, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9569, 0.7686, 0.1882, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+default_font_size = 17
+DDBuy/base_type = &"Button"
+DDBuy/colors/font_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDBuy/colors/font_focus_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDBuy/colors/font_pressed_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDBuy/colors/font_hover_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDBuy/colors/font_hover_pressed_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDBuy/colors/font_disabled_color = Color(0.4196, 0.3922, 0.3412, 1)
+DDBuy/font_sizes/font_size = 19
+DDBuy/fonts/font = SubResource("bold")
+DDBuy/styles/normal = SubResource("buy")
+DDBuy/styles/hover = SubResource("buy_hover")
+DDBuy/styles/pressed = SubResource("buy_pressed")
+DDBuy/styles/hover_pressed = SubResource("buy_pressed")
+DDBuy/styles/disabled = SubResource("buy_disabled")
+DDBuy/styles/focus = SubResource("none")
+DDCard/base_type = &"PanelContainer"
+DDCard/styles/panel = SubResource("card")
+DDHeader/base_type = &"PanelContainer"
+DDHeader/styles/panel = SubResource("header")
+DDLink/base_type = &"Button"
+DDLink/colors/font_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/colors/font_focus_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/colors/font_pressed_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/colors/font_hover_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/colors/font_hover_pressed_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/colors/font_disabled_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLink/font_sizes/font_size = 16
+DDLink/fonts/font = SubResource("bold")
+DDLink/styles/normal = SubResource("link")
+DDLink/styles/hover = SubResource("link_hover")
+DDLink/styles/pressed = SubResource("link_hover")
+DDLink/styles/hover_pressed = SubResource("link_hover")
+DDLink/styles/disabled = SubResource("link")
+DDLink/styles/focus = SubResource("none")
+DDLink/colors/font_hover_color = Color(0.1137, 0.1137, 0.1216, 1)
+DDLink/colors/font_pressed_color = Color(0.1137, 0.1137, 0.1216, 1)
+DDLink/colors/font_hover_pressed_color = Color(0.1137, 0.1137, 0.1216, 1)
+DDLogo/base_type = &"Label"
+DDLogo/colors/font_color = Color(0.9569, 0.7686, 0.1882, 1)
+DDLogo/font_sizes/font_size = 38
+DDLogo/fonts/font = SubResource("bold")
+DDMuted/base_type = &"Label"
+DDMuted/colors/font_color = Color(0.4196, 0.3922, 0.3412, 1)
+DDMuted/font_sizes/font_size = 15
+DDOnDark/base_type = &"Label"
+DDOnDark/colors/font_color = Color(0.9137, 0.8941, 0.8471, 1)
+DDOnDark/font_sizes/font_size = 16
+DDPage/base_type = &"PanelContainer"
+DDPage/styles/panel = SubResource("page")
+DDPhoto/base_type = &"PanelContainer"
+DDPhoto/styles/panel = SubResource("photo")
+DDPrice/base_type = &"Label"
+DDPrice/colors/font_color = Color(0.7843, 0.2118, 0.1686, 1)
+DDPrice/font_sizes/font_size = 30
+DDPrice/fonts/font = SubResource("bold")
+DDStamp/base_type = &"Label"
+DDStamp/colors/font_color = Color(0.7843, 0.2118, 0.1686, 1)
+DDStamp/font_sizes/font_size = 22
+DDStamp/fonts/font = SubResource("bold")
+DDTape/base_type = &"PanelContainer"
+DDTape/styles/panel = SubResource("tape")
+DDTitle/base_type = &"Label"
+DDTitle/colors/font_color = Color(0.1137, 0.1137, 0.1216, 1)
+DDTitle/font_sizes/font_size = 20
+DDTitle/fonts/font = SubResource("bold")
+Label/colors/font_color = Color(0.1137, 0.1137, 0.1216, 1)

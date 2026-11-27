@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/deaddrive_card.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/generated/flash_drive.svg" id="drive"]
+
+[node name="DeadDriveCard" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+size_flags_horizontal = 3
+theme_type_variation = &"DDCard"
+script = ExtResource("script")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+theme_override_constants/separation = 8
+
+[node name="Photo" type="PanelContainer" parent="Stack"]
+theme_type_variation = &"DDPhoto"
+
+[node name="Picture" type="TextureRect" parent="Stack/Photo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 110)
+mouse_filter = 2
+texture = ExtResource("drive")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Stamp" type="Label" parent="Stack/Photo"]
+unique_name_in_owner = true
+visible = false
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "SOLD"
+mouse_filter = 2
+theme_type_variation = &"DDStamp"
+
+[node name="Name" type="Label" parent="Stack"]
+unique_name_in_owner = true
+mouse_filter = 2
+text_overrun_behavior = 3
+theme_type_variation = &"DDTitle"
+
+[node name="Note" type="Label" parent="Stack"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+mouse_filter = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+
+[node name="Seller" type="Label" parent="Stack"]
+unique_name_in_owner = true
+mouse_filter = 2
+theme_type_variation = &"DDMuted"
+
+[node name="Footer" type="HBoxContainer" parent="Stack"]
+theme_override_constants/separation = 10
+
+[node name="Price" type="Label" parent="Stack/Footer"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_type_variation = &"DDPrice"
+
+[node name="Buy" type="Button" parent="Stack/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 46)
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "Buy"
+theme_type_variation = &"DDBuy"
+
+[connection signal="pressed" from="Stack/Footer/Buy" to="." method="_buy"]

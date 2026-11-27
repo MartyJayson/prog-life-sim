@@ -60,7 +60,7 @@ var candles: Array[Dictionary] = []
 var holdings := 0.0
 ## Dollars paid for the SKAM still held (shrinks proportionally on every sale).
 var cost_basis := 0.0
-## Newest first. Each: {"side": "buy"/"sell", "coins", "price", "usd", "time"}.
+## Newest first. Each: {"side": "buy"/"sell"/"in", "coins", "price", "usd", "time", "source"}.
 var trades: Array[Dictionary] = []
 
 var rng := RandomNumberGenerator.new()
@@ -315,8 +315,18 @@ func sell(coins: float) -> int:
 	_log_trade("sell", coins, usd)
 	return usd
 
-func _log_trade(side: String, coins: float, usd: int) -> void:
-	trades.push_front({"side": side, "coins": coins, "price": price, "usd": usd, "time": GameClock.stamp()})
+## Credits SKAM worth [param usd] dollars at the current price for free (a cracked wallet from
+## [param source]). The cost basis does not grow, so it all counts as profit. Returns the SKAM.
+func receive(usd: int, source: String) -> float:
+	if usd <= 0:
+		return 0.0
+	var coins := usd / price
+	holdings += coins
+	_log_trade("in", coins, usd, source)
+	return coins
+
+func _log_trade(side: String, coins: float, usd: int, source := "") -> void:
+	trades.push_front({"side": side, "coins": coins, "price": price, "usd": usd, "time": GameClock.stamp(), "source": source})
 	if trades.size() > TRADE_LIMIT:
 		trades.resize(TRADE_LIMIT)
 	portfolio_changed.emit()

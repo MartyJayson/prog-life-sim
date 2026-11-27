@@ -3,7 +3,7 @@ extends Node
 ## Per-user saved game, registered as the `SaveGame` autoload.
 ##
 ## Each user's progress lives in `user://saves/<profile id>.save`. Logging in loads it into the
-## game-state autoloads (GameClock, Wallet, Mailbox, Jobs, SkamMarket); a brand-new user starts from their defaults.
+## game-state autoloads (GameClock, Wallet, Mailbox, Jobs, SkamMarket, Drives); a brand-new user starts from their defaults.
 ## Progress is written shortly after every change, on a periodic timer and when the game closes.
 
 signal saved
@@ -29,6 +29,7 @@ func _ready() -> void:
 	Mailbox.changed.connect(_changed)
 	Jobs.changed.connect(_changed)
 	SkamMarket.portfolio_changed.connect(_changed)
+	Drives.changed.connect(_changed)
 
 func _process(delta: float) -> void:
 	if profile_id.is_empty():
@@ -62,6 +63,7 @@ func load_profile(id: String) -> void:
 	_restore(Mailbox, data.get("mailbox", {}))
 	_restore(Jobs, data.get("jobs", {}))
 	_restore(SkamMarket, data.get("skam", {}))
+	_restore(Drives, data.get("drives", {}))
 	_dirty = false
 	if data.is_empty():
 		save()
@@ -84,6 +86,7 @@ func save() -> bool:
 		"mailbox": Mailbox.save_state(),
 		"jobs": Jobs.save_state(),
 		"skam": SkamMarket.save_state(),
+		"drives": Drives.save_state(),
 	})
 	saved.emit()
 	return true

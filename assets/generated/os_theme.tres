@@ -756,6 +756,75 @@ bg_color = Color(0.16, 0.45, 0.85, 1)
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 
+[sub_resource type="StyleBoxFlat" id="explorer_tile"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="explorer_tile_hover"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.91, 0.957, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.49, 0.65, 0.86, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="explorer_tile_pressed"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.8, 0.89, 0.98, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16, 0.45, 0.85, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="drive_bar_track"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.863, 0.902, 0.949, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.49, 0.65, 0.86, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="drive_bar_fill"]
+bg_color = Color(0.16, 0.45, 0.85, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [resource]
 default_font_size = 20
 Button/colors/font_color = Color(0.141, 0.231, 0.337, 1)
@@ -819,6 +888,8 @@ LineEdit/colors/font_color = Color(0.141, 0.231, 0.337, 1)
 LineEdit/colors/selection_color = Color(0.647, 0.812, 0.933, 1)
 LineEdit/styles/focus = SubResource("input_focus")
 LineEdit/styles/normal = SubResource("input")
+LineEdit/styles/read_only = SubResource("input")
+LineEdit/colors/font_uneditable_color = Color(0.141, 0.231, 0.337, 1)
 LoginBody/base_type = &"Panel"
 LoginBody/styles/panel = SubResource("login_body")
 LoginBottomBand/base_type = &"PanelContainer"
@@ -983,6 +1054,8 @@ TextEdit/colors/font_color = Color(0.141, 0.231, 0.337, 1)
 TextEdit/colors/selection_color = Color(0.647, 0.812, 0.933, 1)
 TextEdit/styles/focus = SubResource("input_focus")
 TextEdit/styles/normal = SubResource("input")
+TextEdit/styles/read_only = SubResource("input")
+TextEdit/colors/font_readonly_color = Color(0.141, 0.231, 0.337, 1)
 TitleButton/base_type = &"Button"
 TitleButton/colors/font_color = Color(1, 1, 1, 1)
 TitleButton/colors/font_hover_color = Color(1, 1, 1, 1)
@@ -1008,3 +1081,16 @@ TooltipLabel/font_sizes/font_size = 16
 TooltipPanel/styles/panel = SubResource("tooltip")
 Widget/base_type = &"PanelContainer"
 Widget/styles/panel = SubResource("widget")
+DriveBar/base_type = &"ProgressBar"
+DriveBar/styles/background = SubResource("drive_bar_track")
+DriveBar/styles/fill = SubResource("drive_bar_fill")
+ExplorerTile/base_type = &"Button"
+ExplorerTile/colors/font_color = Color(0.141, 0.231, 0.337, 1)
+ExplorerTile/colors/font_hover_color = Color(0.141, 0.231, 0.337, 1)
+ExplorerTile/colors/font_pressed_color = Color(0.141, 0.231, 0.337, 1)
+ExplorerTile/colors/font_hover_pressed_color = Color(0.141, 0.231, 0.337, 1)
+ExplorerTile/styles/normal = SubResource("explorer_tile")
+ExplorerTile/styles/hover = SubResource("explorer_tile_hover")
+ExplorerTile/styles/pressed = SubResource("explorer_tile_pressed")
+ExplorerTile/styles/hover_pressed = SubResource("explorer_tile_pressed")
+ExplorerTile/styles/focus = SubResource("explorer_tile")

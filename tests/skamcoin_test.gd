@@ -23,11 +23,11 @@ func run() -> void:
 
 	# Game time: one day lasts two real hours.
 	clock.reset_state()
-	check(clock.stamp() == "01.09.2028  08:00", "a new game starts on 01.09.2028 at 08:00")
+	check(clock.stamp() == "01.09.2028  08:30", "a new game starts on 01.09.2028 at 08:30")
 	clock.advance(5.0)
-	check(clock.time_text() == "08:01", "five real seconds are one game minute")
+	check(clock.time_text() == "08:31", "five real seconds are one game minute")
 	clock.advance(7200.0 - 5.0)
-	check(clock.stamp() == "02.09.2028  08:00", "two real hours are one game day")
+	check(clock.stamp() == "02.09.2028  08:30", "two real hours are one game day")
 	var seconds := [0]
 	var count_second := func() -> void: seconds[0] += 1
 	clock.second_passed.connect(count_second)

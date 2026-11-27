@@ -17,7 +17,9 @@ const PAGES := {
 	"bank.oc": preload("res://scenes/web/bank.tscn"),
 	"bank.oc/payments": preload("res://scenes/web/bank_payments.tscn"),
 	"stupidjob.oc": preload("res://scenes/web/work.tscn"),
-	"skamcoin.oc": preload("res://scenes/web/skamcoin.tscn")
+	"skamcoin.oc": preload("res://scenes/web/skamcoin.tscn"),
+	"deaddrive.oc": preload("res://scenes/web/deaddrive.tscn"),
+	"cryptohack.oc": preload("res://scenes/web/cryptohack.tscn")
 }
 ## Sites that serve every path under their host; the page gets the rest of the path via `open_path`.
 const HOSTS := {

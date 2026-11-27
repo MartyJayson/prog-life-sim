@@ -8,6 +8,7 @@ const ORDER_ROWS := 6
 const UP := Color("#16c784")
 const DOWN := Color("#ea3943")
 const NEUTRAL := Color("#dfe5ec")
+const BRAND := Color("#9d7bff")
 ## Selling within this many SKAM of the whole balance sells everything (the field rounds to 4 decimals).
 const SELL_ALL_SLACK := 0.0001
 
@@ -101,15 +102,18 @@ func _refresh_portfolio() -> void:
 		rows.remove_child(row)
 		row.queue_free()
 	for trade: Dictionary in SkamMarket.trades.slice(0, ORDER_ROWS):
-		var buying: bool = trade.get("side", "") == "buy"
+		var kind: String = trade.get("side", "")
+		var buying := kind == "buy"
 		var row: Control = ORDER_ROW.instantiate()
 		rows.add_child(row)
 		var side: Label = row.get_node("Side")
-		side.text = "BUY" if buying else "SELL"
-		side.add_theme_color_override("font_color", UP if buying else DOWN)
+		side.text = {"buy": "BUY", "sell": "SELL", "in": "IN"}.get(kind, "?")
+		side.add_theme_color_override("font_color", {"buy": UP, "sell": DOWN}.get(kind, BRAND))
 		row.get_node("Text/Amount").text = SkamMarket.format_coins(trade.get("coins", 0.0)) + " SKAM"
 		row.get_node("Text/Time").text = "@ %s   ·   %s" % [SkamMarket.format_price(trade.get("price", 0.0)), str(trade.get("time", "")).get_slice("  ", 1)]
 		row.get_node("Usd").text = ("−" if buying else "+") + Wallet.format_money(int(trade.get("usd", 0)))
+		if kind == "in":
+			row.get_node("Text/Time").text = "from %s   ·   %s" % [trade.get("source", "a wallet"), str(trade.get("time", "")).get_slice("  ", 1)]
 	%OrdersEmpty.visible = rows.get_child_count() == 0
 
 func _refresh_holdings_value() -> void:

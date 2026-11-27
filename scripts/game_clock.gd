@@ -10,7 +10,7 @@ signal minute_changed
 ## One real second passed; things that live in real time (the SkamCoin market) tick on it.
 signal second_passed
 
-const START := {"year": 2028, "month": 9, "day": 1, "hour": 8, "minute": 0, "second": 0}
+const START := {"year": 2028, "month": 9, "day": 1, "hour": 8, "minute": 30, "second": 0}
 const REAL_SECONDS_PER_DAY := 7200.0
 const SPEED := 86400.0 / REAL_SECONDS_PER_DAY
 

@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/deaddrive.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/deaddrive_theme.tres" id="theme"]
+
+[node name="DeadDrive" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Page" type="PanelContainer" parent="."]
+theme_type_variation = &"DDPage"
+
+[node name="Stack" type="VBoxContainer" parent="Page"]
+theme_override_constants/separation = 18
+
+[node name="Header" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"DDHeader"
+
+[node name="Row" type="HBoxContainer" parent="Page/Stack/Header"]
+theme_override_constants/separation = 16
+
+[node name="Brand" type="VBoxContainer" parent="Page/Stack/Header/Row"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Logo" type="Label" parent="Page/Stack/Header/Row/Brand"]
+text = "DEADDRIVE"
+mouse_filter = 2
+theme_type_variation = &"DDLogo"
+
+[node name="Tagline" type="Label" parent="Page/Stack/Header/Row/Brand"]
+text = "Used flash drives  ·  sold as is  ·  no questions asked"
+mouse_filter = 2
+theme_type_variation = &"DDOnDark"
+
+[node name="Balance" type="Label" parent="Page/Stack/Header/Row"]
+unique_name_in_owner = true
+size_flags_vertical = 4
+text = ""
+mouse_filter = 2
+theme_type_variation = &"DDOnDark"
+theme_override_font_sizes/font_size = 18
+
+[node name="Computer" type="Button" parent="Page/Stack/Header/Row"]
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "Open My Computer"
+theme_type_variation = &"DDLink"
+metadata/app = "computer"
+
+[node name="Tape" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"DDTape"
+
+[node name="Delivery" type="Label" parent="Page/Stack/Tape"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"DDTitle"
+theme_override_font_sizes/font_size = 17
+
+[node name="Listings" type="GridContainer" parent="Page/Stack"]
+unique_name_in_owner = true
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 18
+columns = 3
+
+[node name="Empty" type="Label" parent="Page/Stack"]
+unique_name_in_owner = true
+visible = false
+text = "Sold out. Come back after the next delivery."
+horizontal_alignment = 1
+mouse_filter = 2
+theme_type_variation = &"DDTitle"
+
+[node name="Notice" type="Label" parent="Page/Stack"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 26)
+text = ""
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"DDTitle"
+theme_override_font_sizes/font_size = 18
+
+[node name="Fine" type="Label" parent="Page/Stack"]
+text = "We never look inside the drives. Whatever the last owner left on them is yours. Pricier drives come from better places. No refunds.  ·  DeadDrive.oc is a fictional shop on the OS web."
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"DDMuted"
+theme_override_font_sizes/font_size = 14

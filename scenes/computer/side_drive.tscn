@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/generated/flash_drive.svg" id="icon"]
+
+[node name="SideDrive" type="Button"]
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = ""
+icon = ExtResource("icon")
+alignment = 0
+text_overrun_behavior = 3
+theme_type_variation = &"MailFolder"
+theme_override_constants/icon_max_width = 24

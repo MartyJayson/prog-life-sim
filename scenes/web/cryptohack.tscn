@@ -1,0 +1,103 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/web/cryptohack.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/web/cryptohack_theme.tres" id="theme"]
+
+[node name="CryptoHack" type="VBoxContainer"]
+size_flags_horizontal = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Page" type="PanelContainer" parent="."]
+theme_type_variation = &"CHPage"
+
+[node name="Stack" type="VBoxContainer" parent="Page"]
+theme_override_constants/separation = 16
+
+[node name="Logo" type="Label" parent="Page/Stack"]
+text = "> cryptohack_"
+mouse_filter = 2
+theme_type_variation = &"CHLogo"
+
+[node name="Tagline" type="Label" parent="Page/Stack"]
+text = "SkamCoin wallet recovery service v0.9  //  you bring the hash, we bring the coins"
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CHMuted"
+
+[node name="Form" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"CHPanel"
+
+[node name="Column" type="VBoxContainer" parent="Page/Stack/Form"]
+theme_override_constants/separation = 10
+
+[node name="Caption" type="Label" parent="Page/Stack/Form/Column"]
+text = "WALLET HASH (64 hex characters)"
+mouse_filter = 2
+theme_type_variation = &"CHMuted"
+
+[node name="Hash" type="LineEdit" parent="Page/Stack/Form/Column"]
+unique_name_in_owner = true
+placeholder_text = "paste the recovery hash here"
+max_length = 80
+clear_button_enabled = true
+select_all_on_focus = true
+
+[node name="Buttons" type="HBoxContainer" parent="Page/Stack/Form/Column"]
+theme_override_constants/separation = 10
+
+[node name="Paste" type="Button" parent="Page/Stack/Form/Column/Buttons"]
+unique_name_in_owner = true
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "PASTE"
+
+[node name="Spacer" type="Control" parent="Page/Stack/Form/Column/Buttons"]
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Crack" type="Button" parent="Page/Stack/Form/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 48)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "[ CRACK WALLET ]"
+
+[node name="Progress" type="ProgressBar" parent="Page/Stack"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 10)
+max_value = 1.0
+step = 0.0
+show_percentage = false
+
+[node name="Log" type="PanelContainer" parent="Page/Stack"]
+theme_type_variation = &"CHPanel"
+
+[node name="Text" type="RichTextLabel" parent="Page/Stack/Log"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 260)
+bbcode_enabled = true
+text = "ready. waiting for a hash...
+"
+scroll_following = true
+selection_enabled = true
+
+[node name="Result" type="Label" parent="Page/Stack"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+text = ""
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CHResult"
+
+[node name="Fine" type="Label" parent="Page/Stack"]
+text = "Recovered funds land in your SkamCoin account on skamcoin.oc as SKAM at the market price. Every wallet can be drained only once.  //  cryptohack.oc is a fictional site on the OS web."
+autowrap_mode = 3
+mouse_filter = 2
+theme_type_variation = &"CHMuted"
+theme_override_font_sizes/font_size = 14
+
+[connection signal="pressed" from="Page/Stack/Form/Column/Buttons/Paste" to="." method="paste"]
+[connection signal="pressed" from="Page/Stack/Form/Column/Buttons/Crack" to="." method="crack"]
+[connection signal="text_submitted" from="Page/Stack/Form/Column/Hash" to="." method="crack" unbinds=1]

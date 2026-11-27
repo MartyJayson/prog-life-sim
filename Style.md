@@ -120,7 +120,7 @@ All icons are generated SVGs in `assets/generated/`.
 - One warm accent per icon: orange `#FFB040`, red `#DE5433` or green `#5CC96F` / `#3CC46B`.
 - No text inside icons (symbols are fine).
 
-Set: `browser.svg` (blue globe with green continents), `notepad.svg` (page with a pencil), `about.svg` (monitor with an "i"), `calculator.svg`, `mail.svg` (envelope with a letter and an orange "new" dot), `debug.svg` (report window with an orange bug), `check.svg` / `cross.svg` (white marks for `QaBoxPass` / `QaBoxFail`), `terminal.svg`, `operations.svg`, `bank.svg`, `slots.svg`, needs: `sleep.svg`, `hunger.svg`, `happiness.svg`, `social.svg`.
+Set: `browser.svg` (blue globe with green continents), `notepad.svg` (page with a pencil), `computer.svg` (monitor and tower, My Computer), `hard_drive.svg`, `flash_drive.svg` (light body, tinted per drive with `self_modulate`), `folder.svg`, `file.svg`, `file_image.svg`, `calculator.svg`, `mail.svg` (envelope with a letter and an orange "new" dot), `debug.svg` (report window with an orange bug), `check.svg` / `cross.svg` (white marks for `QaBoxPass` / `QaBoxFail`), `terminal.svg`, `operations.svg`, `bank.svg`, `slots.svg`, needs: `sleep.svg`, `hunger.svg`, `happiness.svg`, `social.svg`.
 
 ## 7. Desktop layout
 
@@ -169,4 +169,28 @@ The job board `stupidjob.oc` (`work_theme.tres`, navy and teal) and the TinySoft
 
 `skamcoin.oc` (`scenes/web/skamcoin.tscn`, `skamcoin_theme.tres`: near-black navy with a violet `#9D7BFF` brand, green `#16C784` for up and red `#EA3943` for down) is a third-party crypto exchange. The top shows the SKAM/USD price, its 1h change, high, low and volume. Below is a candlestick chart (`scripts/web/candle_chart.gd`) with volume bars, a price axis, a live price tag and a hover crosshair; candles are 30s, 1m or 5m of game time. The market keeps only the last game hour of prices (120 candles of 30 game seconds), so the chart never covers more than that. Under the chart are the Buy and Sell forms (0.5 % fee), the player's SKAM with average price and profit, and their last orders. While a x5 / x10 pump or crash plays out, a banner above the chart warns about extreme volatility.
 
-The market lives in the `SkamMarket` autoload and moves every real second even with the site closed. Game time comes from the `GameClock` autoload: one game day lasts two real hours (one game minute is five real seconds).
+The market lives in the `SkamMarket` autoload and moves every real second even with the site closed. Game time comes from the `GameClock` autoload: a new game starts on 01.09.2028 at 08:30, and one game day lasts two real hours (one game minute is five real seconds).
+
+### My Computer
+
+`scenes/apps/my_computer.tscn` replaces About OS. It is an Explorer-like window built from the Mail variations: a `MailRibbon` with Back, Up, a read-only path ("This PC › SAVE (E:) › Charts") and Eject; a `MailSidebar` with This PC and the plugged USB drives; a white `MailList` pane; and a `MailReader` preview pane for the selected file. This PC shows disks as `ExplorerTile` buttons (`scenes/computer/drive_tile.tscn`: 56 px icon, name, `DriveBar` used-space bar), the drives waiting in the drawer with a "Plug in" button, and the system details that used to be in About OS. Files are `MailRow` rows (`scenes/computer/file_row.tscn`) with Name, Type and Size columns; folders open on click, text files show in the preview with a "Copy text" button. The computer has two USB ports; plugged drives get letters E: and F:. Every owned flash drive has a red `DangerButton` "Destroy" (on its tile, and in the ribbon while it is open); the first press turns it into "Sure? Destroy" for 3 seconds and the second destroys the drive for good, together with any wallet hash on it.
+
+### DeadDrive.oc and cryptohack.oc
+
+`deaddrive.oc` (`deaddrive_theme.tres`: pawn-shop classifieds, paper `#F2EEE4`, ink `#1D1D1F`, red price stamp `#C8362B`, yellow tape `#F4C430`) sells used flash drives from the `Drives` autoload as white cards with a hard black shadow. A fresh batch of 6–9 drives arrives at the start of every game hour; prices run from $3 to $30 and cheap drives are the most common, so an hour may have no expensive drives at all.
+
+A bought drive waits in the drawer until it is plugged in through My Computer. Its files are a previous owner's folder tree (student, photographer, office worker, gamer or trader). With a chance set by its price it also holds a text file with a SkamCoin wallet's 64-character recovery hash; drives without a wallet sometimes hold the hash of an already emptied one.
+
+| Price | Wallet chance | Wallet holds |
+|---|---|---|
+| $3–5 | 50 % | $1 000 – $3 000 |
+| $6–9 | 58 % | $2 000 – $8 000 |
+| $10–14 | 66 % | $5 000 – $25 000 |
+| $15–19 | 74 % | $15 000 – $80 000 |
+| $20–24 | 82 % | $50 000 – $250 000 |
+| $25–29 | 86 % | $120 000 – $500 000 |
+| $30 | 90 % | $250 000 – $1 000 000 |
+
+Sums are log-uniform inside a tier, so the lower end is likelier. The table lives in `Drives.TIERS`.
+
+`cryptohack.oc` (`cryptohack_theme.tres`: green `#39FF7A` monospace on black) takes a hash, plays a short "cracking" log with a progress bar, and moves the wallet's dollars into the SkamCoin account as SKAM at the current price (an "IN" order on skamcoin.oc that adds nothing to the cost basis). Each wallet can be drained once.

@@ -14,7 +14,7 @@ const APPS := {
 	"mail": [preload("res://scenes/apps/mail.tscn"), Vector2(1180, 700)],
 	"notepad": [preload("res://scenes/apps/notepad.tscn"), Vector2(720, 500)],
 	"calculator": [preload("res://scenes/apps/calculator.tscn"), Vector2(380, 475)],
-	"about": [preload("res://scenes/apps/about_os.tscn"), Vector2(520, 320)],
+	"computer": [preload("res://scenes/apps/my_computer.tscn"), Vector2(1160, 680)],
 	"terminal": [preload("res://scenes/apps/terminal.tscn"), Vector2(860, 500)]
 }
 const SITE_WINDOW_SIZE := Vector2(1120, 930)
