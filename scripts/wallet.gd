@@ -4,6 +4,9 @@ extends Node
 ## Saved per user by the `SaveGame` autoload; a new user starts with a fresh account.
 
 signal changed(balance: int)
+## Money moved in (amount > 0) or out (amount < 0) of the bank account; the desktop shows a
+## bank notification for it.
+signal transaction(amount: int, title: String)
 ## Casino OC token account: tokens are bought with dollars and sold back at a lower rate.
 signal tokens_changed(tokens: int)
 
@@ -151,6 +154,7 @@ func _apply(amount: int, title: String) -> void:
 	if history.size() > HISTORY_LIMIT:
 		history.resize(HISTORY_LIMIT)
 	changed.emit(balance)
+	transaction.emit(amount, title)
 
 func _apply_tokens(amount: int, title: String) -> void:
 	tokens += amount

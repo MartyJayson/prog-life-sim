@@ -1,0 +1,85 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/notifications/bank_toast.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/generated/bank.svg" id="bank"]
+
+[sub_resource type="StyleBoxFlat" id="card"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 6
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.24, 0.66, 0.29, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 8
+shadow_offset = Vector2(0, 3)
+
+[node name="BankToast" type="PanelContainer"]
+custom_minimum_size = Vector2(380, 0)
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("card")
+script = ExtResource("script")
+
+[node name="Row" type="HBoxContainer" parent="."]
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="Row"]
+custom_minimum_size = Vector2(40, 40)
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("bank")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="VBoxContainer" parent="Row"]
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="HBoxContainer" parent="Row/Text"]
+mouse_filter = 2
+
+[node name="App" type="Label" parent="Row/Text/Header"]
+size_flags_horizontal = 3
+text = "OS Bank"
+mouse_filter = 2
+theme_type_variation = &"MailMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Time" type="Label" parent="Row/Text/Header"]
+unique_name_in_owner = true
+mouse_filter = 2
+theme_type_variation = &"MailMuted"
+theme_override_font_sizes/font_size = 14
+
+[node name="Amount" type="Label" parent="Row/Text"]
+unique_name_in_owner = true
+mouse_filter = 2
+theme_type_variation = &"MailStrong"
+theme_override_font_sizes/font_size = 24
+
+[node name="Title" type="Label" parent="Row/Text"]
+unique_name_in_owner = true
+mouse_filter = 2
+text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 15
+
+[node name="Close" type="Button" parent="Row"]
+size_flags_vertical = 0
+tooltip_text = "Close"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+text = "✕"
+flat = true
+theme_override_font_sizes/font_size = 13
+
+[connection signal="pressed" from="Row/Close" to="." method="_dismiss"]

@@ -17,3 +17,7 @@ enum Action { NONE, APP, SITE, MAIL }
 @export var target := ""
 ## Letter opened in the Mail app for `MAIL`.
 @export var letter: MailMessage
+## Card scene to show instead of the standard notification card (e.g. the bank toast).
+@export var toast: PackedScene
+## Seconds before the notification hides by itself; 0 keeps it until it is clicked or closed.
+@export var lifetime := 0.0

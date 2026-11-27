@@ -81,6 +81,44 @@ func run() -> void:
 	desktop._notification_activated(app_event)
 	check(desktop.manager.windows.has("calculator"), "APP action launches an app")
 
+	# Taskbar tray.
+	var clock_stack: Control = desktop.get_node("%Clock").get_parent()
+	var wifi: Control = desktop.get_node("%Wifi")
+	var battery: Control = desktop.get_node("%Battery")
+	check(wifi.visible and battery.visible and wifi.texture != null and battery.texture != null, "the tray shows Wi-Fi and battery icons")
+	check(battery.get_global_rect().end.x <= clock_stack.get_global_rect().position.x and wifi.get_global_rect().end.x <= battery.get_global_rect().position.x, "tray icons sit left of the clock, Wi-Fi first")
+	check(not wifi.tooltip_text.is_empty() and battery.tooltip_text.contains("%"), "tray icons explain themselves on hover")
+
+	# Bank notifications: green for money in, red for a payment; they hide by themselves.
+	for old_toast in center.get_children():
+		old_toast.queue_free()
+	await process_frame
+	var wallet = root.get_node("Wallet")
+	wallet.deposit(250, "TinySoft — QA task 1041")
+	wallet.withdraw(40, "DeadDrive — FlashMole 8 GB")
+	await process_frame
+	var bank_toasts := live_toasts(center)
+	check(bank_toasts.size() == 2 and bank_toasts.all(func(t): return t.has_node("Row/Text/Amount")), "every bank transaction shows a bank notification")
+	var income: Control = bank_toasts[1]
+	var payment: Control = bank_toasts[0]
+	check(income.get_node("%Amount").text == "+ $ 250" and income.get_node("%Title").text.begins_with("TinySoft"), "income shows the amount and its source")
+	check(payment.get_node("%Amount").text == "− $ 40", "a payment shows a minus amount")
+	var green: Color = income.get_theme_stylebox("panel").border_color
+	var red: Color = payment.get_theme_stylebox("panel").border_color
+	check(green.g > green.r and red.r > red.g and income.get_node("%Amount").get_theme_color("font_color") == green, "income is green and a payment is red")
+	check(not income.has_node("Layout/Header"), "bank notifications look different from mail cards")
+	if "--screenshot" in OS.get_cmdline_user_args():
+		await create_timer(0.3).timeout
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png("res://.godot/bank_toasts.png")
+	await create_timer(desktop.BANK_TOAST_LIFETIME + 0.4).timeout
+	check(live_toasts(center).is_empty(), "bank notifications disappear after a few seconds")
+	wallet.deposit(5, "Test")
+	await process_frame
+	await click(center.get_child(0).get_global_rect().get_center())
+	await create_timer(0.3).timeout
+	check(desktop.manager.windows.has("browser") and desktop.manager.windows["browser"].content.address.text == "bank.oc", "clicking a bank notification opens bank.oc")
+
 	desktop.queue_free()
 	await process_frame
 	print("FAILURES: ", failures)

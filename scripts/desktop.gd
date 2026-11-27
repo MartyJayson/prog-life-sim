@@ -7,6 +7,12 @@ const DEBUG_ICON = preload("res://assets/generated/debug.svg")
 const DEBUG_ID := "qa_debug"
 const DEBUG_SIZE := Vector2(480, 700)
 const MAIL_ICON = preload("res://assets/generated/mail.svg")
+const BANK_ICON = preload("res://assets/generated/bank.svg")
+const BANK_TOAST = preload("res://scenes/bank_toast.tscn")
+const INCOME_COLOR := Color("#3da84a")
+const PAYMENT_COLOR := Color("#de5433")
+## Seconds a bank notification stays before it hides by itself.
+const BANK_TOAST_LIFETIME := 3.0
 
 const APPS := {
 	"operations": [preload("res://scenes/apps/operations.tscn"), Vector2(1090, 690)],
@@ -30,6 +36,7 @@ func _ready() -> void:
 	_update_clock()
 	GameClock.minute_changed.connect(_update_clock)
 	Mailbox.delivered.connect(_mail_delivered)
+	Wallet.transaction.connect(_bank_transaction)
 
 func _open(id: String) -> void:
 	_hide_menu()
@@ -133,4 +140,18 @@ func _mail_delivered(message: MailMessage) -> void:
 	data.accent = Color("#2973d9")
 	data.action = NotificationData.Action.MAIL
 	data.letter = message
+	%Notifications.push(data)
+
+## Every move of money in the bank account shows a short OS Bank notification: green when money
+## comes in, red for a payment. Clicking it opens bank.oc.
+func _bank_transaction(amount: int, title: String) -> void:
+	var data := NotificationData.new()
+	data.title = ("+ " if amount > 0 else "− ") + Wallet.format_money(absi(amount))
+	data.message = title
+	data.icon = BANK_ICON
+	data.accent = INCOME_COLOR if amount > 0 else PAYMENT_COLOR
+	data.action = NotificationData.Action.SITE
+	data.target = "bank.oc"
+	data.toast = BANK_TOAST
+	data.lifetime = BANK_TOAST_LIFETIME
 	%Notifications.push(data)

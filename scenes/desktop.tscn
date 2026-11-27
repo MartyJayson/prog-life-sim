@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" path="res://assets/generated/computer.svg" id="computer"]
 
 [ext_resource type="Texture2D" path="res://assets/generated/terminal.svg" id="terminal"]
+[ext_resource type="Texture2D" path="res://assets/generated/tray_wifi.svg" id="tray_wifi"]
+[ext_resource type="Texture2D" path="res://assets/generated/tray_battery.svg" id="tray_battery"]
 
 [ext_resource type="Script" path="res://scripts/notifications/notification_center.gd" id="notifications"]
 [ext_resource type="Script" path="res://scripts/mail/mail_sequence.gd" id="mail_sequence"]
@@ -175,6 +177,30 @@ unique_name_in_owner = true
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 6
+
+[node name="Tray" type="HBoxContainer" parent="Taskbar/Row"]
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="Wifi" type="TextureRect" parent="Taskbar/Row/Tray"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(26, 26)
+size_flags_vertical = 4
+tooltip_text = "OS-Net
+Connected, secured"
+texture = ExtResource("tray_wifi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Battery" type="TextureRect" parent="Taskbar/Row/Tray"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+size_flags_vertical = 4
+tooltip_text = "Battery: 100%
+Plugged in, fully charged"
+texture = ExtResource("tray_battery")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ClockStack" type="VBoxContainer" parent="Taskbar/Row"]
 custom_minimum_size = Vector2(92, 0)

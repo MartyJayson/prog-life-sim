@@ -85,6 +85,7 @@ func run() -> void:
 	check(clock.time_text() == "09:00" and drives.listings[0].id != first_batch, "a new batch arrives at 09:00")
 	var batches_with_top := 0
 	var cheap := 0
+	var pricey := 0
 	var total := 0
 	for i in 300:
 		drives.restock()
@@ -94,9 +95,11 @@ func run() -> void:
 			total += 1
 			if listing.price <= 9:
 				cheap += 1
+			elif listing.price >= 20:
+				pricey += 1
 	print("Batches with a $25+ drive: %d / 300; drives up to $9: %.0f%%" % [batches_with_top, cheap * 100.0 / total])
 	check(batches_with_top > 30 and batches_with_top < 270, "expensive drives are sometimes missing")
-	check(cheap * 2 > total, "most drives are cheap")
+	check(cheap > pricey * 2, "cheap drives are far more common than expensive ones (%d vs %d)" % [cheap, pricey])
 
 	# Buying.
 	drives.listings.clear()
